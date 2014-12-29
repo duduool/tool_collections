@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">WiFiLocation</string>
+    <string name="action_settings">退出</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="basic_map">basic map</string>
+    <string name="show_map">显示地图</string>
+
+</resources>
