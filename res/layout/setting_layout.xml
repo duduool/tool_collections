@@ -2,14 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffdddddd"
+    android:background="#dddddd"
     android:padding="4dp" >
 
     <LinearLayout
         android:id="@+id/setting_title"
         android:layout_width="fill_parent"
         android:layout_height="2dp"
-        android:background="#ffdddddd"
+        android:background="#dddddd"
         android:orientation="horizontal" >
     </LinearLayout>
 
@@ -18,8 +18,10 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/setting_title"
-        android:background="#ffffffff"
-        android:divider="#ffdddddd"
-        android:dividerHeight="6dp" />
+        android:background="#ffffff"
+        android:cacheColorHint="#000000"
+        android:divider="#dddddd"
+        android:dividerHeight="6dp"
+        android:listSelector="@drawable/setting_selector" />
 
 </RelativeLayout>
