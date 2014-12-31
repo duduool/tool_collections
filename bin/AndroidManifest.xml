@@ -29,8 +29,8 @@
             android:value="b2ed06f57033c85388120358838cf344" />
 
         <activity
-            android:name="com.wtu.activity.MainActivity"
-            android:label="@string/app_name"
+            android:name="com.wtu.activity.AppStartGradual"
+            android:theme="@android:style/Theme.NoTitleBar"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,6 +40,10 @@
         </activity>
         <activity
             android:name="com.wtu.activity.BasicMapActivity"
+            android:label="@string/basic_map" >
+        </activity>
+        <activity
+            android:name="com.wtu.activity.MainActivity"
             android:label="@string/basic_map" >
         </activity>
     </application>
