@@ -2,6 +2,7 @@ package com.wtu.view;
 
 import com.wtu.activity.R;
 import com.wtu.animation.FrameAnimationController;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;

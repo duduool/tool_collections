@@ -130,7 +130,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		switch (index) {
 		case 0:
 			homeImage.setImageResource(R.drawable.tab_home_pressed);
-			homeText.setTextColor(Color.rgb(0, 121, 255)); // RGB(0, 121, 255)
+			homeText.setTextColor(Color.rgb(0, 121, 255));
 			if (homeFragment == null) {
 				homeFragment = new HomeFragment();
 				transaction.add(R.id.content, homeFragment);
