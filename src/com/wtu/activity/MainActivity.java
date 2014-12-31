@@ -130,7 +130,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		switch (index) {
 		case 0:
 			homeImage.setImageResource(R.drawable.tab_home_pressed);
-			homeText.setTextColor(Color.BLUE);
+			homeText.setTextColor(Color.rgb(0, 121, 255)); // RGB(0, 121, 255)
 			if (homeFragment == null) {
 				homeFragment = new HomeFragment();
 				transaction.add(R.id.content, homeFragment);
@@ -140,7 +140,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 			break;
 		case 1:
 			mapImage.setImageResource(R.drawable.tab_map_pressed);
-			mapText.setTextColor(Color.BLUE);
+			mapText.setTextColor(Color.rgb(0, 121, 255));
 			if (mapExFragment == null) {
 				mapExFragment = new MapExFragment();
 				transaction.add(R.id.content, mapExFragment);
@@ -150,7 +150,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 			break;
 		case 2:
 			starImage.setImageResource(R.drawable.tab_star_pressed);
-			starText.setTextColor(Color.BLUE);
+			starText.setTextColor(Color.rgb(0, 121, 255));
 			if (starFragment == null) {
 				starFragment = new StarFragment();
 				transaction.add(R.id.content, starFragment);
@@ -161,7 +161,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		case 3:
 		default:
 			settingImage.setImageResource(R.drawable.tab_settings_pressed);
-			settingText.setTextColor(Color.BLUE);
+			settingText.setTextColor(Color.rgb(0, 121, 255));
 			if (settingFragment == null) {
 				settingFragment = new SettingFragment();
 				transaction.add(R.id.content, settingFragment);

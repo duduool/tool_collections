@@ -35,7 +35,7 @@ public final class R {
         public static final int tab_star_pressed=0x7f02000f;
     }
     public static final class id {
-        public static final int action_settings=0x7f080013;
+        public static final int action_settings=0x7f080014;
         public static final int animal=0x7f08000f;
         public static final int checkswithcButton=0x7f080012;
         public static final int content=0x7f080001;
@@ -51,6 +51,7 @@ public final class R {
         public static final int setting_image=0x7f08000c;
         public static final int setting_layout=0x7f08000b;
         public static final int setting_text=0x7f08000d;
+        public static final int setting_title=0x7f080013;
         public static final int star_image=0x7f080009;
         public static final int star_layout=0x7f080008;
         public static final int star_text=0x7f08000a;

@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-    <ListView
+    android:layout_height="match_parent"
+    android:background="#ffdddddd"
+    android:padding="4dp" >
+
+    <LinearLayout
+        android:id="@+id/setting_title"
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="#ffdddddd"
+        android:orientation="horizontal" >
+    </LinearLayout>
+
+    <ListView
         android:id="@+id/android:list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/setting_title"
+        android:background="#ffffffff"
         android:divider="#ffdddddd"
         android:dividerHeight="6dp" />
 
