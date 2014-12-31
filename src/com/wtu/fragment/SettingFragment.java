@@ -22,7 +22,7 @@ public class SettingFragment extends ListFragment {
         List listItem = new ArrayList<HashMap<String, Object>>() ;
 		for (int i = 0; i < 15; i++) {
 			HashMap<String, Object> map = new HashMap<String, Object>() ;
-			map.put("image", R.drawable.brightness) ;
+			map.put("image", R.drawable.car) ;
 			map.put("title", "Level" + i) ;
 			map.put("content", "Hello World!!") ;
 			listItem.add(map) ;

@@ -12,7 +12,7 @@
         android:layout_centerVertical="true"
         android:layout_margin="1dp"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/brightness" />
+        android:src="@drawable/car" />
 
     <LinearLayout
         android:layout_width="wrap_content"
