@@ -1,27 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#dddddd"
-    android:padding="4dp" >
+    android:orientation="vertical" >
 
     <LinearLayout
-        android:id="@+id/setting_title"
-        android:layout_width="fill_parent"
-        android:layout_height="2dp"
-        android:background="#dddddd"
-        android:orientation="horizontal" >
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/head_background" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:gravity="center"
+            android:text="@string/setting"
+            android:textColor="@color/blue"
+            android:textSize="22sp" />
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/android:list"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/setting_title"
-        android:background="#ffffff"
-        android:cacheColorHint="#000000"
-        android:divider="#dddddd"
-        android:dividerHeight="6dp"
-        android:listSelector="@drawable/setting_selector" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#dddddd"
+        android:padding="4dp" >
 
-</RelativeLayout>
+        <LinearLayout
+            android:id="@+id/setting_diveder"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="#dddddd"
+            android:orientation="horizontal" >
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/android:list"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/setting_diveder"
+            android:background="#ffffff"
+            android:cacheColorHint="#000000"
+            android:divider="#dddddd"
+            android:dividerHeight="6dp"
+            android:listSelector="@drawable/setting_selector" />
+    </RelativeLayout>
+
+</LinearLayout>

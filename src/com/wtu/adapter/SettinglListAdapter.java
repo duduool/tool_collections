@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.wtu.activity.R;
-import com.wtu.view.CheckSwitchButton;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,12 +13,13 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 class ViewHolder {    
     public ImageView 	animal;  
     public TextView 	titleText;  
     public TextView 	contentText;  
-    public CheckSwitchButton switchButton;
+    public ToggleButton toggleButton;
 }    
   
 public class SettinglListAdapter extends BaseAdapter {    
@@ -60,7 +59,7 @@ public class SettinglListAdapter extends BaseAdapter {
         	viewHolder.animal = (ImageView) convertView.findViewById(R.id.animal);    
         	viewHolder.titleText = (TextView) convertView.findViewById(R.id.titleText);    
         	viewHolder.contentText = (TextView) convertView.findViewById(R.id.contentText);    
-        	viewHolder.switchButton = (CheckSwitchButton) convertView.findViewById(R.id.checkswithcButton) ;
+        	viewHolder.toggleButton = (ToggleButton) convertView.findViewById(R.id.toggleButton) ;
         	
             convertView.setTag(viewHolder);    
         } else {    
@@ -71,7 +70,7 @@ public class SettinglListAdapter extends BaseAdapter {
         viewHolder.titleText.setText((String)(((HashMap)list.get(position)).get("title")));  
         viewHolder.contentText.setText((String)(((HashMap)list.get(position)).get("content")));  
   
-        viewHolder.switchButton.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+        viewHolder.toggleButton.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton compoundButton, boolean flag) {
 				
@@ -84,9 +83,9 @@ public class SettinglListAdapter extends BaseAdapter {
 		}) ;
 		
 		if (map.get(position) != null) {
-			viewHolder.switchButton.setChecked(true) ;
+			viewHolder.toggleButton.setChecked(true) ;
 		} else {
-			viewHolder.switchButton.setChecked(false) ;
+			viewHolder.toggleButton.setChecked(false) ;
 		}
         
         return convertView;  

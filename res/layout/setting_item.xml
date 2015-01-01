@@ -42,11 +42,17 @@
             android:textSize="12sp" />
     </LinearLayout>
 
-    <com.wtu.view.CheckSwitchButton
-        android:id="@+id/checkswithcButton"
+    <ToggleButton
+        android:id="@+id/toggleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:enabled="true" />
+        android:layout_centerVertical="true"
+        android:background="@android:color/transparent"
+        android:button="@drawable/toggle_selector"
+        android:checked="false"
+        android:text=""
+        android:textOff=""
+        android:textOn="" />
 
 </RelativeLayout>

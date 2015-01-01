@@ -9,442 +9,589 @@ package com.wtu.activity;
 
 public final class R {
     public static final class attr {
+        /**  Minimum width for the switch component 
+         <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int switchMinWidth=0x7f010007;
+        /**  Minimum space between the switch and caption text 
+         <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int switchPadding=0x7f010008;
+        /**  Default style for the Switch widget. 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int switchStyle=0x7f010000;
+        /**  TextAppearance style for text displayed on the switch thumb. 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int switchTextAppearance=0x7f010006;
+        /**  Present the text in ALL CAPS. This may use a small-caps form when available. 
+         <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int textAllCaps=0x7f010010;
+        /**  Text color. 
+         <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+         */
+        public static final int textColor=0x7f010009;
+        /**  Color of the text selection highlight. 
+         <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+         */
+        public static final int textColorHighlight=0x7f01000d;
+        /**  Color of the hint text. 
+         <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+         */
+        public static final int textColorHint=0x7f01000e;
+        /**  Color of the links. 
+         <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+         */
+        public static final int textColorLink=0x7f01000f;
+        /**  Text to use when the switch is in the unchecked/"off" state. 
+         <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int textOff=0x7f010004;
+        /**  Text to use when the switch is in the checked/"on" state. 
+         <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int textOn=0x7f010003;
+        /**  Size of the text. Recommended dimension type for text is "sp" for scaled-pixels (example: 15sp). 
+         <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int textSize=0x7f01000a;
+        /**  Style (bold, italic, bolditalic) for the text. 
+         <p>Must be one or more (separated by '|') of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>normal</code></td><td>0</td><td></td></tr>
+<tr><td><code>bold</code></td><td>1</td><td></td></tr>
+<tr><td><code>italic</code></td><td>2</td><td></td></tr>
+</table>
+         */
+        public static final int textStyle=0x7f01000b;
+        /**  Drawable to use as the "thumb" that switches back and forth. 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int thumb=0x7f010001;
+        /**  Amount of padding on either side of text within the switch thumb. 
+         <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int thumbTextPadding=0x7f010005;
+        /**  Drawable to use as the "track" that the switch thumb slides within. 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int track=0x7f010002;
+        /**  Typeface (normal, sans, serif, monospace) for the text. 
+         <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>normal</code></td><td>0</td><td></td></tr>
+<tr><td><code>sans</code></td><td>1</td><td></td></tr>
+<tr><td><code>serif</code></td><td>2</td><td></td></tr>
+<tr><td><code>monospace</code></td><td>3</td><td></td></tr>
+</table>
+         */
+        public static final int typeface=0x7f01000c;
     }
     public static final class color {
-        /** 蜜色 
+        /**  蜜色 
          */
         public static final int aliceblue=0x7f04002c;
-        /** 亚麻色 
+        /**  亚麻色 
          */
         public static final int antiquewhite=0x7f040022;
-        /** 中灰兰色 
+        /**  中灰兰色 
          */
         public static final int aqua=0x7f040082;
-        /** 粟色 
+        /**  粟色 
          */
         public static final int aquamarine=0x7f040063;
-        /** 沙褐色
+        /**  沙褐色 
          */
         public static final int azure=0x7f04002a;
-        /** 烟白色 
+        /**  烟白色 
          */
         public static final int beige=0x7f040027;
-        /** 浅玫瑰色 
+        /**  浅玫瑰色 
          */
         public static final int bisque=0x7f04000d;
-        /** 海军色 
+        /**  海军色 
          */
         public static final int black=0x7f040091;
-        /** 番木色 
+        /**  番木色 
          */
         public static final int blanchedalmond=0x7f04000b;
-        /** 暗绿色 
+        /**  暗绿色 
          */
         public static final int blue=0x7f04008d;
-        /** 暗红色 
+        /**  暗红色 
          */
         public static final int blueviolet=0x7f04005b;
-        /** 暗灰色 
+        /**  暗灰色 
          */
         public static final int brown=0x7f040050;
-        /** 亮青色 
+        /**  亮青色 
          */
         public static final int burlywood=0x7f040034;
-        /** 菊兰色 
+        /**  菊兰色 
          */
         public static final int cadetblue=0x7f040071;
-        /** 碧绿色
+        /**  碧绿色 
          */
         public static final int chartreuse=0x7f040064;
-        /** 茶色 
+        /**  茶色 
          */
         public static final int chocolate=0x7f04003f;
-        /** 暗桔黄色 
+        /**  暗桔黄色 
          */
         public static final int coral=0x7f040017;
-        /** 中绿色 
+        /**  中绿色 
          */
         public static final int cornflowerblue=0x7f040070;
-        /** 柠檬绸色 
+        /**  柠檬绸色 
          */
         public static final int cornsilk=0x7f040007;
-        /** 淡灰色 
+        /**  淡灰色 
          */
         public static final int crimson=0x7f040037;
-        /** 浅绿色 
+        /**  浅绿色 
          */
         public static final int cyan=0x7f040083;
-        /** 中兰色 
+        /**  中兰色 
          */
         public static final int darkblue=0x7f04008f;
-        /** 深天蓝色 
+        /**  深天蓝色 
          */
         public static final int darkcyan=0x7f040089;
-        /** 中粉紫色 
+        /**  中粉紫色 
          */
         public static final int darkgoldenrod=0x7f040047;
-        /** 亮蓝色 
+        /**  亮蓝色 
          */
         public static final int darkgray=0x7f04004e;
-        /** 绿色 
+        /**  绿色 
          */
         public static final int darkgreen=0x7f04008c;
-        /** 暗灰色 
+        /**  暗灰色 
          */
         public static final int darkgrey=0x7f04004f;
-        /** 银色 
+        /**  银色 
          */
         public static final int darkkhaki=0x7f040044;
-        /** 重褐色 
+        /**  重褐色 
          */
         public static final int darkmagenta=0x7f040059;
-        /** 军兰色 
+        /**  军兰色 
          */
         public static final int darkolivegreen=0x7f040072;
-        /** 亮肉色 
+        /**  亮肉色 
          */
         public static final int darkorange=0x7f040016;
-        /** 赭色 
+        /**  赭色 
          */
         public static final int darkorchid=0x7f040052;
-        /** 暗洋红 
+        /**  暗洋红 
          */
         public static final int darkred=0x7f04005a;
-        /** 紫罗兰色 
+        /**  紫罗兰色 
          */
         public static final int darksalmon=0x7f040031;
-        /** 亮绿色 
+        /**  亮绿色 
          */
         public static final int darkseagreen=0x7f040057;
-        /** 中绿宝石 
+        /**  中绿宝石 
          */
         public static final int darkslateblue=0x7f040075;
-        /** 橙绿色 
+        /**  橙绿色 
          */
         public static final int darkslategray=0x7f04007b;
-        /** 暗瓦灰色 
+        /**  暗瓦灰色 
          */
         public static final int darkslategrey=0x7f04007c;
-        /** 中春绿色 
+        /**  中春绿色 
          */
         public static final int darkturquoise=0x7f040087;
-        /** 苍绿色 
+        /**  苍绿色 
          */
         public static final int darkviolet=0x7f040054;
-        /** 红橙色 
+        /**  红橙色 
          */
         public static final int deeppink=0x7f04001b;
-        /** 暗宝石绿 
+        /**  暗宝石绿 
          */
         public static final int deepskyblue=0x7f040088;
-        /** 石蓝色 
+        /**  石蓝色 
          */
         public static final int dimgray=0x7f04006d;
-        /** 暗灰色 
+        /**  暗灰色 
          */
         public static final int dimgrey=0x7f04006e;
-        /** 亮海蓝色 
+        /**  亮海蓝色 
          */
         public static final int dodgerblue=0x7f040080;
-        /** 暗金黄色 
+        /**  暗金黄色 
          */
         public static final int firebrick=0x7f040048;
-        /** 雪白色 
+        /**  雪白色 
          */
         public static final int floralwhite=0x7f040005;
-        /** 海绿色 
+        /**  海绿色 
          */
         public static final int forestgreen=0x7f04007e;
-        /** 深粉红色 
+        /**  深粉红色 
          */
         public static final int fuchsia=0x7f04001c;
-        /** 洋李色 
+        /**  洋李色 
          */
         public static final int gainsboro=0x7f040036;
-        /** 鲜肉色 
+        /**  鲜肉色 
          */
         public static final int ghostwhite=0x7f040024;
-        /** 桃色 
+        /**  桃色 
          */
         public static final int gold=0x7f040011;
-        /** 苍紫罗兰色 
+        /**  苍紫罗兰色 
          */
         public static final int goldenrod=0x7f040039;
-        /** 天蓝色 
+        /**  天蓝色 
          */
         public static final int gray=0x7f04005e;
-        /** 水鸭色 
+        /**  水鸭色 
          */
         public static final int green=0x7f04008b;
-        /** 苍宝石绿 
+        /**  苍宝石绿 
          */
         public static final int greenyellow=0x7f04004c;
-        /** 灰色 
+        /**  灰色 
          */
         public static final int grey=0x7f04005f;
-        /** 天蓝色 
+        /**  天蓝色 
          */
         public static final int honeydew=0x7f04002b;
-        /** 珊瑚色 
+        /**  珊瑚色 
          */
         public static final int hotpink=0x7f040018;
-        /** 秘鲁色 
+        /**  秘鲁色 
          */
         public static final int indianred=0x7f040041;
-        /** 暗橄榄绿  
+        /**  暗橄榄绿 
          */
         public static final int indigo=0x7f040073;
-        /** 白色 
+        /**  白色 
          */
         public static final int ivory=0x7f040001;
-        /** 艾利斯兰 
+        /**  艾利斯兰 
          */
         public static final int khaki=0x7f04002d;
-        /** 暗肉色 
+        /**  暗肉色 
          */
         public static final int lavender=0x7f040032;
-        /** 海贝色 
+        /**  海贝色 
          */
         public static final int lavenderblush=0x7f040009;
-        /** 黄绿色 
+        /**  黄绿色 
          */
         public static final int lawngreen=0x7f040065;
-        /** 花白色 
+        /**  花白色 
          */
         public static final int lemonchiffon=0x7f040006;
-        /** 黄绿色 
+        /**  黄绿色 
          */
         public static final int lightblue=0x7f04004d;
-        /** 黄褐色 
+        /**  黄褐色 
          */
         public static final int lightcoral=0x7f04002e;
-        /** 淡紫色 
+        /**  淡紫色 
          */
         public static final int lightcyan=0x7f040033;
-        /** 老花色 
+        /**  老花色 
          */
         public static final int lightgoldenrodyellow=0x7f040020;
-        /** 蓟色 
+        /**  蓟色 
          */
         public static final int lightgray=0x7f04003c;
-        /** 中紫色 
+        /**  中紫色 
          */
         public static final int lightgreen=0x7f040056;
-        /** 亮灰色 
+        /**  亮灰色 
          */
         public static final int lightgrey=0x7f04003d;
-        /** 粉红色 
+        /**  粉红色 
          */
         public static final int lightpink=0x7f040013;
-        /** 橙色 
+        /**  橙色 
          */
         public static final int lightsalmon=0x7f040015;
-        /** 森林绿 
+        /**  森林绿 
          */
         public static final int lightseagreen=0x7f04007f;
-        /** 紫罗兰蓝色 
+        /**  紫罗兰蓝色 
          */
         public static final int lightskyblue=0x7f04005c;
-        /** 中暗蓝色 
+        /**  中暗蓝色 
          */
         public static final int lightslategray=0x7f040067;
-        /** 亮蓝灰 
+        /**  亮蓝灰 
          */
         public static final int lightslategrey=0x7f040068;
-        /** 粉蓝色 
+        /**  粉蓝色 
          */
         public static final int lightsteelblue=0x7f04004a;
-        /** 象牙色 
+        /**  象牙色 
          */
         public static final int lightyellow=0x7f040002;
-        /** 春绿色
+        /**  春绿色 
          */
         public static final int lime=0x7f040085;
-        /** 中海蓝 
+        /**  中海蓝 
          */
         public static final int limegreen=0x7f04007a;
-        /** 亮金黄色 
+        /**  亮金黄色 
          */
         public static final int linen=0x7f040021;
-        /** 紫红色 
+        /**  紫红色 
          */
         public static final int magenta=0x7f04001d;
-        /** 紫色 
+        /**  紫色 
          */
         public static final int maroon=0x7f040062;
-        /** 暗灰色 
+        /**  暗灰色 
          */
         public static final int mediumaquamarine=0x7f04006f;
-        /** 蓝色 
+        /**  蓝色 
          */
         public static final int mediumblue=0x7f04008e;
-        /** 褐玫瑰红 
+        /**  褐玫瑰红 
          */
         public static final int mediumorchid=0x7f040046;
-        /** 暗紫罗兰色 
+        /**  暗紫罗兰色 
          */
         public static final int mediumpurple=0x7f040055;
-        /** 青绿色 
+        /**  青绿色 
          */
         public static final int mediumseagreen=0x7f040079;
-        /** 草绿色 
+        /**  草绿色 
          */
         public static final int mediumslateblue=0x7f040066;
-        /** 酸橙色 
+        /**  酸橙色 
          */
         public static final int mediumspringgreen=0x7f040086;
-        /** 靛青色 
+        /**  靛青色 
          */
         public static final int mediumturquoise=0x7f040074;
-        /** 印第安红 
+        /**  印第安红 
          */
         public static final int mediumvioletred=0x7f040042;
-        /** 闪兰色 
+        /**  闪兰色 
          */
         public static final int midnightblue=0x7f040081;
-        /** 幽灵白 
+        /**  幽灵白 
          */
         public static final int mintcream=0x7f040025;
-        /** 白杏色 
+        /**  白杏色 
          */
         public static final int mistyrose=0x7f04000c;
-        /** 桔黄色 
+        /**  桔黄色 
          */
         public static final int moccasin=0x7f04000e;
-        /** 鹿皮色 
+        /**  鹿皮色 
          */
         public static final int navajowhite=0x7f04000f;
-        /** 暗蓝色 
+        /**  暗蓝色 
          */
         public static final int navy=0x7f040090;
-        /** 红色 
+        /**  红色 
          */
         public static final int oldlace=0x7f04001f;
-        /** 灰色 
+        /**  灰色 
          */
         public static final int olive=0x7f040060;
-        /** 灰石色 
+        /**  灰石色 
          */
         public static final int olivedrab=0x7f04006b;
-        /** 亮粉红色
+        /**  亮粉红色 
          */
         public static final int orange=0x7f040014;
-        /** 西红柿色 
+        /**  西红柿色 
          */
         public static final int orangered=0x7f04001a;
-        /** 金麒麟色 
+        /**  金麒麟色 
          */
         public static final int orchid=0x7f04003a;
-        /** 亮珊瑚色 
+        /**  亮珊瑚色 
          */
         public static final int palegoldenrod=0x7f04002f;
-        /** 暗紫色
+        /**  暗紫色 
          */
         public static final int palegreen=0x7f040053;
-        /** 亮钢兰色 
+        /**  亮钢兰色 
          */
         public static final int paleturquoise=0x7f04004b;
-        /** 暗深红色 
+        /**  暗深红色 
          */
         public static final int palevioletred=0x7f040038;
-        /** 淡紫红 
+        /**  淡紫红 
          */
         public static final int papayawhip=0x7f04000a;
-        /** 纳瓦白 
+        /**  纳瓦白 
          */
         public static final int peachpuff=0x7f040010;
-        /** 巧可力色 
+        /**  巧可力色 
          */
         public static final int peru=0x7f040040;
-        /** 金色 
+        /**  金色 
          */
         public static final int pink=0x7f040012;
-        /** 实木色 
+        /**  实木色 
          */
         public static final int plum=0x7f040035;
-        /** 火砖色 
+        /**  火砖色 
          */
         public static final int powderblue=0x7f040049;
-        /** 橄榄色 
+        /**  橄榄色 
          */
         public static final int purple=0x7f040061;
-        /** 红紫色 
+        /**  红紫色 
          */
         public static final int red=0x7f04001e;
-        /** 暗黄褐色 
+        /**  暗黄褐色 
          */
         public static final int rosybrown=0x7f040045;
-        /** 钢兰色 
+        /**  钢兰色 
          */
         public static final int royalblue=0x7f040077;
-        /** 暗海兰色 
+        /**  暗海兰色 
          */
         public static final int saddlebrown=0x7f040058;
-        /** 古董白 
+        /**  古董白 
          */
         public static final int salmon=0x7f040023;
-        /** 浅黄色 
+        /**  浅黄色 
          */
         public static final int sandybrown=0x7f040029;
-        /** 暗瓦灰色 
+        /**  暗瓦灰色 
          */
         public static final int seagreen=0x7f04007d;
-        /** 米绸色 
+        /**  米绸色 
          */
         public static final int seashell=0x7f040008;
-        /** 褐色 
+        /**  褐色 
          */
         public static final int sienna=0x7f040051;
-        /** 中紫罗兰色 
+        /**  中紫罗兰色 
          */
         public static final int silver=0x7f040043;
-        /** 亮天蓝色 
+        /**  亮天蓝色 
          */
         public static final int skyblue=0x7f04005d;
-        /** 深绿褐色 
+        /**  深绿褐色 
          */
         public static final int slateblue=0x7f04006c;
-        /** 亮蓝灰 
+        /**  亮蓝灰 
          */
         public static final int slategray=0x7f040069;
-        /** 灰石色 
+        /**  灰石色 
          */
         public static final int slategrey=0x7f04006a;
-        /** 黄色 
+        /**  黄色 
          */
         public static final int snow=0x7f040004;
-        /** 青色 
+        /**  青色 
          */
         public static final int springgreen=0x7f040084;
-        /** 暗灰蓝色 
+        /**  暗灰蓝色 
          */
         public static final int steelblue=0x7f040076;
-        /** 亮灰色 
+        public static final int switchtextcolor=0x7f040092;
+        /**  亮灰色 
          */
         public static final int tan=0x7f04003e;
-        /** 暗青色 
+        /**  暗青色 
          */
         public static final int teal=0x7f04008a;
-        /** 淡紫色 
+        /**  淡紫色 
          */
         public static final int thistle=0x7f04003b;
-        /** 热粉红色 
+        /**  热粉红色 
          */
         public static final int tomato=0x7f040019;
-        /** 皇家蓝 
+        /**  皇家蓝 
          */
         public static final int turquoise=0x7f040078;
-        /** 苍麒麟色 
+        /**  苍麒麟色 
          */
         public static final int violet=0x7f040030;
-        /** 米色 
+        /**  米色 
          */
         public static final int wheat=0x7f040028;
         public static final int white=0x7f040000;
-        /** 薄荷色 
+        /**  薄荷色 
          */
         public static final int whitesmoke=0x7f040026;
-        /** 亮黄色
+        /**  亮黄色 
          */
         public static final int yellow=0x7f040003;
     }
@@ -461,53 +608,68 @@ public final class R {
         public static final int checkswitch_btn_unpressed=0x7f020003;
         public static final int checkswitch_frame=0x7f020004;
         public static final int checkswitch_mask=0x7f020005;
-        public static final int ic_launcher=0x7f020006;
-        public static final int setting_selector=0x7f020007;
-        public static final int splash=0x7f020008;
-        public static final int tab_home_normal=0x7f020009;
-        public static final int tab_home_pressed=0x7f02000a;
-        public static final int tab_map_normal=0x7f02000b;
-        public static final int tab_map_pressed=0x7f02000c;
-        public static final int tab_settings_normal=0x7f02000d;
-        public static final int tab_settings_pressed=0x7f02000e;
-        public static final int tab_star_normal=0x7f02000f;
-        public static final int tab_star_pressed=0x7f020010;
+        public static final int head_background=0x7f020006;
+        public static final int ic_launcher=0x7f020007;
+        public static final int setting_selector=0x7f020008;
+        public static final int splash=0x7f020009;
+        public static final int switch_btn_off=0x7f02000a;
+        public static final int switch_btn_on=0x7f02000b;
+        public static final int switch_btn_slipper=0x7f02000c;
+        public static final int switch_selector=0x7f02000d;
+        public static final int tab_home_normal=0x7f02000e;
+        public static final int tab_home_pressed=0x7f02000f;
+        public static final int tab_map_normal=0x7f020010;
+        public static final int tab_map_pressed=0x7f020011;
+        public static final int tab_settings_normal=0x7f020012;
+        public static final int tab_settings_pressed=0x7f020013;
+        public static final int tab_star_normal=0x7f020014;
+        public static final int tab_star_pressed=0x7f020015;
+        public static final int toggle_selector=0x7f020016;
+        public static final int toggle_switch_off=0x7f020017;
+        public static final int toggle_switch_on=0x7f020018;
     }
     public static final class id {
-        public static final int action_settings=0x7f090014;
-        public static final int animal=0x7f09000f;
-        public static final int checkswithcButton=0x7f090012;
-        public static final int content=0x7f090001;
-        public static final int contentText=0x7f090011;
-        public static final int home_image=0x7f090003;
-        public static final int home_layout=0x7f090002;
-        public static final int home_text=0x7f090004;
-        public static final int map=0x7f090000;
-        public static final int mapView=0x7f09000e;
-        public static final int map_image=0x7f090006;
-        public static final int map_layout=0x7f090005;
-        public static final int map_text=0x7f090007;
-        public static final int setting_image=0x7f09000c;
-        public static final int setting_layout=0x7f09000b;
-        public static final int setting_text=0x7f09000d;
-        public static final int setting_title=0x7f090013;
-        public static final int star_image=0x7f090009;
-        public static final int star_layout=0x7f090008;
-        public static final int star_text=0x7f09000a;
-        public static final int titleText=0x7f090010;
+        public static final int action_settings=0x7f07001b;
+        public static final int animal=0x7f070015;
+        public static final int bold=0x7f070001;
+        public static final int content=0x7f070007;
+        public static final int contentText=0x7f070017;
+        public static final int home_image=0x7f070009;
+        public static final int home_layout=0x7f070008;
+        public static final int home_text=0x7f07000a;
+        public static final int italic=0x7f070002;
+        public static final int mEnableCheckSwithcButton=0x7f07001a;
+        public static final int map=0x7f070006;
+        public static final int mapView=0x7f070014;
+        public static final int map_image=0x7f07000c;
+        public static final int map_layout=0x7f07000b;
+        public static final int map_text=0x7f07000d;
+        public static final int monospace=0x7f070005;
+        public static final int normal=0x7f070000;
+        public static final int sans=0x7f070003;
+        public static final int serif=0x7f070004;
+        public static final int setting_diveder=0x7f070019;
+        public static final int setting_image=0x7f070012;
+        public static final int setting_layout=0x7f070011;
+        public static final int setting_text=0x7f070013;
+        public static final int star_image=0x7f07000f;
+        public static final int star_layout=0x7f07000e;
+        public static final int star_text=0x7f070010;
+        public static final int titleText=0x7f070016;
+        public static final int toggleButton=0x7f070018;
     }
     public static final class layout {
-        public static final int basicmap_activity=0x7f030000;
-        public static final int home_layout=0x7f030001;
-        public static final int main_activity=0x7f030002;
-        public static final int map_layout=0x7f030003;
-        public static final int setting_item=0x7f030004;
-        public static final int setting_layout=0x7f030005;
-        public static final int star_layout=0x7f030006;
-        public static final int start_layout=0x7f030007;
+        public static final int app_splash=0x7f030000;
+        public static final int basicmap_activity=0x7f030001;
+        public static final int home_layout=0x7f030002;
+        public static final int main_activity=0x7f030003;
+        public static final int map_layout=0x7f030004;
+        public static final int setting_item=0x7f030005;
+        public static final int setting_layout=0x7f030006;
+        public static final int star_layout=0x7f030007;
     }
     public static final class menu {
-        public static final int main=0x7f080000;
+        public static final int main=0x7f090000;
     }
     public static final class string {
         public static final int action_settings=0x7f060001;
@@ -518,6 +680,8 @@ public final class R {
         public static final int map=0x7f060005;
         public static final int setting=0x7f060007;
         public static final int star=0x7f060006;
+        public static final int switch_off=0x7f060009;
+        public static final int switch_on=0x7f060008;
     }
     public static final class style {
         /** 
@@ -530,10 +694,347 @@ public final class R {
             backward-compatibility can go here.
         
          */
-        public static final int AppBaseTheme=0x7f070000;
+        public static final int AppBaseTheme=0x7f080001;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f070001;
+        public static final int AppTheme=0x7f080002;
+        public static final int Switch=0x7f080000;
     }
+    public static final class styleable {
+        /** Attributes that can be used with a SwitchButton.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #SwitchButton_switchMinWidth com.wtu.activity:switchMinWidth}</code></td><td> Minimum width for the switch component </td></tr>
+           <tr><td><code>{@link #SwitchButton_switchPadding com.wtu.activity:switchPadding}</code></td><td> Minimum space between the switch and caption text </td></tr>
+           <tr><td><code>{@link #SwitchButton_switchTextAppearance com.wtu.activity:switchTextAppearance}</code></td><td> TextAppearance style for text displayed on the switch thumb.</td></tr>
+           <tr><td><code>{@link #SwitchButton_textOff com.wtu.activity:textOff}</code></td><td> Text to use when the switch is in the unchecked/"off" state.</td></tr>
+           <tr><td><code>{@link #SwitchButton_textOn com.wtu.activity:textOn}</code></td><td> Text to use when the switch is in the checked/"on" state.</td></tr>
+           <tr><td><code>{@link #SwitchButton_thumb com.wtu.activity:thumb}</code></td><td> Drawable to use as the "thumb" that switches back and forth.</td></tr>
+           <tr><td><code>{@link #SwitchButton_thumbTextPadding com.wtu.activity:thumbTextPadding}</code></td><td> Amount of padding on either side of text within the switch thumb.</td></tr>
+           <tr><td><code>{@link #SwitchButton_track com.wtu.activity:track}</code></td><td> Drawable to use as the "track" that the switch thumb slides within.</td></tr>
+           </table>
+           @see #SwitchButton_switchMinWidth
+           @see #SwitchButton_switchPadding
+           @see #SwitchButton_switchTextAppearance
+           @see #SwitchButton_textOff
+           @see #SwitchButton_textOn
+           @see #SwitchButton_thumb
+           @see #SwitchButton_thumbTextPadding
+           @see #SwitchButton_track
+         */
+        public static final int[] SwitchButton = {
+            0x7f010001, 0x7f010002, 0x7f010003, 0x7f010004,
+            0x7f010005, 0x7f010006, 0x7f010007, 0x7f010008
+        };
+        /**
+          <p>
+          @attr description
+           Minimum width for the switch component 
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name com.wtu.activity:switchMinWidth
+        */
+        public static final int SwitchButton_switchMinWidth = 6;
+        /**
+          <p>
+          @attr description
+           Minimum space between the switch and caption text 
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name com.wtu.activity:switchPadding
+        */
+        public static final int SwitchButton_switchPadding = 7;
+        /**
+          <p>
+          @attr description
+           TextAppearance style for text displayed on the switch thumb. 
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          <p>This is a private symbol.
+          @attr name com.wtu.activity:switchTextAppearance
+        */
+        public static final int SwitchButton_switchTextAppearance = 5;
+        /**
+          <p>
+          @attr description
+           Text to use when the switch is in the unchecked/"off" state. 
+
+
+          <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name com.wtu.activity:textOff
+        */
+        public static final int SwitchButton_textOff = 3;
+        /**
+          <p>
+          @attr description
+           Text to use when the switch is in the checked/"on" state. 
+
+
+          <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name com.wtu.activity:textOn
+        */
+        public static final int SwitchButton_textOn = 2;
+        /**
+          <p>
+          @attr description
+           Drawable to use as the "thumb" that switches back and forth. 
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          <p>This is a private symbol.
+          @attr name com.wtu.activity:thumb
+        */
+        public static final int SwitchButton_thumb = 0;
+        /**
+          <p>
+          @attr description
+           Amount of padding on either side of text within the switch thumb. 
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name com.wtu.activity:thumbTextPadding
+        */
+        public static final int SwitchButton_thumbTextPadding = 4;
+        /**
+          <p>
+          @attr description
+           Drawable to use as the "track" that the switch thumb slides within. 
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          <p>This is a private symbol.
+          @attr name com.wtu.activity:track
+        */
+        public static final int SwitchButton_track = 1;
+        /** Attributes that can be used with a Switch_Style.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #Switch_Style_switchStyle com.wtu.activity:switchStyle}</code></td><td> Default style for the Switch widget.</td></tr>
+           </table>
+           @see #Switch_Style_switchStyle
+         */
+        public static final int[] Switch_Style = {
+            0x7f010000
+        };
+        /**
+          <p>
+          @attr description
+           Default style for the Switch widget. 
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          <p>This is a private symbol.
+          @attr name com.wtu.activity:switchStyle
+        */
+        public static final int Switch_Style_switchStyle = 0;
+        /** Attributes that can be used with a TextAppearance.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #TextAppearance_textAllCaps com.wtu.activity:textAllCaps}</code></td><td> Present the text in ALL CAPS.</td></tr>
+           <tr><td><code>{@link #TextAppearance_textColor com.wtu.activity:textColor}</code></td><td> Text color.</td></tr>
+           <tr><td><code>{@link #TextAppearance_textColorHighlight com.wtu.activity:textColorHighlight}</code></td><td> Color of the text selection highlight.</td></tr>
+           <tr><td><code>{@link #TextAppearance_textColorHint com.wtu.activity:textColorHint}</code></td><td> Color of the hint text.</td></tr>
+           <tr><td><code>{@link #TextAppearance_textColorLink com.wtu.activity:textColorLink}</code></td><td> Color of the links.</td></tr>
+           <tr><td><code>{@link #TextAppearance_textSize com.wtu.activity:textSize}</code></td><td> Size of the text.</td></tr>
+           <tr><td><code>{@link #TextAppearance_textStyle com.wtu.activity:textStyle}</code></td><td> Style (bold, italic, bolditalic) for the text.</td></tr>
+           <tr><td><code>{@link #TextAppearance_typeface com.wtu.activity:typeface}</code></td><td> Typeface (normal, sans, serif, monospace) for the text.</td></tr>
+           </table>
+           @see #TextAppearance_textAllCaps
+           @see #TextAppearance_textColor
+           @see #TextAppearance_textColorHighlight
+           @see #TextAppearance_textColorHint
+           @see #TextAppearance_textColorLink
+           @see #TextAppearance_textSize
+           @see #TextAppearance_textStyle
+           @see #TextAppearance_typeface
+         */
+        public static final int[] TextAppearance = {
+            0x7f010009, 0x7f01000a, 0x7f01000b, 0x7f01000c,
+            0x7f01000d, 0x7f01000e, 0x7f01000f, 0x7f010010
+        };
+        /**
+          <p>
+          @attr description
+           Present the text in ALL CAPS. This may use a small-caps form when available. 
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name com.wtu.activity:textAllCaps
+        */
+        public static final int TextAppearance_textAllCaps = 7;
+        /**
+          <p>
+          @attr description
+           Text color. 
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+          <p>This is a private symbol.
+          @attr name com.wtu.activity:textColor
+        */
+        public static final int TextAppearance_textColor = 0;
+        /**
+          <p>
+          @attr description
+           Color of the text selection highlight. 
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+          <p>This is a private symbol.
+          @attr name com.wtu.activity:textColorHighlight
+        */
+        public static final int TextAppearance_textColorHighlight = 4;
+        /**
+          <p>
+          @attr description
+           Color of the hint text. 
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+          <p>This is a private symbol.
+          @attr name com.wtu.activity:textColorHint
+        */
+        public static final int TextAppearance_textColorHint = 5;
+        /**
+          <p>
+          @attr description
+           Color of the links. 
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+          <p>This is a private symbol.
+          @attr name com.wtu.activity:textColorLink
+        */
+        public static final int TextAppearance_textColorLink = 6;
+        /**
+          <p>
+          @attr description
+           Size of the text. Recommended dimension type for text is "sp" for scaled-pixels (example: 15sp). 
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name com.wtu.activity:textSize
+        */
+        public static final int TextAppearance_textSize = 1;
+        /**
+          <p>
+          @attr description
+           Style (bold, italic, bolditalic) for the text. 
+
+
+          <p>Must be one or more (separated by '|') of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>normal</code></td><td>0</td><td></td></tr>
+<tr><td><code>bold</code></td><td>1</td><td></td></tr>
+<tr><td><code>italic</code></td><td>2</td><td></td></tr>
+</table>
+          <p>This is a private symbol.
+          @attr name com.wtu.activity:textStyle
+        */
+        public static final int TextAppearance_textStyle = 2;
+        /**
+          <p>
+          @attr description
+           Typeface (normal, sans, serif, monospace) for the text. 
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>normal</code></td><td>0</td><td></td></tr>
+<tr><td><code>sans</code></td><td>1</td><td></td></tr>
+<tr><td><code>serif</code></td><td>2</td><td></td></tr>
+<tr><td><code>monospace</code></td><td>3</td><td></td></tr>
+</table>
+          <p>This is a private symbol.
+          @attr name com.wtu.activity:typeface
+        */
+        public static final int TextAppearance_typeface = 3;
+    };
 }
