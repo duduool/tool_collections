@@ -47,12 +47,11 @@
                 android:textSize="20sp" />
 
             <com.wtu.view.SwitchButton
-                style="@style/Switch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="3dip"
-                android:clickable="true" />
+                style="@style/SwitchButtonStyle" />
+
+            <com.wtu.view.SwitchButton
+                style="@style/MaterialDesignStyle" />
+
         </LinearLayout>
     </RelativeLayout>
 

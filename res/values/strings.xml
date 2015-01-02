@@ -3,7 +3,6 @@
 
     <string name="app_name">WiFiLocation</string>
     <string name="action_settings">Quit</string>
-    <string name="hello_world">Hello world!</string>
     <string name="basic_map">basic map</string>
     <string name="home">Home</string>
     <string name="map">Map</string>

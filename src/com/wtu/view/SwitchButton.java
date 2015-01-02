@@ -1,506 +1,585 @@
 package com.wtu.view;
 
 import com.wtu.activity.R;
-
-import android.annotation.SuppressLint;
+import com.wtu.view.AnimationController.OnAnimateListener;
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.graphics.Rect;
-import android.graphics.Typeface;
+import android.graphics.RectF;
+import android.graphics.Region;
 import android.graphics.drawable.Drawable;
-import android.text.Layout;
-import android.text.StaticLayout;
-import android.text.TextPaint;
-import android.text.TextUtils;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.MotionEvent;
-import android.view.VelocityTracker;
 import android.view.ViewConfiguration;
-import android.view.accessibility.AccessibilityEvent;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.CompoundButton;
 
+/**
+ * SwitchButton widget which is easy to use
+ * 
+ * @version 1.2
+ * @author kyleduo
+ * @since 2014-09-24
+ */
+
 public class SwitchButton extends CompoundButton {
-    private static final int TOUCH_MODE_IDLE = 0;
-    private static final int TOUCH_MODE_DOWN = 1;
-    private static final int TOUCH_MODE_DRAGGING = 2;
+	private static boolean SHOW_RECT = false;
 
-    private static final int SANS = 1;
-    private static final int SERIF = 2;
-    private static final int MONOSPACE = 3;
-    private Drawable mThumbDrawable;
-    private Drawable mTrackDrawable;
-    private int mThumbTextPadding;
-    private int mSwitchMinWidth;
-    private int mSwitchPadding;
-    private CharSequence mTextOn;
-    private CharSequence mTextOff;
-    private int mTouchMode;
-    private int mTouchSlop;
-    private float mTouchX;
-    private float mTouchY;
-    @SuppressLint("Recycle")
-	private VelocityTracker mVelocityTracker = VelocityTracker.obtain();
-    private int mMinFlingVelocity;
+	private boolean mIsChecked = false;
 
-    private float mThumbPosition;
-    private int mSwitchWidth;
-    private int mSwitchHeight;
-    private int mThumbWidth; 
+	private Configuration mConf;
 
-    private int mSwitchLeft;
-    private int mSwitchTop;
-    private int mSwitchRight;
-    private int mSwitchBottom;
-    private TextPaint mTextPaint;
-    private ColorStateList mTextColors;
-    private Layout mOnLayout;
-    private Layout mOffLayout;
+	/**
+	 * zone for thumb to move inside
+	 */
+	private Rect mSafeZone;
+	/**
+	 * zone for background
+	 */
+	private Rect mBackZone;
+	private Rect mThumbZone;
+	private RectF mSaveLayerZone;
 
-    private Context mContext;
+	private AnimationController mAnimationController;
+	private SBAnimationListener mOnAnimateListener = new SBAnimationListener();
+	private boolean isAnimating = false;
 
-    private final Rect mTempRect = new Rect();
+	private float mStartX, mStartY, mLastX;
+	private float mCenterPos;
 
-    private static final int[] CHECKED_STATE_SET = {
-        android.R.attr.state_checked
-    };
+	private int mTouchSlop;
+	private int mClickTimeout;
 
+	private Paint mRectPaint;
 
-    public SwitchButton(Context context) {
-        this(context, null);
-        mContext = context;
-    }
+	private Rect mBounds = null;
 
+	private OnCheckedChangeListener mOnCheckedChangeListener;
 
-    public SwitchButton(Context context, AttributeSet attrs) {
-        this(context, attrs, R.attr.switchStyle);
-        mContext = context;
-    }
+	public SwitchButton(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
+		initView();
 
+		TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.SwitchButton);
 
-    public SwitchButton(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-        mContext = context;
-        mTextPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
-        Resources res = getResources();
-        mTextPaint.density = res.getDisplayMetrics().density;
-        TypedArray a = context.obtainStyledAttributes(attrs,R.styleable.SwitchButton, defStyle, 0);
-        mThumbDrawable = a.getDrawable(R.styleable.SwitchButton_thumb);
-        mTrackDrawable = a.getDrawable(R.styleable.SwitchButton_track);
-        mTextOn = a.getText(R.styleable.SwitchButton_textOn);
-        mTextOff = a.getText(R.styleable.SwitchButton_textOff);
-        mThumbTextPadding = a.getDimensionPixelSize( R.styleable.SwitchButton_thumbTextPadding, 0);
-        mSwitchMinWidth = a.getDimensionPixelSize(R.styleable.SwitchButton_switchMinWidth, 0);
-        mSwitchPadding = a.getDimensionPixelSize(R.styleable.SwitchButton_switchPadding, 0);
+		mConf.setThumbMarginInPixel(ta.getDimensionPixelSize(R.styleable.SwitchButton_thumb_margin, mConf.getDefaultThumbMarginInPixel()));
+		mConf.setThumbMarginInPixel(ta.getDimensionPixelSize(R.styleable.SwitchButton_thumb_marginTop, mConf.getThumbMarginTop()),
+				ta.getDimensionPixelSize(R.styleable.SwitchButton_thumb_marginBottom, mConf.getThumbMarginBottom()),
+				ta.getDimensionPixelSize(R.styleable.SwitchButton_thumb_marginLeft, mConf.getThumbMarginLeft()),
+				ta.getDimensionPixelSize(R.styleable.SwitchButton_thumb_marginRight, mConf.getThumbMarginRight()));
+		mConf.setRadius(ta.getInt(R.styleable.SwitchButton_radius, Configuration.Default.DEFAULT_RADIUS));
 
-        int appearance = a.getResourceId(R.styleable.SwitchButton_switchTextAppearance, 0);
-        if (appearance != 0) {
-            setSwitchTextAppearance(context, appearance);
-        }
-        a.recycle();
-        ViewConfiguration config = ViewConfiguration.get(context);
-        mTouchSlop = config.getScaledTouchSlop();
-        mMinFlingVelocity = config.getScaledMinimumFlingVelocity();
-        refreshDrawableState();
-        setChecked(isChecked());
-    }
-    
-    
-    public void setSwitchTextAppearance(Context context, int resid) {
-        mContext = context;
-        TypedArray appearance = context.obtainStyledAttributes(resid,R.styleable.TextAppearance);
-        ColorStateList colors;
-        int ts;
-        colors = appearance.getColorStateList(R.styleable.TextAppearance_textColor);
-        if (colors != null) {
-            mTextColors = colors;
-        } else {
-            mTextColors = getTextColors();
-        }
-        ts = appearance.getDimensionPixelSize(R.styleable.
-                TextAppearance_textSize, 0);
-        if (ts != 0) {
-            if (ts != mTextPaint.getTextSize()) {
-                mTextPaint.setTextSize(ts);
-                requestLayout();
-            }
-        }
-        int typefaceIndex, styleIndex;
-        typefaceIndex = appearance.getInt(R.styleable.TextAppearance_typeface, -1);
-        styleIndex = appearance.getInt(R.styleable.TextAppearance_textStyle, -1);
-        setSwitchTypefaceByIndex(typefaceIndex, styleIndex);
-        appearance.recycle();
-    }
-    private void setSwitchTypefaceByIndex(int typefaceIndex, int styleIndex) {
-        Typeface tf = null;
-        switch (typefaceIndex) {
-            case SANS:
-                tf = Typeface.SANS_SERIF;
-                break;
-            case SERIF:
-                tf = Typeface.SERIF;
-                break;
-            case MONOSPACE:
-                tf = Typeface.MONOSPACE;
-                break;
-        }
-        setSwitchTypeface(tf, styleIndex);
-    }
-    public void setSwitchTypeface(Typeface tf, int style) {
-        if (style > 0) {
-            if (tf == null) {
-                tf = Typeface.defaultFromStyle(style);
-            } else {
-                tf = Typeface.create(tf, style);
-            }
-            setSwitchTypeface(tf);
-            int typefaceStyle = tf != null ? tf.getStyle() : 0;
-            int need = style & ~typefaceStyle;
-            mTextPaint.setFakeBoldText((need & Typeface.BOLD) != 0);
-            mTextPaint.setTextSkewX((need & Typeface.ITALIC) != 0 ? -0.25f : 0);
-        } else {
-            mTextPaint.setFakeBoldText(false);
-            mTextPaint.setTextSkewX(0);
-            setSwitchTypeface(tf);
-        }
-    }
+		mConf.setThumbWidthAndHeightInPixel(ta.getDimensionPixelSize(R.styleable.SwitchButton_thumb_width, -1), ta.getDimensionPixelSize(R.styleable.SwitchButton_thumb_height, -1));
 
-    public void setSwitchTypeface(Typeface tf) {
-        if (mTextPaint.getTypeface() != tf) {
-            mTextPaint.setTypeface(tf);
-            requestLayout();
-            invalidate();
-        }
-    }
-    public CharSequence getTextOn() {
-        return mTextOn;
-    }
-    public void setTextOn(CharSequence textOn) {
-        mTextOn = textOn;
-        requestLayout();
-    }
-    public CharSequence getTextOff() {
-        return mTextOff;
-    }
+		mConf.setMeasureFactor(ta.getFloat(R.styleable.SwitchButton_measureFactor, -1));
 
-    public void setTextOff(CharSequence textOff) {
-        mTextOff = textOff;
-        requestLayout();
-    }
-    
-    @Override
-    public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        final int widthMode = MeasureSpec.getMode(widthMeasureSpec);
-        final int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
-        if (mOnLayout == null) {
-            mOnLayout = makeLayout(mTextOn);
-        }
-        if (mOffLayout == null) {
-            mOffLayout = makeLayout(mTextOff);
-        }
-        mTrackDrawable.getPadding(mTempRect);
-        final int maxTextWidth = Math.max(mOnLayout.getWidth(), mOffLayout.getWidth());
-        final int switchWidth = Math.max(mSwitchMinWidth,
-                maxTextWidth * 2 + mThumbTextPadding * 4 + mTempRect.left + mTempRect.right);
-        final int switchHeight = mTrackDrawable.getIntrinsicHeight();
-        mThumbWidth = maxTextWidth + mThumbTextPadding * 2;
-        switch (widthMode) {
-            case MeasureSpec.AT_MOST:
-                widthSize = Math.min(widthSize, switchWidth);
-                break;
+		mConf.setInsetBounds(ta.getDimensionPixelSize(R.styleable.SwitchButton_insetLeft, 0), ta.getDimensionPixelSize(R.styleable.SwitchButton_insetTop, 0),
+				ta.getDimensionPixelSize(R.styleable.SwitchButton_insetRight, 0), ta.getDimensionPixelSize(R.styleable.SwitchButton_insetBottom, 0));
 
-            case MeasureSpec.UNSPECIFIED:
-                widthSize = switchWidth;
-                break;
+		int velocity = ta.getInteger(R.styleable.SwitchButton_animationVelocity, -1);
+		mAnimationController.setVelocity(velocity);
 
-            case MeasureSpec.EXACTLY:
-                break;
-        }
-        switch (heightMode) {
-            case MeasureSpec.AT_MOST:
-                heightSize = Math.min(heightSize, switchHeight);
-                break;
-            case MeasureSpec.UNSPECIFIED:
-                heightSize = switchHeight;
-                break;
+		fetchDrawableFromAttr(ta);
+		ta.recycle();
+	}
 
-            case MeasureSpec.EXACTLY:
-                break;
-        }
-        mSwitchWidth = switchWidth;
-        mSwitchHeight = switchHeight;
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        final int measuredHeight = getMeasuredHeight();
-        if (measuredHeight < switchHeight) {
-            setMeasuredDimension(getMeasuredWidth(), switchHeight);
-        }
-    }
+	public SwitchButton(Context context, AttributeSet attrs) {
+		this(context, attrs, 0);
+	}
 
-    @Override
-    public boolean dispatchPopulateAccessibilityEvent(AccessibilityEvent event) {
-        populateAccessibilityEvent(event);
-        return false;
-    }
+	public SwitchButton(Context context) {
+		this(context, null);
+	}
 
-    public void populateAccessibilityEvent(AccessibilityEvent event) {
-        if (isChecked()) {
-            CharSequence text = mOnLayout.getText();
-            if (TextUtils.isEmpty(text)) {
-                text = mContext.getString(R.string.switch_on);
-            }
-            event.getText().add(text);
-        } else {
-            CharSequence text = mOffLayout.getText();
-            if (TextUtils.isEmpty(text)) {
-                text = mContext.getString(R.string.switch_off);
-            }
-            event.getText().add(text);
-        }
-    }
+	private void initView() {
+		mConf = Configuration.getDefault(getContext().getResources().getDisplayMetrics().density);
+		mTouchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
+		mClickTimeout = ViewConfiguration.getPressedStateDuration() + ViewConfiguration.getTapTimeout();
+		mAnimationController = AnimationController.getDefault().init(mOnAnimateListener);
+		mBounds = new Rect();
+		if (SHOW_RECT) {
+			mRectPaint = new Paint();
+			mRectPaint.setStyle(Style.STROKE);
+		}
+	}
 
-    private Layout makeLayout(CharSequence text) {
-        return new StaticLayout(text, mTextPaint,(int) Math.ceil(Layout.getDesiredWidth(text, mTextPaint)),Layout.Alignment.ALIGN_NORMAL, 1.f, 0, true);
-    }
+	/**
+	 * fetch drawable resources from attrs, drop them to conf, AFTER the size
+	 * has been confirmed
+	 * 
+	 * @param ta
+	 */
+	private void fetchDrawableFromAttr(TypedArray ta) {
+		if (mConf == null) {
+			return;
+		}
+		mConf.setOffDrawable(fetchDrawable(ta, R.styleable.SwitchButton_offDrawable, R.styleable.SwitchButton_offColor, Configuration.Default.DEFAULT_OFF_COLOR));
+		mConf.setOnDrawable(fetchDrawable(ta, R.styleable.SwitchButton_onDrawable, R.styleable.SwitchButton_onColor, Configuration.Default.DEFAULT_ON_COLOR));
+		mConf.setThumbDrawable(fetchDrawable(ta, R.styleable.SwitchButton_thumbDrawable, R.styleable.SwitchButton_thumbColor, Configuration.Default.DEFAULT_THUMB_COLOR));
+	}
 
-    private boolean hitThumb(float x, float y) {
-        mThumbDrawable.getPadding(mTempRect);
-        final int thumbTop = mSwitchTop - mTouchSlop;
-        final int thumbLeft = mSwitchLeft + (int) (mThumbPosition + 0.5f) - mTouchSlop;
-        final int thumbRight = thumbLeft + mThumbWidth +
-                mTempRect.left + mTempRect.right + mTouchSlop;
-        final int thumbBottom = mSwitchBottom + mTouchSlop;
-        return x > thumbLeft && x < thumbRight && y > thumbTop && y < thumbBottom;
-    }
-    
-    @Override
-    public boolean onTouchEvent(MotionEvent ev) {
-        mVelocityTracker.addMovement(ev);
-        final int action = ev.getActionMasked();
-      
-        switch (action) {
-            case MotionEvent.ACTION_DOWN: {
-                final float x = ev.getX();
-                final float y = ev.getY();
-                if (isEnabled() && hitThumb(x, y)) {
-                    mTouchMode = TOUCH_MODE_DOWN;
-                    mTouchX = x;
-                    mTouchY = y;
-                }
-                break;
-            }
-            case MotionEvent.ACTION_MOVE: {
-                switch (mTouchMode) {
-                    case TOUCH_MODE_IDLE:
-                    	return true;
-                    case TOUCH_MODE_DOWN: {
-                        final float x = ev.getX();
-                        final float y = ev.getY();
-                        if (Math.abs(x - mTouchX) > mTouchSlop ||
-                                Math.abs(y - mTouchY) > mTouchSlop) {
-                            mTouchMode = TOUCH_MODE_DRAGGING;
-                            getParent().requestDisallowInterceptTouchEvent(true);
-                            mTouchX = x;
-                            mTouchY = y;
-                            return true;
-                        }
-                        break;
-                    }
-                    case TOUCH_MODE_DRAGGING: {
-                        final float x = ev.getX();
-                        final float dx = x - mTouchX;
-                        float newPos = Math.max(0,
-                                Math.min(mThumbPosition + dx, getThumbScrollRange()));
-                        if (newPos != mThumbPosition) {
-                            mThumbPosition = newPos;
-                            mTouchX = x;
-                            invalidate();
-                        }
-                        return true;
-                    }
-                }
-                break;
-            }
-            case MotionEvent.ACTION_UP:
-            case MotionEvent.ACTION_CANCEL: {
-                if (mTouchMode == TOUCH_MODE_DRAGGING) {
-                    stopDrag(ev);
-                    return true;
-                }
-                mTouchMode = TOUCH_MODE_IDLE;
-                mVelocityTracker.clear();
-                break;
-            }
-        }
-        return super.onTouchEvent(ev);
-    }
+	private Drawable fetchDrawable(TypedArray ta, int attrId, int alterColorId, int defaultColor) {
+		Drawable tempDrawable = ta.getDrawable(attrId);
+		if (tempDrawable == null) {
+			int tempColor = ta.getColor(alterColorId, defaultColor);
+			tempDrawable = new GradientDrawable();
+			((GradientDrawable) tempDrawable).setCornerRadius(this.mConf.getRadius());
+			((GradientDrawable) tempDrawable).setColor(tempColor);
+		}
+		return tempDrawable;
+	}
 
-    private void cancelSuperTouch(MotionEvent ev) {
-        MotionEvent cancel = MotionEvent.obtain(ev);
-        cancel.setAction(MotionEvent.ACTION_CANCEL);
-        super.onTouchEvent(cancel);
-        cancel.recycle();
-    }
+	public void setConfiguration(Configuration conf) {
+		if (mConf == null) {
+			mConf = Configuration.getDefault(conf.getDensity());
+		}
+		mConf.setOffDrawable(conf.getOffDrawableWithFix());
+		mConf.setOnDrawable(conf.getOnDrawableWithFix());
+		mConf.setThumbDrawable(conf.getThumbDrawableWithFix());
+		mConf.setThumbMarginInPixel(conf.getThumbMarginTop(), conf.getThumbMarginBottom(), conf.getThumbMarginLeft(), conf.getThumbMarginRight());
+		mConf.setThumbWidthAndHeightInPixel(conf.getThumbWidth(), conf.getThumbHeight());
+		mConf.setVelocity(conf.getVelocity());
+		mConf.setMeasureFactor(conf.getMeasureFactor());
+		mAnimationController.setVelocity(mConf.getVelocity());
+		this.requestLayout();
+		setup();
+		setChecked(mIsChecked);
+	}
 
+	/**
+	 * return a REFERENCE of configuration, it is suggested that not to change that
+	 * 
+	 * @return
+	 */
+	public Configuration getConfiguration() {
+		return mConf;
+	}
 
-    private void stopDrag(MotionEvent ev) {
-        mTouchMode = TOUCH_MODE_IDLE;
-     
-        boolean commitChange = ev.getAction() == MotionEvent.ACTION_UP && isEnabled();
+	@Override
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		setMeasuredDimension(measureWidth(widthMeasureSpec), measureHeight(heightMeasureSpec));
+	}
 
-        cancelSuperTouch(ev);
+	@Override
+	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+		super.onSizeChanged(w, h, oldw, oldh);
+		setup();
+	}
 
-        if (commitChange) {
-            boolean newState;
-            mVelocityTracker.computeCurrentVelocity(1000);
-            float xvel = mVelocityTracker.getXVelocity();
-            if (Math.abs(xvel) > mMinFlingVelocity) {
-                newState = xvel > 0;
-            } else {
-                newState = getTargetCheckedState();
-            }
-            animateThumbToCheckedState(newState);
-        } else {
-            animateThumbToCheckedState(isChecked());
-        }
-    }
+	private void setup() {
+		setupBackZone();
+		setupSafeZone();
+		setupThumbZone();
 
-    private void animateThumbToCheckedState(boolean newCheckedState) {
-        
-        setChecked(newCheckedState);
-    }
+		setupDrawableBounds();
+		if (this.getMeasuredWidth() > 0 && this.getMeasuredHeight() > 0) {
+			mSaveLayerZone = new RectF(0, 0, this.getMeasuredWidth(), this.getMeasuredHeight());
+		}
 
-    private boolean getTargetCheckedState() {
-        return mThumbPosition >= getThumbScrollRange() / 2;
-    }
+		ViewGroup parent = (ViewGroup) this.getParent();
+		if (parent != null) {
+			parent.setClipChildren(false);
+		}
+	}
 
-    @Override
-    public void setChecked(boolean checked) {
-        super.setChecked(checked);
-        mThumbPosition = checked ? getThumbScrollRange() : 0;
-        invalidate();
-    }
+	/**
+	 * setup zone for thumb to move
+	 * 
+	 * @param w
+	 * @param h
+	 */
+	private void setupSafeZone() {
+		int w = getMeasuredWidth();
+		int h = getMeasuredHeight();
+		if (w > 0 && h > 0) {
+			if (mSafeZone == null) {
+				mSafeZone = new Rect();
+			}
+			int left, right, top, bottom;
+			left = getPaddingLeft() + (mConf.getThumbMarginLeft() > 0 ? mConf.getThumbMarginLeft() : 0);
+			right = w - getPaddingRight() - (mConf.getThumbMarginRight() > 0 ? mConf.getThumbMarginRight() : 0) + (-mConf.getShrinkX());
+			top = getPaddingTop() + (mConf.getThumbMarginTop() > 0 ? mConf.getThumbMarginTop() : 0);
+			bottom = h - getPaddingBottom() - (mConf.getThumbMarginBottom() > 0 ? mConf.getThumbMarginBottom() : 0) + (-mConf.getShrinkY());
+			mSafeZone.set(left, top, right, bottom);
 
-    @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        super.onLayout(changed, left, top, right, bottom);
+			mCenterPos = mSafeZone.left + (mSafeZone.right - mSafeZone.left - mConf.getThumbWidth()) / 2;
+		} else {
+			mSafeZone = null;
+		}
+	}
 
-        mThumbPosition = isChecked() ? getThumbScrollRange() : 0;
+	private void setupBackZone() {
+		int w = getMeasuredWidth();
+		int h = getMeasuredHeight();
+		if (w > 0 && h > 0) {
+			if (mBackZone == null) {
+				mBackZone = new Rect();
+			}
+			int left, right, top, bottom;
+			left = getPaddingLeft() + (mConf.getThumbMarginLeft() > 0 ? 0 : -mConf.getThumbMarginLeft());
+			right = w - getPaddingRight() - (mConf.getThumbMarginRight() > 0 ? 0 : -mConf.getThumbMarginRight()) + (-mConf.getShrinkX());
+			top = getPaddingTop() + (mConf.getThumbMarginTop() > 0 ? 0 : -mConf.getThumbMarginTop());
+			bottom = h - getPaddingBottom() - (mConf.getThumbMarginBottom() > 0 ? 0 : -mConf.getThumbMarginBottom()) + (-mConf.getShrinkY());
+			mBackZone.set(left, top, right, bottom);
+		} else {
+			mBackZone = null;
+		}
+	}
 
-        int switchRight = getWidth() - getPaddingRight();
-        int switchLeft = switchRight - mSwitchWidth;
-        int switchTop = 0;
-        int switchBottom = 0;
-        switch (getGravity() & Gravity.VERTICAL_GRAVITY_MASK) {
-            default:
-            case Gravity.TOP:
-                switchTop = getPaddingTop();
-                switchBottom = switchTop + mSwitchHeight;
-                break;
+	private void setupThumbZone() {
+		int w = getMeasuredWidth();
+		int h = getMeasuredHeight();
+		if (w > 0 && h > 0) {
+			if (mThumbZone == null) {
+				mThumbZone = new Rect();
+			}
+			int left, right, top, bottom;
+			left = mIsChecked ? (mSafeZone.right - mConf.getThumbWidth()) : mSafeZone.left;
+			right = left + mConf.getThumbWidth();
+			top = mSafeZone.top;
+			bottom = top + mConf.getThumbHeight();
+			mThumbZone.set(left, top, right, bottom);
+		} else {
+			mThumbZone = null;
+		}
+	}
 
-            case Gravity.CENTER_VERTICAL:
-                switchTop = (getPaddingTop() + getHeight() - getPaddingBottom()) / 2 -
-                        mSwitchHeight / 2;
-                switchBottom = switchTop + mSwitchHeight;
-                break;
+	private void setupDrawableBounds() {
+		if (mBackZone != null) {
+			mConf.getOnDrawable().setBounds(mBackZone);
+			mConf.getOffDrawable().setBounds(mBackZone);
+		}
+		if (mThumbZone != null) {
+			mConf.getThumbDrawable().setBounds(mThumbZone);
+		}
+	}
 
-            case Gravity.BOTTOM:
-                switchBottom = getHeight() - getPaddingBottom();
-                switchTop = switchBottom - mSwitchHeight;
-                break;
-        }
+	private int measureWidth(int measureSpec) {
+		int measuredWidth = 0;
 
-        mSwitchLeft = switchLeft;
-        mSwitchTop = switchTop;
-        mSwitchBottom = switchBottom;
-        mSwitchRight = switchRight;
-    }
+		int specMode = MeasureSpec.getMode(measureSpec);
+		int specSize = MeasureSpec.getSize(measureSpec);
 
-    @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        int switchLeft = mSwitchLeft;
-        int switchTop = mSwitchTop;
-        int switchRight = mSwitchRight;
-        int switchBottom = mSwitchBottom;
-        mTrackDrawable.setBounds(switchLeft, switchTop, switchRight, switchBottom);
-        mTrackDrawable.draw(canvas);
+		int minWidth = (int) (mConf.getThumbWidth() * mConf.getMeasureFactor() + getPaddingLeft() + getPaddingRight());
+		int innerMarginWidth = mConf.getThumbMarginLeft() + mConf.getThumbMarginRight();
+		if (innerMarginWidth > 0) {
+			minWidth += innerMarginWidth;
+		}
 
-        canvas.save();
+		if (specMode == MeasureSpec.EXACTLY) {
+			measuredWidth = Math.max(specSize, minWidth);
+		} else {
+			measuredWidth = minWidth;
+			if (specMode == MeasureSpec.AT_MOST) {
+				measuredWidth = Math.min(specSize, minWidth);
+			}
+		}
 
-        mTrackDrawable.getPadding(mTempRect);
-        int switchInnerLeft = switchLeft + mTempRect.left;
-        int switchInnerTop = switchTop + mTempRect.top;
-        int switchInnerRight = switchRight - mTempRect.right;
-        int switchInnerBottom = switchBottom - mTempRect.bottom;
-        canvas.clipRect(switchInnerLeft, switchTop, switchInnerRight, switchBottom);
+		// bounds are negative numbers
+		measuredWidth += (mConf.getInsetBounds().left + mConf.getInsetBounds().right);
 
+		return measuredWidth;
+	}
 
-        mThumbDrawable.getPadding(mTempRect);
-        final int thumbPos = (int) (mThumbPosition + 0.5f);
-        int thumbLeft = switchInnerLeft - mTempRect.left + thumbPos;
-        int thumbRight = switchInnerLeft + thumbPos + mThumbWidth + mTempRect.right;
+	private int measureHeight(int measureSpec) {
+		int measuredHeight = 0;
 
-        mThumbDrawable.setBounds(thumbLeft, switchTop, thumbRight, switchBottom);
-        mThumbDrawable.draw(canvas);
+		int specMode = MeasureSpec.getMode(measureSpec);
+		int specSize = MeasureSpec.getSize(measureSpec);
 
-        if (mTextColors != null) {
-            mTextPaint.setColor(mTextColors.getColorForState(getDrawableState(),
-                    mTextColors.getDefaultColor()));
-        }
-        mTextPaint.drawableState = getDrawableState();
+		int minHeight = mConf.getThumbHeight() + getPaddingTop() + getPaddingBottom();
+		int innerMarginHeight = mConf.getThumbMarginTop() + mConf.getThumbMarginBottom();
 
-        Layout switchText = getTargetCheckedState() ? mOnLayout : mOffLayout;
+		if (innerMarginHeight > 0) {
+			minHeight += innerMarginHeight;
+		}
 
-        canvas.translate((thumbLeft + thumbRight) / 2 - switchText.getWidth() / 2,
-                (switchInnerTop + switchInnerBottom) / 2 - switchText.getHeight() / 2);
-        switchText.draw(canvas);
+		if (specMode == MeasureSpec.EXACTLY) {
+			measuredHeight = Math.max(specSize, minHeight);
+		} else {
+			measuredHeight = minHeight;
+			if (specMode == MeasureSpec.AT_MOST) {
+				measuredHeight = Math.min(specSize, minHeight);
+			}
+		}
 
-        canvas.restore();
-    }
+		measuredHeight += (mConf.getInsetBounds().top + mConf.getInsetBounds().bottom);
 
-    @Override
-    public int getCompoundPaddingRight() {
-        int padding = super.getCompoundPaddingRight() + mSwitchWidth;
-        if (!TextUtils.isEmpty(getText())) {
-            padding += mSwitchPadding;
-        }
-        return padding;
-    }
+		return measuredHeight;
+	}
 
-    private int getThumbScrollRange() {
-        if (mTrackDrawable == null) {
-            return 0;
-        }
-        mTrackDrawable.getPadding(mTempRect);
-        return mSwitchWidth - mThumbWidth - mTempRect.left - mTempRect.right;
-    }
+	@Override
+	protected void onDraw(Canvas canvas) {
+		super.onDraw(canvas);
 
-    @Override
-    protected int[] onCreateDrawableState(int extraSpace) {
-        final int[] drawableState = super.onCreateDrawableState(extraSpace + 1);
-        if (isChecked()) {
-            mergeDrawableStates(drawableState, CHECKED_STATE_SET);
-        }
-        return drawableState;
-    }
+		canvas.getClipBounds(mBounds);
+		if (mBounds != null && mConf.needShrink()) {
+			mBounds.inset(mConf.getInsetX(), mConf.getInsetY());
+			canvas.clipRect(mBounds, Region.Op.REPLACE);
+			canvas.translate(mConf.getInsetBounds().left, mConf.getInsetBounds().top);
+		}
 
-    @Override
-    protected void drawableStateChanged() {
-        super.drawableStateChanged();
-        int[] myDrawableState = getDrawableState();
-        if (mThumbDrawable != null) mThumbDrawable.setState(myDrawableState);
-        if (mTrackDrawable != null) mTrackDrawable.setState(myDrawableState);
-        invalidate();
-    }
+		boolean useGeneralDisableEffect = !isEnabled() && this.notStatableDrawable();
+		if (useGeneralDisableEffect) {
+			canvas.saveLayerAlpha(mSaveLayerZone, 255 / 2, Canvas.MATRIX_SAVE_FLAG | Canvas.CLIP_SAVE_FLAG | Canvas.HAS_ALPHA_LAYER_SAVE_FLAG | Canvas.FULL_COLOR_LAYER_SAVE_FLAG
+					| Canvas.CLIP_TO_LAYER_SAVE_FLAG);
+		}
 
-    @Override
-    protected boolean verifyDrawable(Drawable who) {
-        return super.verifyDrawable(who) || who == mThumbDrawable || who == mTrackDrawable;
-    }
+		mConf.getOffDrawable().draw(canvas);
+		mConf.getOnDrawable().setAlpha(calcAlpha());
+		mConf.getOnDrawable().draw(canvas);
+		mConf.getThumbDrawable().draw(canvas);
+
+		if (useGeneralDisableEffect) {
+			canvas.restore();
+		}
+
+		if (SHOW_RECT) {
+			mRectPaint.setColor(Color.parseColor("#AA0000"));
+			canvas.drawRect(mBackZone, mRectPaint);
+			mRectPaint.setColor(Color.parseColor("#00FF00"));
+			canvas.drawRect(mSafeZone, mRectPaint);
+			mRectPaint.setColor(Color.parseColor("#0000FF"));
+			canvas.drawRect(mThumbZone, mRectPaint);
+		}
+	}
+
+	private boolean notStatableDrawable() {
+		boolean thumbStatable = (mConf.getThumbDrawable() instanceof StateListDrawable);
+		boolean onStatable = (mConf.getOnDrawable() instanceof StateListDrawable);
+		boolean offStatable = (mConf.getOffDrawable() instanceof StateListDrawable);
+		return !thumbStatable || !onStatable || !offStatable;
+	}
+
+	/**
+	 * calculate the alpha value for on layer
+	 * @return 0 ~ 255
+	 */
+	private int calcAlpha() {
+		int alpha = 255;
+		if (mSafeZone == null || mSafeZone.right == mSafeZone.left) {
+
+		} else {
+			int backWidth = mSafeZone.right - mConf.getThumbWidth() - mSafeZone.left;
+			if (backWidth > 0) {
+				alpha = (mThumbZone.left - mSafeZone.left) * 255 / backWidth;
+			}
+		}
+
+		return alpha;
+	}
+
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+
+		if (isAnimating || !isEnabled()) {
+			return false;
+		}
+		int action = event.getAction();
+
+		float deltaX = event.getX() - mStartX;
+		float deltaY = event.getY() - mStartY;
+
+		// status the view going to change to when finger released
+		boolean nextStatus = mIsChecked;
+
+		switch (action) {
+		case MotionEvent.ACTION_DOWN:
+			catchView();
+			mStartX = event.getX();
+			mStartY = event.getY();
+			mLastX = mStartX;
+			setPressed(true);
+			break;
+
+		case MotionEvent.ACTION_MOVE:
+			float x = event.getX();
+			moveThumb((int) (x - mLastX));
+			mLastX = x;
+			break;
+
+		case MotionEvent.ACTION_CANCEL:
+		case MotionEvent.ACTION_UP:
+			setPressed(false);
+
+			nextStatus = getStatusBasedOnPos();
+
+			float time = event.getEventTime() - event.getDownTime();
+
+			if (deltaX < mTouchSlop && deltaY < mTouchSlop && time < mClickTimeout) {
+				performClick();
+			} else {
+				slideToChecked(nextStatus);
+			}
+
+			break;
+
+		default:
+			break;
+		}
+		invalidate();
+		return true;
+	}
+
+	/**
+	 * return the status based on position of thumb
+	 * @return
+	 */
+	private boolean getStatusBasedOnPos() {
+		return mThumbZone.left > mCenterPos;
+	}
+
+	@Override
+	public void invalidate() {
+		if (mBounds != null && mConf.needShrink()) {
+			invalidate(mBounds);
+		} else {
+			super.invalidate();
+		}
+	}
+
+	@Override
+	public boolean performClick() {
+		return super.performClick();
+	}
+
+	private void catchView() {
+		ViewParent parent = getParent();
+		if (parent != null) {
+			parent.requestDisallowInterceptTouchEvent(true);
+		}
+	}
+
+	@Override
+	public void setChecked(final boolean checked) {
+		setChecked(checked, true);
+	}
+
+	public void setChecked(final boolean checked, boolean trigger) {
+		if (mThumbZone != null) {
+			moveThumb(checked ? getMeasuredWidth() : -getMeasuredWidth());
+		}
+		setCheckedInClass(checked, trigger);
+	}
+
+	@Override
+	public boolean isChecked() {
+		return mIsChecked;
+	}
+
+	@Override
+	public void toggle() {
+		toggle(true);
+	}
+
+	public void toggle(boolean animated) {
+		if (animated) {
+			slideToChecked(!mIsChecked);
+		} else {
+			setChecked(!mIsChecked);
+		}
+	}
+
+	@Override
+	protected void drawableStateChanged() {
+		super.drawableStateChanged();
+		setDrawableState(mConf.getThumbDrawable());
+		setDrawableState(mConf.getOnDrawable());
+		setDrawableState(mConf.getOffDrawable());
+	}
+
+	private void setDrawableState(Drawable drawable) {
+		if (drawable != null) {
+			int[] myDrawableState = getDrawableState();
+			drawable.setState(myDrawableState);
+			invalidate();
+		}
+	}
+
+	public void setOnCheckedChangeListener(OnCheckedChangeListener onCheckedChangeListener) {
+		if (onCheckedChangeListener == null) {
+			throw new IllegalArgumentException("onCheckedChangeListener can not be null");
+		}
+		mOnCheckedChangeListener = onCheckedChangeListener;
+	}
+
+	private void setCheckedInClass(boolean checked) {
+		setCheckedInClass(checked, true);
+	}
+
+	private void setCheckedInClass(boolean checked, boolean trigger) {
+		if (mIsChecked == checked) {
+			return;
+		}
+		mIsChecked = checked;
+
+		refreshDrawableState();
+
+		if (mOnCheckedChangeListener != null && trigger) {
+			mOnCheckedChangeListener.onCheckedChanged(this, mIsChecked);
+		}
+	}
+
+	public void slideToChecked(boolean checked) {
+		if (isAnimating) {
+			return;
+		}
+		int from = mThumbZone.left;
+		int to = checked ? mSafeZone.right - mConf.getThumbWidth() : mSafeZone.left;
+		mAnimationController.startAnimation(from, to);
+	}
+
+	private void moveThumb(int delta) {
+
+		int newLeft = mThumbZone.left + delta;
+		int newRight = mThumbZone.right + delta;
+		if (newLeft < mSafeZone.left) {
+			newLeft = mSafeZone.left;
+			newRight = newLeft + mConf.getThumbWidth();
+		}
+		if (newRight > mSafeZone.right) {
+			newRight = mSafeZone.right;
+			newLeft = newRight - mConf.getThumbWidth();
+		}
+
+		moveThumbTo(newLeft, newRight);
+	}
+
+	private void moveThumbTo(int newLeft, int newRight) {
+		mThumbZone.set(newLeft, mThumbZone.top, newRight, mThumbZone.bottom);
+		mConf.getThumbDrawable().setBounds(mThumbZone);
+	}
+
+	class SBAnimationListener implements OnAnimateListener {
+
+		@Override
+		public void onAnimationStart() {
+			isAnimating = true;
+		}
+
+		@Override
+		public boolean continueAnimating() {
+			return mThumbZone.right < mSafeZone.right && mThumbZone.left > mSafeZone.left;
+		}
+
+		@Override
+		public void onFrameUpdate(int frame) {
+			moveThumb(frame);
+			postInvalidate();
+		}
+
+		@Override
+		public void onAnimateComplete() {
+			setCheckedInClass(getStatusBasedOnPos());
+			isAnimating = false;
+		}
+
+	}
 }

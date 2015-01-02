@@ -24,7 +24,6 @@ public class SettingFragment extends ListFragment {
 			HashMap<String, Object> map = new HashMap<String, Object>() ;
 			map.put("image", R.drawable.car) ;
 			map.put("title", "Level" + i) ;
-			map.put("content", "Hello World!!") ;
 			listItem.add(map) ;
 		}
 		adapter = new SettinglListAdapter(this.getActivity(), listItem) ;

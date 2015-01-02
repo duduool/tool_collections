@@ -9,152 +9,143 @@ package com.wtu.activity;
 
 public final class R {
     public static final class attr {
-        /**  Minimum width for the switch component 
-         <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int animationVelocity=0x7f01000e;
+        /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
          */
-        public static final int switchMinWidth=0x7f010007;
-        /**  Minimum space between the switch and caption text 
-         <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+        public static final int insetBottom=0x7f010014;
+        /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
+         */
+        public static final int insetLeft=0x7f010011;
+        /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+         */
+        public static final int insetRight=0x7f010012;
+        /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+         */
+        public static final int insetTop=0x7f010013;
+        /** <p>Must be a floating point value, such as "<code>1.2</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int switchPadding=0x7f010008;
-        /**  Default style for the Switch widget. 
-         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-         */
-        public static final int switchStyle=0x7f010000;
-        /**  TextAppearance style for text displayed on the switch thumb. 
-         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-         */
-        public static final int switchTextAppearance=0x7f010006;
-        /**  Present the text in ALL CAPS. This may use a small-caps form when available. 
-         <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int textAllCaps=0x7f010010;
-        /**  Text color. 
-         <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+        public static final int measureFactor=0x7f010010;
+        /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
          */
-        public static final int textColor=0x7f010009;
-        /**  Color of the text selection highlight. 
-         <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+        public static final int offColor=0x7f01000b;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int offDrawable=0x7f010001;
+        /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
          */
-        public static final int textColorHighlight=0x7f01000d;
-        /**  Color of the hint text. 
-         <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+        public static final int onColor=0x7f01000a;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
-"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
          */
-        public static final int textColorHint=0x7f01000e;
-        /**  Color of the links. 
-         <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
-"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-         */
-        public static final int textColorLink=0x7f01000f;
-        /**  Text to use when the switch is in the unchecked/"off" state. 
-         <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+        public static final int onDrawable=0x7f010000;
+        /** <p>Must be an integer value, such as "<code>100</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int textOff=0x7f010004;
-        /**  Text to use when the switch is in the checked/"on" state. 
-         <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
+        public static final int radius=0x7f01000f;
+        /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
          */
-        public static final int textOn=0x7f010003;
-        /**  Size of the text. Recommended dimension type for text is "sp" for scaled-pixels (example: 15sp). 
-         <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+        public static final int thumbColor=0x7f01000c;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int thumbDrawable=0x7f010002;
+        /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+         */
+        public static final int thumbPressedColor=0x7f01000d;
+        /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
          */
-        public static final int textSize=0x7f01000a;
-        /**  Style (bold, italic, bolditalic) for the text. 
-         <p>Must be one or more (separated by '|') of the following constant values.</p>
-<table>
-<colgroup align="left" />
-<colgroup align="left" />
-<colgroup align="left" />
-<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-<tr><td><code>normal</code></td><td>0</td><td></td></tr>
-<tr><td><code>bold</code></td><td>1</td><td></td></tr>
-<tr><td><code>italic</code></td><td>2</td><td></td></tr>
-</table>
-         */
-        public static final int textStyle=0x7f01000b;
-        /**  Drawable to use as the "thumb" that switches back and forth. 
-         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+        public static final int thumb_height=0x7f010009;
+        /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-         */
-        public static final int thumb=0x7f010001;
-        /**  Amount of padding on either side of text within the switch thumb. 
-         <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+<p>May be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
          */
-        public static final int thumbTextPadding=0x7f010005;
-        /**  Drawable to use as the "track" that the switch thumb slides within. 
-         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+        public static final int thumb_margin=0x7f010003;
+        /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
          */
-        public static final int track=0x7f010002;
-        /**  Typeface (normal, sans, serif, monospace) for the text. 
-         <p>Must be one of the following constant values.</p>
-<table>
-<colgroup align="left" />
-<colgroup align="left" />
-<colgroup align="left" />
-<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-<tr><td><code>normal</code></td><td>0</td><td></td></tr>
-<tr><td><code>sans</code></td><td>1</td><td></td></tr>
-<tr><td><code>serif</code></td><td>2</td><td></td></tr>
-<tr><td><code>monospace</code></td><td>3</td><td></td></tr>
-</table>
+        public static final int thumb_marginBottom=0x7f010005;
+        /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
          */
-        public static final int typeface=0x7f01000c;
+        public static final int thumb_marginLeft=0x7f010006;
+        /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+         */
+        public static final int thumb_marginRight=0x7f010007;
+        /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+         */
+        public static final int thumb_marginTop=0x7f010004;
+        /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+         */
+        public static final int thumb_width=0x7f010008;
     }
     public static final class color {
         /**  蜜色 
@@ -565,7 +556,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         /**  暗灰蓝色 
          */
         public static final int steelblue=0x7f040076;
-        public static final int switchtextcolor=0x7f040092;
         /**  亮灰色 
          */
         public static final int tan=0x7f04003e;
@@ -603,60 +593,48 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class drawable {
         public static final int car=0x7f020000;
-        public static final int checkswitch_bottom=0x7f020001;
-        public static final int checkswitch_btn_pressed=0x7f020002;
-        public static final int checkswitch_btn_unpressed=0x7f020003;
-        public static final int checkswitch_frame=0x7f020004;
-        public static final int checkswitch_mask=0x7f020005;
-        public static final int head_background=0x7f020006;
-        public static final int ic_launcher=0x7f020007;
-        public static final int setting_selector=0x7f020008;
-        public static final int splash=0x7f020009;
-        public static final int switch_btn_off=0x7f02000a;
-        public static final int switch_btn_on=0x7f02000b;
-        public static final int switch_btn_slipper=0x7f02000c;
-        public static final int switch_selector=0x7f02000d;
-        public static final int tab_home_normal=0x7f02000e;
-        public static final int tab_home_pressed=0x7f02000f;
-        public static final int tab_map_normal=0x7f020010;
-        public static final int tab_map_pressed=0x7f020011;
-        public static final int tab_settings_normal=0x7f020012;
-        public static final int tab_settings_pressed=0x7f020013;
-        public static final int tab_star_normal=0x7f020014;
-        public static final int tab_star_pressed=0x7f020015;
-        public static final int toggle_selector=0x7f020016;
-        public static final int toggle_switch_off=0x7f020017;
-        public static final int toggle_switch_on=0x7f020018;
+        public static final int head_background=0x7f020001;
+        public static final int ic_launcher=0x7f020002;
+        public static final int setting_selector=0x7f020003;
+        public static final int splash=0x7f020004;
+        public static final int switch_off_selector=0x7f020005;
+        public static final int switch_on_selector=0x7f020006;
+        public static final int switch_thumb_disable=0x7f020007;
+        public static final int switch_thumb_off_normal=0x7f020008;
+        public static final int switch_thumb_off_pressed=0x7f020009;
+        public static final int switch_thumb_on_normal=0x7f02000a;
+        public static final int switch_thumb_on_pressed=0x7f02000b;
+        public static final int switch_thumb_selector=0x7f02000c;
+        public static final int tab_home_normal=0x7f02000d;
+        public static final int tab_home_pressed=0x7f02000e;
+        public static final int tab_map_normal=0x7f02000f;
+        public static final int tab_map_pressed=0x7f020010;
+        public static final int tab_settings_normal=0x7f020011;
+        public static final int tab_settings_pressed=0x7f020012;
+        public static final int tab_star_normal=0x7f020013;
+        public static final int tab_star_pressed=0x7f020014;
     }
     public static final class id {
-        public static final int action_settings=0x7f07001b;
-        public static final int animal=0x7f070015;
-        public static final int bold=0x7f070001;
-        public static final int content=0x7f070007;
-        public static final int contentText=0x7f070017;
-        public static final int home_image=0x7f070009;
-        public static final int home_layout=0x7f070008;
-        public static final int home_text=0x7f07000a;
-        public static final int italic=0x7f070002;
-        public static final int mEnableCheckSwithcButton=0x7f07001a;
-        public static final int map=0x7f070006;
-        public static final int mapView=0x7f070014;
-        public static final int map_image=0x7f07000c;
-        public static final int map_layout=0x7f07000b;
-        public static final int map_text=0x7f07000d;
-        public static final int monospace=0x7f070005;
-        public static final int normal=0x7f070000;
-        public static final int sans=0x7f070003;
-        public static final int serif=0x7f070004;
-        public static final int setting_diveder=0x7f070019;
-        public static final int setting_image=0x7f070012;
-        public static final int setting_layout=0x7f070011;
-        public static final int setting_text=0x7f070013;
-        public static final int star_image=0x7f07000f;
-        public static final int star_layout=0x7f07000e;
-        public static final int star_text=0x7f070010;
-        public static final int titleText=0x7f070016;
-        public static final int toggleButton=0x7f070018;
+        public static final int action_settings=0x7f090013;
+        public static final int animal=0x7f09000f;
+        public static final int content=0x7f090001;
+        public static final int home_image=0x7f090003;
+        public static final int home_layout=0x7f090002;
+        public static final int home_text=0x7f090004;
+        public static final int map=0x7f090000;
+        public static final int mapView=0x7f09000e;
+        public static final int map_image=0x7f090006;
+        public static final int map_layout=0x7f090005;
+        public static final int map_text=0x7f090007;
+        public static final int setting_diveder=0x7f090012;
+        public static final int setting_image=0x7f09000c;
+        public static final int setting_layout=0x7f09000b;
+        public static final int setting_text=0x7f09000d;
+        public static final int star_image=0x7f090009;
+        public static final int star_layout=0x7f090008;
+        public static final int star_text=0x7f09000a;
+        public static final int switchButton=0x7f090011;
+        public static final int titleText=0x7f090010;
     }
     public static final class layout {
         public static final int app_splash=0x7f030000;
@@ -669,37 +647,39 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int star_layout=0x7f030007;
     }
     public static final class menu {
-        public static final int main=0x7f090000;
+        public static final int main=0x7f080000;
     }
     public static final class string {
         public static final int action_settings=0x7f060001;
         public static final int app_name=0x7f060000;
-        public static final int basic_map=0x7f060003;
-        public static final int hello_world=0x7f060002;
-        public static final int home=0x7f060004;
-        public static final int map=0x7f060005;
-        public static final int setting=0x7f060007;
-        public static final int star=0x7f060006;
-        public static final int switch_off=0x7f060009;
-        public static final int switch_on=0x7f060008;
+        public static final int basic_map=0x7f060002;
+        public static final int home=0x7f060003;
+        public static final int map=0x7f060004;
+        public static final int setting=0x7f060006;
+        public static final int star=0x7f060005;
     }
     public static final class style {
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+
     
 
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
+
         
          */
-        public static final int AppBaseTheme=0x7f080001;
+        public static final int AppBaseTheme=0x7f070000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f080002;
-        public static final int Switch=0x7f080000;
+        public static final int AppTheme=0x7f070001;
+        public static final int MD=0x7f070002;
+        public static final int MaterialDesignStyle=0x7f070005;
+        public static final int StyleTitleText=0x7f070003;
+        public static final int SwitchButtonStyle=0x7f070004;
     }
     public static final class styleable {
         /** Attributes that can be used with a SwitchButton.
@@ -708,333 +688,320 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #SwitchButton_switchMinWidth com.wtu.activity:switchMinWidth}</code></td><td> Minimum width for the switch component </td></tr>
-           <tr><td><code>{@link #SwitchButton_switchPadding com.wtu.activity:switchPadding}</code></td><td> Minimum space between the switch and caption text </td></tr>
-           <tr><td><code>{@link #SwitchButton_switchTextAppearance com.wtu.activity:switchTextAppearance}</code></td><td> TextAppearance style for text displayed on the switch thumb.</td></tr>
-           <tr><td><code>{@link #SwitchButton_textOff com.wtu.activity:textOff}</code></td><td> Text to use when the switch is in the unchecked/"off" state.</td></tr>
-           <tr><td><code>{@link #SwitchButton_textOn com.wtu.activity:textOn}</code></td><td> Text to use when the switch is in the checked/"on" state.</td></tr>
-           <tr><td><code>{@link #SwitchButton_thumb com.wtu.activity:thumb}</code></td><td> Drawable to use as the "thumb" that switches back and forth.</td></tr>
-           <tr><td><code>{@link #SwitchButton_thumbTextPadding com.wtu.activity:thumbTextPadding}</code></td><td> Amount of padding on either side of text within the switch thumb.</td></tr>
-           <tr><td><code>{@link #SwitchButton_track com.wtu.activity:track}</code></td><td> Drawable to use as the "track" that the switch thumb slides within.</td></tr>
+           <tr><td><code>{@link #SwitchButton_animationVelocity com.wtu.activity:animationVelocity}</code></td><td></td></tr>
+           <tr><td><code>{@link #SwitchButton_insetBottom com.wtu.activity:insetBottom}</code></td><td></td></tr>
+           <tr><td><code>{@link #SwitchButton_insetLeft com.wtu.activity:insetLeft}</code></td><td></td></tr>
+           <tr><td><code>{@link #SwitchButton_insetRight com.wtu.activity:insetRight}</code></td><td></td></tr>
+           <tr><td><code>{@link #SwitchButton_insetTop com.wtu.activity:insetTop}</code></td><td></td></tr>
+           <tr><td><code>{@link #SwitchButton_measureFactor com.wtu.activity:measureFactor}</code></td><td></td></tr>
+           <tr><td><code>{@link #SwitchButton_offColor com.wtu.activity:offColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #SwitchButton_offDrawable com.wtu.activity:offDrawable}</code></td><td></td></tr>
+           <tr><td><code>{@link #SwitchButton_onColor com.wtu.activity:onColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #SwitchButton_onDrawable com.wtu.activity:onDrawable}</code></td><td></td></tr>
+           <tr><td><code>{@link #SwitchButton_radius com.wtu.activity:radius}</code></td><td></td></tr>
+           <tr><td><code>{@link #SwitchButton_thumbColor com.wtu.activity:thumbColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #SwitchButton_thumbDrawable com.wtu.activity:thumbDrawable}</code></td><td></td></tr>
+           <tr><td><code>{@link #SwitchButton_thumbPressedColor com.wtu.activity:thumbPressedColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #SwitchButton_thumb_height com.wtu.activity:thumb_height}</code></td><td></td></tr>
+           <tr><td><code>{@link #SwitchButton_thumb_margin com.wtu.activity:thumb_margin}</code></td><td></td></tr>
+           <tr><td><code>{@link #SwitchButton_thumb_marginBottom com.wtu.activity:thumb_marginBottom}</code></td><td></td></tr>
+           <tr><td><code>{@link #SwitchButton_thumb_marginLeft com.wtu.activity:thumb_marginLeft}</code></td><td></td></tr>
+           <tr><td><code>{@link #SwitchButton_thumb_marginRight com.wtu.activity:thumb_marginRight}</code></td><td></td></tr>
+           <tr><td><code>{@link #SwitchButton_thumb_marginTop com.wtu.activity:thumb_marginTop}</code></td><td></td></tr>
+           <tr><td><code>{@link #SwitchButton_thumb_width com.wtu.activity:thumb_width}</code></td><td></td></tr>
            </table>
-           @see #SwitchButton_switchMinWidth
-           @see #SwitchButton_switchPadding
-           @see #SwitchButton_switchTextAppearance
-           @see #SwitchButton_textOff
-           @see #SwitchButton_textOn
-           @see #SwitchButton_thumb
-           @see #SwitchButton_thumbTextPadding
-           @see #SwitchButton_track
+           @see #SwitchButton_animationVelocity
+           @see #SwitchButton_insetBottom
+           @see #SwitchButton_insetLeft
+           @see #SwitchButton_insetRight
+           @see #SwitchButton_insetTop
+           @see #SwitchButton_measureFactor
+           @see #SwitchButton_offColor
+           @see #SwitchButton_offDrawable
+           @see #SwitchButton_onColor
+           @see #SwitchButton_onDrawable
+           @see #SwitchButton_radius
+           @see #SwitchButton_thumbColor
+           @see #SwitchButton_thumbDrawable
+           @see #SwitchButton_thumbPressedColor
+           @see #SwitchButton_thumb_height
+           @see #SwitchButton_thumb_margin
+           @see #SwitchButton_thumb_marginBottom
+           @see #SwitchButton_thumb_marginLeft
+           @see #SwitchButton_thumb_marginRight
+           @see #SwitchButton_thumb_marginTop
+           @see #SwitchButton_thumb_width
          */
         public static final int[] SwitchButton = {
-            0x7f010001, 0x7f010002, 0x7f010003, 0x7f010004,
-            0x7f010005, 0x7f010006, 0x7f010007, 0x7f010008
+            0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003,
+            0x7f010004, 0x7f010005, 0x7f010006, 0x7f010007,
+            0x7f010008, 0x7f010009, 0x7f01000a, 0x7f01000b,
+            0x7f01000c, 0x7f01000d, 0x7f01000e, 0x7f01000f,
+            0x7f010010, 0x7f010011, 0x7f010012, 0x7f010013,
+            0x7f010014
         };
         /**
-          <p>
-          @attr description
-           Minimum width for the switch component 
+          <p>This symbol is the offset where the {@link com.wtu.activity.R.attr#animationVelocity}
+          attribute's value can be found in the {@link #SwitchButton} array.
 
 
-          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.wtu.activity:animationVelocity
+        */
+        public static final int SwitchButton_animationVelocity = 14;
+        /**
+          <p>This symbol is the offset where the {@link com.wtu.activity.R.attr#insetBottom}
+          attribute's value can be found in the {@link #SwitchButton} array.
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          <p>This is a private symbol.
-          @attr name com.wtu.activity:switchMinWidth
+          @attr name com.wtu.activity:insetBottom
         */
-        public static final int SwitchButton_switchMinWidth = 6;
+        public static final int SwitchButton_insetBottom = 20;
         /**
-          <p>
-          @attr description
-           Minimum space between the switch and caption text 
+          <p>This symbol is the offset where the {@link com.wtu.activity.R.attr#insetLeft}
+          attribute's value can be found in the {@link #SwitchButton} array.
 
 
-          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          <p>This is a private symbol.
-          @attr name com.wtu.activity:switchPadding
+          @attr name com.wtu.activity:insetLeft
         */
-        public static final int SwitchButton_switchPadding = 7;
+        public static final int SwitchButton_insetLeft = 17;
         /**
-          <p>
-          @attr description
-           TextAppearance style for text displayed on the switch thumb. 
+          <p>This symbol is the offset where the {@link com.wtu.activity.R.attr#insetRight}
+          attribute's value can be found in the {@link #SwitchButton} array.
 
 
-          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          <p>This is a private symbol.
-          @attr name com.wtu.activity:switchTextAppearance
-        */
-        public static final int SwitchButton_switchTextAppearance = 5;
-        /**
-          <p>
-          @attr description
-           Text to use when the switch is in the unchecked/"off" state. 
-
-
-          <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          <p>This is a private symbol.
-          @attr name com.wtu.activity:textOff
-        */
-        public static final int SwitchButton_textOff = 3;
-        /**
-          <p>
-          @attr description
-           Text to use when the switch is in the checked/"on" state. 
-
-
-          <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          <p>This is a private symbol.
-          @attr name com.wtu.activity:textOn
-        */
-        public static final int SwitchButton_textOn = 2;
-        /**
-          <p>
-          @attr description
-           Drawable to use as the "thumb" that switches back and forth. 
-
-
-          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          <p>This is a private symbol.
-          @attr name com.wtu.activity:thumb
-        */
-        public static final int SwitchButton_thumb = 0;
-        /**
-          <p>
-          @attr description
-           Amount of padding on either side of text within the switch thumb. 
-
-
-          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+<p>May be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
+          @attr name com.wtu.activity:insetRight
+        */
+        public static final int SwitchButton_insetRight = 18;
+        /**
+          <p>This symbol is the offset where the {@link com.wtu.activity.R.attr#insetTop}
+          attribute's value can be found in the {@link #SwitchButton} array.
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+          @attr name com.wtu.activity:insetTop
+        */
+        public static final int SwitchButton_insetTop = 19;
+        /**
+          <p>This symbol is the offset where the {@link com.wtu.activity.R.attr#measureFactor}
+          attribute's value can be found in the {@link #SwitchButton} array.
+
+
+          <p>Must be a floating point value, such as "<code>1.2</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          <p>This is a private symbol.
-          @attr name com.wtu.activity:thumbTextPadding
+          @attr name com.wtu.activity:measureFactor
         */
-        public static final int SwitchButton_thumbTextPadding = 4;
+        public static final int SwitchButton_measureFactor = 16;
         /**
-          <p>
-          @attr description
-           Drawable to use as the "track" that the switch thumb slides within. 
-
-
-          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          <p>This is a private symbol.
-          @attr name com.wtu.activity:track
-        */
-        public static final int SwitchButton_track = 1;
-        /** Attributes that can be used with a Switch_Style.
-           <p>Includes the following attributes:</p>
-           <table>
-           <colgroup align="left" />
-           <colgroup align="left" />
-           <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #Switch_Style_switchStyle com.wtu.activity:switchStyle}</code></td><td> Default style for the Switch widget.</td></tr>
-           </table>
-           @see #Switch_Style_switchStyle
-         */
-        public static final int[] Switch_Style = {
-            0x7f010000
-        };
-        /**
-          <p>
-          @attr description
-           Default style for the Switch widget. 
-
-
-          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          <p>This is a private symbol.
-          @attr name com.wtu.activity:switchStyle
-        */
-        public static final int Switch_Style_switchStyle = 0;
-        /** Attributes that can be used with a TextAppearance.
-           <p>Includes the following attributes:</p>
-           <table>
-           <colgroup align="left" />
-           <colgroup align="left" />
-           <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #TextAppearance_textAllCaps com.wtu.activity:textAllCaps}</code></td><td> Present the text in ALL CAPS.</td></tr>
-           <tr><td><code>{@link #TextAppearance_textColor com.wtu.activity:textColor}</code></td><td> Text color.</td></tr>
-           <tr><td><code>{@link #TextAppearance_textColorHighlight com.wtu.activity:textColorHighlight}</code></td><td> Color of the text selection highlight.</td></tr>
-           <tr><td><code>{@link #TextAppearance_textColorHint com.wtu.activity:textColorHint}</code></td><td> Color of the hint text.</td></tr>
-           <tr><td><code>{@link #TextAppearance_textColorLink com.wtu.activity:textColorLink}</code></td><td> Color of the links.</td></tr>
-           <tr><td><code>{@link #TextAppearance_textSize com.wtu.activity:textSize}</code></td><td> Size of the text.</td></tr>
-           <tr><td><code>{@link #TextAppearance_textStyle com.wtu.activity:textStyle}</code></td><td> Style (bold, italic, bolditalic) for the text.</td></tr>
-           <tr><td><code>{@link #TextAppearance_typeface com.wtu.activity:typeface}</code></td><td> Typeface (normal, sans, serif, monospace) for the text.</td></tr>
-           </table>
-           @see #TextAppearance_textAllCaps
-           @see #TextAppearance_textColor
-           @see #TextAppearance_textColorHighlight
-           @see #TextAppearance_textColorHint
-           @see #TextAppearance_textColorLink
-           @see #TextAppearance_textSize
-           @see #TextAppearance_textStyle
-           @see #TextAppearance_typeface
-         */
-        public static final int[] TextAppearance = {
-            0x7f010009, 0x7f01000a, 0x7f01000b, 0x7f01000c,
-            0x7f01000d, 0x7f01000e, 0x7f01000f, 0x7f010010
-        };
-        /**
-          <p>
-          @attr description
-           Present the text in ALL CAPS. This may use a small-caps form when available. 
-
-
-          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          <p>This is a private symbol.
-          @attr name com.wtu.activity:textAllCaps
-        */
-        public static final int TextAppearance_textAllCaps = 7;
-        /**
-          <p>
-          @attr description
-           Text color. 
+          <p>This symbol is the offset where the {@link com.wtu.activity.R.attr#offColor}
+          attribute's value can be found in the {@link #SwitchButton} array.
 
 
           <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          <p>This is a private symbol.
-          @attr name com.wtu.activity:textColor
+          @attr name com.wtu.activity:offColor
         */
-        public static final int TextAppearance_textColor = 0;
+        public static final int SwitchButton_offColor = 11;
         /**
-          <p>
-          @attr description
-           Color of the text selection highlight. 
+          <p>This symbol is the offset where the {@link com.wtu.activity.R.attr#offDrawable}
+          attribute's value can be found in the {@link #SwitchButton} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name com.wtu.activity:offDrawable
+        */
+        public static final int SwitchButton_offDrawable = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.wtu.activity.R.attr#onColor}
+          attribute's value can be found in the {@link #SwitchButton} array.
 
 
           <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          <p>This is a private symbol.
-          @attr name com.wtu.activity:textColorHighlight
+          @attr name com.wtu.activity:onColor
         */
-        public static final int TextAppearance_textColorHighlight = 4;
+        public static final int SwitchButton_onColor = 10;
         /**
-          <p>
-          @attr description
-           Color of the hint text. 
+          <p>This symbol is the offset where the {@link com.wtu.activity.R.attr#onDrawable}
+          attribute's value can be found in the {@link #SwitchButton} array.
 
 
-          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
-"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          <p>This is a private symbol.
-          @attr name com.wtu.activity:textColorHint
+          @attr name com.wtu.activity:onDrawable
         */
-        public static final int TextAppearance_textColorHint = 5;
+        public static final int SwitchButton_onDrawable = 0;
         /**
-          <p>
-          @attr description
-           Color of the links. 
+          <p>This symbol is the offset where the {@link com.wtu.activity.R.attr#radius}
+          attribute's value can be found in the {@link #SwitchButton} array.
 
 
-          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
-"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          <p>This is a private symbol.
-          @attr name com.wtu.activity:textColorLink
-        */
-        public static final int TextAppearance_textColorLink = 6;
-        /**
-          <p>
-          @attr description
-           Size of the text. Recommended dimension type for text is "sp" for scaled-pixels (example: 15sp). 
-
-
-          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
-Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
-in (inches), mm (millimeters).
+          <p>Must be an integer value, such as "<code>100</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          <p>This is a private symbol.
-          @attr name com.wtu.activity:textSize
+          @attr name com.wtu.activity:radius
         */
-        public static final int TextAppearance_textSize = 1;
+        public static final int SwitchButton_radius = 15;
         /**
-          <p>
-          @attr description
-           Style (bold, italic, bolditalic) for the text. 
+          <p>This symbol is the offset where the {@link com.wtu.activity.R.attr#thumbColor}
+          attribute's value can be found in the {@link #SwitchButton} array.
 
 
-          <p>Must be one or more (separated by '|') of the following constant values.</p>
-<table>
-<colgroup align="left" />
-<colgroup align="left" />
-<colgroup align="left" />
-<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-<tr><td><code>normal</code></td><td>0</td><td></td></tr>
-<tr><td><code>bold</code></td><td>1</td><td></td></tr>
-<tr><td><code>italic</code></td><td>2</td><td></td></tr>
-</table>
-          <p>This is a private symbol.
-          @attr name com.wtu.activity:textStyle
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+          @attr name com.wtu.activity:thumbColor
         */
-        public static final int TextAppearance_textStyle = 2;
+        public static final int SwitchButton_thumbColor = 12;
         /**
-          <p>
-          @attr description
-           Typeface (normal, sans, serif, monospace) for the text. 
+          <p>This symbol is the offset where the {@link com.wtu.activity.R.attr#thumbDrawable}
+          attribute's value can be found in the {@link #SwitchButton} array.
 
 
-          <p>Must be one of the following constant values.</p>
-<table>
-<colgroup align="left" />
-<colgroup align="left" />
-<colgroup align="left" />
-<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-<tr><td><code>normal</code></td><td>0</td><td></td></tr>
-<tr><td><code>sans</code></td><td>1</td><td></td></tr>
-<tr><td><code>serif</code></td><td>2</td><td></td></tr>
-<tr><td><code>monospace</code></td><td>3</td><td></td></tr>
-</table>
-          <p>This is a private symbol.
-          @attr name com.wtu.activity:typeface
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name com.wtu.activity:thumbDrawable
         */
-        public static final int TextAppearance_typeface = 3;
+        public static final int SwitchButton_thumbDrawable = 2;
+        /**
+          <p>This symbol is the offset where the {@link com.wtu.activity.R.attr#thumbPressedColor}
+          attribute's value can be found in the {@link #SwitchButton} array.
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+          @attr name com.wtu.activity:thumbPressedColor
+        */
+        public static final int SwitchButton_thumbPressedColor = 13;
+        /**
+          <p>This symbol is the offset where the {@link com.wtu.activity.R.attr#thumb_height}
+          attribute's value can be found in the {@link #SwitchButton} array.
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+          @attr name com.wtu.activity:thumb_height
+        */
+        public static final int SwitchButton_thumb_height = 9;
+        /**
+          <p>This symbol is the offset where the {@link com.wtu.activity.R.attr#thumb_margin}
+          attribute's value can be found in the {@link #SwitchButton} array.
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+          @attr name com.wtu.activity:thumb_margin
+        */
+        public static final int SwitchButton_thumb_margin = 3;
+        /**
+          <p>This symbol is the offset where the {@link com.wtu.activity.R.attr#thumb_marginBottom}
+          attribute's value can be found in the {@link #SwitchButton} array.
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+          @attr name com.wtu.activity:thumb_marginBottom
+        */
+        public static final int SwitchButton_thumb_marginBottom = 5;
+        /**
+          <p>This symbol is the offset where the {@link com.wtu.activity.R.attr#thumb_marginLeft}
+          attribute's value can be found in the {@link #SwitchButton} array.
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+          @attr name com.wtu.activity:thumb_marginLeft
+        */
+        public static final int SwitchButton_thumb_marginLeft = 6;
+        /**
+          <p>This symbol is the offset where the {@link com.wtu.activity.R.attr#thumb_marginRight}
+          attribute's value can be found in the {@link #SwitchButton} array.
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+          @attr name com.wtu.activity:thumb_marginRight
+        */
+        public static final int SwitchButton_thumb_marginRight = 7;
+        /**
+          <p>This symbol is the offset where the {@link com.wtu.activity.R.attr#thumb_marginTop}
+          attribute's value can be found in the {@link #SwitchButton} array.
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+          @attr name com.wtu.activity:thumb_marginTop
+        */
+        public static final int SwitchButton_thumb_marginTop = 4;
+        /**
+          <p>This symbol is the offset where the {@link com.wtu.activity.R.attr#thumb_width}
+          attribute's value can be found in the {@link #SwitchButton} array.
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+          @attr name com.wtu.activity:thumb_width
+        */
+        public static final int SwitchButton_thumb_width = 8;
     };
 }
