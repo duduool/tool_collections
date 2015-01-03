@@ -45,13 +45,6 @@
                 android:padding="10dp"
                 android:text="@string/app_name"
                 android:textSize="20sp" />
-
-            <com.wtu.view.SwitchButton
-                style="@style/SwitchButtonStyle" />
-
-            <com.wtu.view.SwitchButton
-                style="@style/MaterialDesignStyle" />
-
         </LinearLayout>
     </RelativeLayout>
 
