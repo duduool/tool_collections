@@ -1,142 +1,183 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:ignore="UseCompoundDrawables,HardcodedText" >
-
-    <FrameLayout
-        android:id="@+id/content"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="#FFFFFF" >
-    </FrameLayout>
+    android:background="#ffffff"
+    tools:ignore="UseCompoundDrawables" >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:baselineAligned="false" >
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
 
-        <RelativeLayout
-            android:id="@+id/home_layout"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/head_background" >
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/head_text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:orientation="vertical" >
+                android:layout_height="42dp"
+                android:gravity="center"
+                android:text="@string/home"
+                android:textColor="@color/blue"
+                android:textSize="22sp" />
+        </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/home_image"
-                    android:layout_width="wrap_content"
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:background="@color/gray"
+            android:flipInterval="30"
+            android:persistentDrawingCache="animation" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:baselineAligned="false" >
+
+            <RelativeLayout
+                android:id="@+id/home_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:contentDescription="@string/app_name"
-                    android:src="@drawable/tab_home_normal" />
+                    android:layout_centerVertical="true"
+                    android:orientation="vertical" >
 
-                <TextView
-                    android:id="@+id/home_text"
-                    android:layout_width="wrap_content"
+                    <ImageView
+                        android:id="@+id/home_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/tab_home_normal" />
+
+                    <TextView
+                        android:id="@+id/home_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/home"
+                        android:textColor="#82858b" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/map_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="@string/home"
-                    android:textColor="#82858b" />
-            </LinearLayout>
-        </RelativeLayout>
+                    android:layout_centerVertical="true"
+                    android:orientation="vertical" >
 
-        <RelativeLayout
-            android:id="@+id/map_layout"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" >
+                    <ImageView
+                        android:id="@+id/map_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/tab_map_normal" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:orientation="vertical" >
+                    <TextView
+                        android:id="@+id/map_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/map"
+                        android:textColor="#82858b" />
+                </LinearLayout>
+            </RelativeLayout>
 
-                <ImageView
-                    android:id="@+id/map_image"
-                    android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/star_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:contentDescription="@string/app_name"
-                    android:src="@drawable/tab_map_normal" />
+                    android:layout_centerVertical="true"
+                    android:orientation="vertical" >
 
-                <TextView
-                    android:id="@+id/map_text"
-                    android:layout_width="wrap_content"
+                    <ImageView
+                        android:id="@+id/star_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/tab_star_normal" />
+
+                    <TextView
+                        android:id="@+id/star_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/star"
+                        android:textColor="#82858b" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/setting_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="@string/map"
-                    android:textColor="#82858b" />
-            </LinearLayout>
-        </RelativeLayout>
+                    android:layout_centerVertical="true"
+                    android:orientation="vertical" >
 
-        <RelativeLayout
-            android:id="@+id/star_layout"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" >
+                    <ImageView
+                        android:id="@+id/setting_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/tab_settings_normal" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:orientation="vertical" >
-
-                <ImageView
-                    android:id="@+id/star_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:contentDescription="@string/app_name"
-                    android:src="@drawable/tab_star_normal" />
-
-                <TextView
-                    android:id="@+id/star_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="@string/star"
-                    android:textColor="#82858b" />
-            </LinearLayout>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/setting_layout"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:orientation="vertical" >
-
-                <ImageView
-                    android:id="@+id/setting_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:contentDescription="@string/app_name"
-                    android:src="@drawable/tab_settings_normal" />
-
-                <TextView
-                    android:id="@+id/setting_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="@string/setting"
-                    android:textColor="#82858b" />
-            </LinearLayout>
-        </RelativeLayout>
+                    <TextView
+                        android:id="@+id/setting_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/setting"
+                        android:textColor="#82858b" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+    <com.wtu.view.PullDoorView
+        android:id="@+id/myImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffdddddd" >
+
+        <TextView
+            android:id="@+id/hint_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:text="@string/notify"
+            android:textColor="#ffffffff"
+            android:textSize="18sp" />
+    </com.wtu.view.PullDoorView>
+
+</FrameLayout>

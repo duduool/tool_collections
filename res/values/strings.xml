@@ -8,5 +8,6 @@
     <string name="map">Map</string>
     <string name="star">Star</string>
     <string name="setting">Setting</string>
+    <string name="notify">上滑可以进入首页</string>
 
 </resources>

@@ -5,20 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@drawable/head_background" >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="42dp"
-            android:gravity="center"
-            android:text="@string/map"
-            android:textColor="@color/blue"
-            android:textSize="22sp" />
-    </LinearLayout>
-
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >

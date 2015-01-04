@@ -17,6 +17,25 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int animationVelocity=0x7f01000e;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int border_color=0x7f010016;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int border_width=0x7f010015;
         /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
@@ -592,49 +611,53 @@ in (inches), mm (millimeters).
         public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
-        public static final int car=0x7f020000;
-        public static final int head_background=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
-        public static final int setting_selector=0x7f020003;
-        public static final int splash=0x7f020004;
-        public static final int switch_off_selector=0x7f020005;
-        public static final int switch_on_selector=0x7f020006;
-        public static final int switch_thumb_disable=0x7f020007;
-        public static final int switch_thumb_off_normal=0x7f020008;
-        public static final int switch_thumb_off_pressed=0x7f020009;
-        public static final int switch_thumb_on_normal=0x7f02000a;
-        public static final int switch_thumb_on_pressed=0x7f02000b;
-        public static final int switch_thumb_selector=0x7f02000c;
-        public static final int tab_home_normal=0x7f02000d;
-        public static final int tab_home_pressed=0x7f02000e;
-        public static final int tab_map_normal=0x7f02000f;
-        public static final int tab_map_pressed=0x7f020010;
-        public static final int tab_settings_normal=0x7f020011;
-        public static final int tab_settings_pressed=0x7f020012;
-        public static final int tab_star_normal=0x7f020013;
-        public static final int tab_star_pressed=0x7f020014;
+        public static final int background=0x7f020000;
+        public static final int car=0x7f020001;
+        public static final int head_background=0x7f020002;
+        public static final int ic_launcher=0x7f020003;
+        public static final int setting_selector=0x7f020004;
+        public static final int splash=0x7f020005;
+        public static final int switch_off_selector=0x7f020006;
+        public static final int switch_on_selector=0x7f020007;
+        public static final int switch_thumb_disable=0x7f020008;
+        public static final int switch_thumb_off_normal=0x7f020009;
+        public static final int switch_thumb_off_pressed=0x7f02000a;
+        public static final int switch_thumb_on_normal=0x7f02000b;
+        public static final int switch_thumb_on_pressed=0x7f02000c;
+        public static final int switch_thumb_selector=0x7f02000d;
+        public static final int tab_home_normal=0x7f02000e;
+        public static final int tab_home_pressed=0x7f02000f;
+        public static final int tab_map_normal=0x7f020010;
+        public static final int tab_map_pressed=0x7f020011;
+        public static final int tab_settings_normal=0x7f020012;
+        public static final int tab_settings_pressed=0x7f020013;
+        public static final int tab_star_normal=0x7f020014;
+        public static final int tab_star_pressed=0x7f020015;
     }
     public static final class id {
-        public static final int action_settings=0x7f090013;
-        public static final int animal=0x7f09000f;
-        public static final int content=0x7f090001;
-        public static final int home_image=0x7f090003;
-        public static final int home_layout=0x7f090002;
-        public static final int home_text=0x7f090004;
+        public static final int action_settings=0x7f090016;
+        public static final int animal=0x7f090012;
+        public static final int head_text=0x7f090001;
+        public static final int hint_text=0x7f090010;
+        public static final int home_image=0x7f090004;
+        public static final int home_layout=0x7f090003;
+        public static final int home_text=0x7f090005;
         public static final int map=0x7f090000;
-        public static final int mapView=0x7f09000e;
-        public static final int map_image=0x7f090006;
-        public static final int map_layout=0x7f090005;
-        public static final int map_text=0x7f090007;
-        public static final int setting_diveder=0x7f090012;
-        public static final int setting_image=0x7f09000c;
-        public static final int setting_layout=0x7f09000b;
-        public static final int setting_text=0x7f09000d;
-        public static final int star_image=0x7f090009;
-        public static final int star_layout=0x7f090008;
-        public static final int star_text=0x7f09000a;
-        public static final int switchButton=0x7f090011;
-        public static final int titleText=0x7f090010;
+        public static final int mapView=0x7f090011;
+        public static final int map_image=0x7f090007;
+        public static final int map_layout=0x7f090006;
+        public static final int map_text=0x7f090008;
+        public static final int myImage=0x7f09000f;
+        public static final int setting_diveder=0x7f090015;
+        public static final int setting_image=0x7f09000d;
+        public static final int setting_layout=0x7f09000c;
+        public static final int setting_text=0x7f09000e;
+        public static final int star_image=0x7f09000a;
+        public static final int star_layout=0x7f090009;
+        public static final int star_text=0x7f09000b;
+        public static final int switchButton=0x7f090014;
+        public static final int titleText=0x7f090013;
+        public static final int viewPager=0x7f090002;
     }
     public static final class layout {
         public static final int app_splash=0x7f030000;
@@ -655,6 +678,7 @@ in (inches), mm (millimeters).
         public static final int basic_map=0x7f060002;
         public static final int home=0x7f060003;
         public static final int map=0x7f060004;
+        public static final int notify=0x7f060007;
         public static final int setting=0x7f060006;
         public static final int star=0x7f060005;
     }
@@ -682,6 +706,52 @@ in (inches), mm (millimeters).
         public static final int SwitchButtonStyle=0x7f070004;
     }
     public static final class styleable {
+        /** Attributes that can be used with a CircleImageView.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #CircleImageView_border_color com.wtu.activity:border_color}</code></td><td></td></tr>
+           <tr><td><code>{@link #CircleImageView_border_width com.wtu.activity:border_width}</code></td><td></td></tr>
+           </table>
+           @see #CircleImageView_border_color
+           @see #CircleImageView_border_width
+         */
+        public static final int[] CircleImageView = {
+            0x7f010015, 0x7f010016
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.wtu.activity.R.attr#border_color}
+          attribute's value can be found in the {@link #CircleImageView} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.wtu.activity:border_color
+        */
+        public static final int CircleImageView_border_color = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.wtu.activity.R.attr#border_width}
+          attribute's value can be found in the {@link #CircleImageView} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.wtu.activity:border_width
+        */
+        public static final int CircleImageView_border_width = 0;
         /** Attributes that can be used with a SwitchButton.
            <p>Includes the following attributes:</p>
            <table>

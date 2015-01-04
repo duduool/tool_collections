@@ -1,16 +1,16 @@
 package com.wtu.fragment;
 
 import com.amap.api.maps2d.AMap;
-import com.amap.api.maps2d.MapFragment;
 import com.amap.api.maps2d.MapView;
 import com.wtu.activity.R;
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class MapExFragment extends MapFragment {
+public class MapExFragment extends Fragment {
   private static MapExFragment fragment = null;
   public static final int POSITION = 0;
   
@@ -18,7 +18,7 @@ public class MapExFragment extends MapFragment {
   private AMap aMap;
   private View mapLayout;
   
-  public static MapFragment newInstance(){
+  public static Fragment newInstance(){
     if(fragment == null){
       synchronized(MapExFragment.class){
         if(fragment == null){

@@ -1,24 +1,32 @@
 package com.wtu.activity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.wtu.activity.R;
+import com.wtu.fragment.SettingFragment;
 import com.wtu.fragment.HomeFragment;
 import com.wtu.fragment.MapExFragment;
-import com.wtu.fragment.SettingFragment;
 import com.wtu.fragment.StarFragment;
 import android.os.Bundle;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.graphics.Color;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MainActivity extends FragmentActivity implements OnClickListener {
+public class MainActivity extends FragmentActivity {
 	private HomeFragment homeFragment;
 	private MapExFragment mapExFragment;
 	private StarFragment starFragment;
@@ -35,7 +43,16 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 	private TextView mapText;
 	private TextView starText;
 	private TextView settingText;
+	private TextView headText;
+	private TextView hintText;
+	private ViewPager viewPager;
+	private List<Fragment> fragments;
 	private FragmentManager fragmentManager;
+	private int offset = 0;// 动画图片偏移量
+	private int currIndex = 0;// 当前页卡编号
+	private int bmpW;// 动画图片宽度
+	/** 页卡总数 **/
+	private static final int pageSize = 4;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +62,13 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 
 		// 初始化布局元素
 		initViews();
-		fragmentManager = getFragmentManager();
-		// 第一次启动时选中第0个tab
-		setTabSelection(0);
+		InitViewPager();
+		
+		Animation ani = new AlphaAnimation(0f,1f);
+		ani.setDuration(1500);
+		ani.setRepeatMode(Animation.REVERSE);
+		ani.setRepeatCount(Animation.INFINITE);
+		hintText.startAnimation(ani);
 	}
 
 	@Override
@@ -88,89 +109,51 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		mapText 		= (TextView) findViewById(R.id.map_text);
 		starText 		= (TextView) findViewById(R.id.star_text);
 		settingText 	= (TextView) findViewById(R.id.setting_text);
-		homeLayout.setOnClickListener(this);
-		mapLayout.setOnClickListener(this);
-		starLayout.setOnClickListener(this);
-		settingLayout.setOnClickListener(this);
+		headText 		= (TextView) findViewById(R.id.head_text);
+		hintText		= (TextView) findViewById(R.id.hint_text);
+		homeLayout.setOnClickListener(new MyOnClickListener(0));
+		mapLayout.setOnClickListener(new MyOnClickListener(1));
+		starLayout.setOnClickListener(new MyOnClickListener(2));
+		settingLayout.setOnClickListener(new MyOnClickListener(3));
 	}
 
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.home_layout:
-			setTabSelection(0);
-			break;
-		case R.id.map_layout:
-			setTabSelection(1);
-			break;
-		case R.id.star_layout:
-			setTabSelection(2);
-			break;
-		case R.id.setting_layout:
-			setTabSelection(3);
-			break;
-		default:
-			break;
-		}
+	private void InitViewPager() {
+		viewPager = (ViewPager) findViewById(R.id.viewPager);
+		fragments = new ArrayList<Fragment>();
+		fragments.add(new HomeFragment());
+		fragments.add(new MapExFragment());
+		fragments.add(new StarFragment());
+		fragments.add(new SettingFragment());
+		viewPager.setAdapter(new myPagerAdapter(getSupportFragmentManager(), fragments));
+		viewPager.setCurrentItem(0);
+		viewPager.setOnPageChangeListener(new MyOnPageChangeListener());
 	}
-
-	/**
-	 * 根据传入的index参数来设置选中的tab页。
-	 * 
-	 * @param index
-	 *            每个tab页对应的下标。0表示Home，1表示Map，2表示Star，3表示Setting
-	 */
+	
 	private void setTabSelection(int index) {
-		// 每次选中之前先清楚掉上次的选中状态
 		clearSelection();
-		// 开启一个Fragment事务
-		FragmentTransaction transaction = fragmentManager.beginTransaction();
-		// 先隐藏掉所有的Fragment，以防止有多个Fragment显示在界面上的情况
-		hideFragments(transaction);
 		switch (index) {
 		case 0:
 			homeImage.setImageResource(R.drawable.tab_home_pressed);
 			homeText.setTextColor(Color.rgb(0, 121, 255));
-			if (homeFragment == null) {
-				homeFragment = new HomeFragment();
-				transaction.add(R.id.content, homeFragment);
-			} else {
-				transaction.show(homeFragment);
-			}
+			headText.setText(R.string.home);
 			break;
 		case 1:
 			mapImage.setImageResource(R.drawable.tab_map_pressed);
 			mapText.setTextColor(Color.rgb(0, 121, 255));
-			if (mapExFragment == null) {
-				mapExFragment = new MapExFragment();
-				transaction.add(R.id.content, mapExFragment);
-			} else {
-				transaction.show(mapExFragment);
-			}
+			headText.setText(R.string.map);
 			break;
 		case 2:
 			starImage.setImageResource(R.drawable.tab_star_pressed);
 			starText.setTextColor(Color.rgb(0, 121, 255));
-			if (starFragment == null) {
-				starFragment = new StarFragment();
-				transaction.add(R.id.content, starFragment);
-			} else {
-				transaction.show(starFragment);
-			}
+			headText.setText(R.string.star);
 			break;
 		case 3:
 		default:
 			settingImage.setImageResource(R.drawable.tab_settings_pressed);
 			settingText.setTextColor(Color.rgb(0, 121, 255));
-			if (settingFragment == null) {
-				settingFragment = new SettingFragment();
-				transaction.add(R.id.content, settingFragment);
-			} else {
-				transaction.show(settingFragment);
-			}
+			headText.setText(R.string.setting);
 			break;
 		}
-		transaction.commit();
 	}
 
 	/**
@@ -187,29 +170,110 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		settingText.setTextColor(Color.parseColor("#82858b"));
 	}
 
-	/**
-	 * 将所有的Fragment都置为隐藏状态。
-	 * 
-	 * @param transaction
-	 *            用于对Fragment执行操作的事务
-	 */
-	private void hideFragments(FragmentTransaction transaction) {
-		if (homeFragment != null) {
-			transaction.hide(homeFragment);
-		}
-		if (mapExFragment != null) {
-			transaction.hide(mapExFragment);
-		}
-		if (starFragment != null) {
-			transaction.hide(starFragment);
-		}
-		if (settingFragment != null) {
-			transaction.hide(settingFragment);
-		}
-	}
-	
 	// 有待改进
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
+	}
+	
+	/**
+	 * 图标点击监听
+	 */
+	private class MyOnClickListener implements OnClickListener {
+		private int index = 0;
+
+		public MyOnClickListener(int i) {
+			index = i;
+		}
+
+		public void onClick(View v) {
+			switch (index) {
+			case 0:
+				setTabSelection(0);
+				break;
+			case 1:
+				setTabSelection(1);
+				break;
+			case 2:
+				setTabSelection(2);
+				break;
+			case 3:
+				setTabSelection(3);
+				break;
+			default:
+				break;
+			}
+			viewPager.setCurrentItem(index);
+		}
+	}
+	
+	/**
+	 * 为选项卡绑定监听器
+	 */
+	public class MyOnPageChangeListener implements OnPageChangeListener {
+
+		int one = offset * 2 + bmpW;// 页卡1 -> 页卡2 偏移量
+		int two = one * 2;// 页卡1 -> 页卡3 偏移量
+
+		public void onPageScrollStateChanged(int index) {
+		}
+
+		public void onPageScrolled(int arg0, float arg1, int arg2) {
+		}
+
+		public void onPageSelected(int index) {
+			switch (index) {
+			case 0:
+				setTabSelection(0);
+				break;
+			case 1:
+				setTabSelection(1);
+				break;
+			case 2:
+				setTabSelection(2);
+				break;
+			case 3:
+				setTabSelection(3);
+				break;
+			default:
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 定义适配器
+	 */
+	class myPagerAdapter extends FragmentPagerAdapter {
+		private List<Fragment> fragmentList;
+
+		public myPagerAdapter(FragmentManager fm, List<Fragment> fragmentList) {
+			super(fm);
+			this.fragmentList = fragmentList;
+		}
+
+		/**
+		 * 得到每个页面
+		 */
+		@Override
+		public Fragment getItem(int arg0) {
+			return (fragmentList == null || fragmentList.size() == 0) ? null
+					: fragmentList.get(arg0);
+		}
+
+		/**
+		 * 每个页面的title
+		 */
+		@Override
+		public CharSequence getPageTitle(int position) {
+			return null;
+		}
+
+		/**
+		 * 页面的总个数
+		 */
+		@Override
+		public int getCount() {
+			return fragmentList == null ? 0 : fragmentList.size();
+		}
 	}
 }

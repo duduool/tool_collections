@@ -24,5 +24,9 @@
         <attr name="insetTop" format="dimension|reference" />
         <attr name="insetBottom" format="dimension|reference" />
     </declare-styleable>
+    <declare-styleable name="CircleImageView">
+        <attr name="border_width" format="dimension" />
+        <attr name="border_color" format="color" />
+    </declare-styleable>
 
 </resources>
