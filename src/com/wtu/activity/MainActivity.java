@@ -2,19 +2,18 @@ package com.wtu.activity;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import com.wtu.activity.R;
 import com.wtu.fragment.SettingFragment;
 import com.wtu.fragment.HomeFragment;
 import com.wtu.fragment.MapExFragment;
 import com.wtu.fragment.StarFragment;
+import com.wtu.view.MyViewPager;
 import android.os.Bundle;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -45,14 +44,9 @@ public class MainActivity extends FragmentActivity {
 	private TextView settingText;
 	private TextView headText;
 	private TextView hintText;
-	private ViewPager viewPager;
+	private MyViewPager viewPager;
 	private List<Fragment> fragments;
 	private FragmentManager fragmentManager;
-	private int offset = 0;// 动画图片偏移量
-	private int currIndex = 0;// 当前页卡编号
-	private int bmpW;// 动画图片宽度
-	/** 页卡总数 **/
-	private static final int pageSize = 4;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,14 +55,8 @@ public class MainActivity extends FragmentActivity {
 		setContentView(R.layout.main_activity);
 
 		// 初始化布局元素
-		initViews();
-		InitViewPager();
-		
-		Animation ani = new AlphaAnimation(0f,1f);
-		ani.setDuration(1500);
-		ani.setRepeatMode(Animation.REVERSE);
-		ani.setRepeatCount(Animation.INFINITE);
-		hintText.startAnimation(ani);
+		this.initViews();
+		this.InitViewPager();
 	}
 
 	@Override
@@ -94,7 +82,7 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	/**
-	 * 在这里获取到每个需要用到的控件的实例，并给它们设置好必要的点击事件。
+	 * 获取控件的实例，并设置点击事件。
 	 */
 	private void initViews() {
 		homeLayout 		= findViewById(R.id.home_layout);
@@ -115,18 +103,27 @@ public class MainActivity extends FragmentActivity {
 		mapLayout.setOnClickListener(new MyOnClickListener(1));
 		starLayout.setOnClickListener(new MyOnClickListener(2));
 		settingLayout.setOnClickListener(new MyOnClickListener(3));
+		
+		Animation ani = new AlphaAnimation(0f,1f);
+		ani.setDuration(1500);
+		ani.setRepeatMode(Animation.REVERSE);
+		ani.setRepeatCount(Animation.INFINITE);
+		hintText.startAnimation(ani);
 	}
 
 	private void InitViewPager() {
-		viewPager = (ViewPager) findViewById(R.id.viewPager);
+		viewPager = (MyViewPager) findViewById(R.id.viewPager);
+		viewPager.setOffscreenPageLimit(1);
 		fragments = new ArrayList<Fragment>();
 		fragments.add(new HomeFragment());
 		fragments.add(new MapExFragment());
 		fragments.add(new StarFragment());
 		fragments.add(new SettingFragment());
-		viewPager.setAdapter(new myPagerAdapter(getSupportFragmentManager(), fragments));
-		viewPager.setCurrentItem(0);
+		viewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager(), fragments));
 		viewPager.setOnPageChangeListener(new MyOnPageChangeListener());
+		
+		this.setTabSelection(0);
+		viewPager.setCurrentItem(0);
 	}
 	
 	private void setTabSelection(int index) {
@@ -175,9 +172,7 @@ public class MainActivity extends FragmentActivity {
 	protected void onSaveInstanceState(Bundle outState) {
 	}
 	
-	/**
-	 * 图标点击监听
-	 */
+	// 自定义的一些类
 	private class MyOnClickListener implements OnClickListener {
 		private int index = 0;
 
@@ -205,15 +200,8 @@ public class MainActivity extends FragmentActivity {
 			viewPager.setCurrentItem(index);
 		}
 	}
-	
-	/**
-	 * 为选项卡绑定监听器
-	 */
-	public class MyOnPageChangeListener implements OnPageChangeListener {
 
-		int one = offset * 2 + bmpW;// 页卡1 -> 页卡2 偏移量
-		int two = one * 2;// 页卡1 -> 页卡3 偏移量
-
+	private class MyOnPageChangeListener implements OnPageChangeListener {
 		public void onPageScrollStateChanged(int index) {
 		}
 
@@ -237,40 +225,29 @@ public class MainActivity extends FragmentActivity {
 			default:
 				break;
 			}
+			viewPager.setCurrentItem(index);
 		}
 	}
 	
-	/**
-	 * 定义适配器
-	 */
-	class myPagerAdapter extends FragmentPagerAdapter {
+	private class MyPagerAdapter extends FragmentPagerAdapter {
 		private List<Fragment> fragmentList;
 
-		public myPagerAdapter(FragmentManager fm, List<Fragment> fragmentList) {
+		public MyPagerAdapter(FragmentManager fm, List<Fragment> fragmentList) {
 			super(fm);
 			this.fragmentList = fragmentList;
 		}
 
-		/**
-		 * 得到每个页面
-		 */
 		@Override
-		public Fragment getItem(int arg0) {
+		public Fragment getItem(int index) {
 			return (fragmentList == null || fragmentList.size() == 0) ? null
-					: fragmentList.get(arg0);
+					: fragmentList.get(index);
 		}
 
-		/**
-		 * 每个页面的title
-		 */
 		@Override
 		public CharSequence getPageTitle(int position) {
 			return null;
 		}
 
-		/**
-		 * 页面的总个数
-		 */
 		@Override
 		public int getCount() {
 			return fragmentList == null ? 0 : fragmentList.size();

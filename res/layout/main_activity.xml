@@ -25,7 +25,7 @@
                 android:textSize="22sp" />
         </LinearLayout>
 
-        <android.support.v4.view.ViewPager
+        <com.wtu.view.MyViewPager
             android:id="@+id/viewPager"
             android:layout_width="wrap_content"
             android:layout_height="0dp"

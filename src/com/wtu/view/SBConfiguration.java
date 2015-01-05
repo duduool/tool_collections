@@ -12,7 +12,7 @@ import android.graphics.drawable.GradientDrawable;
  * @author kyleduo
  * @since 2014-09-24
  */
-public class Configuration implements Cloneable {
+public class SBConfiguration implements Cloneable {
 
 	static class Default {
 		static int DEFAULT_OFF_COLOR = Color.parseColor("#E3E3E3");
@@ -63,11 +63,11 @@ public class Configuration implements Cloneable {
 	 */
 	private Rect mInsetBounds;
 
-	private Configuration() {
+	private SBConfiguration() {
 	};
 
-	public static Configuration getDefault(float density) {
-		Configuration defaultConfiguration = new Configuration();
+	public static SBConfiguration getDefault(float density) {
+		SBConfiguration defaultConfiguration = new SBConfiguration();
 		defaultConfiguration.density = density;
 		defaultConfiguration.setThumbMarginInPixel(defaultConfiguration.getDefaultThumbMarginInPixel());
 

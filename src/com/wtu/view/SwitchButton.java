@@ -34,7 +34,7 @@ public class SwitchButton extends CompoundButton {
 
 	private boolean mIsChecked = false;
 
-	private Configuration mConf;
+	private SBConfiguration mConf;
 
 	/**
 	 * zone for thumb to move inside
@@ -74,7 +74,7 @@ public class SwitchButton extends CompoundButton {
 				ta.getDimensionPixelSize(R.styleable.SwitchButton_thumb_marginBottom, mConf.getThumbMarginBottom()),
 				ta.getDimensionPixelSize(R.styleable.SwitchButton_thumb_marginLeft, mConf.getThumbMarginLeft()),
 				ta.getDimensionPixelSize(R.styleable.SwitchButton_thumb_marginRight, mConf.getThumbMarginRight()));
-		mConf.setRadius(ta.getInt(R.styleable.SwitchButton_radius, Configuration.Default.DEFAULT_RADIUS));
+		mConf.setRadius(ta.getInt(R.styleable.SwitchButton_radius, SBConfiguration.Default.DEFAULT_RADIUS));
 
 		mConf.setThumbWidthAndHeightInPixel(ta.getDimensionPixelSize(R.styleable.SwitchButton_thumb_width, -1), ta.getDimensionPixelSize(R.styleable.SwitchButton_thumb_height, -1));
 
@@ -99,7 +99,7 @@ public class SwitchButton extends CompoundButton {
 	}
 
 	private void initView() {
-		mConf = Configuration.getDefault(getContext().getResources().getDisplayMetrics().density);
+		mConf = SBConfiguration.getDefault(getContext().getResources().getDisplayMetrics().density);
 		mTouchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
 		mClickTimeout = ViewConfiguration.getPressedStateDuration() + ViewConfiguration.getTapTimeout();
 		mAnimationController = AnimationController.getDefault().init(mOnAnimateListener);
@@ -120,9 +120,9 @@ public class SwitchButton extends CompoundButton {
 		if (mConf == null) {
 			return;
 		}
-		mConf.setOffDrawable(fetchDrawable(ta, R.styleable.SwitchButton_offDrawable, R.styleable.SwitchButton_offColor, Configuration.Default.DEFAULT_OFF_COLOR));
-		mConf.setOnDrawable(fetchDrawable(ta, R.styleable.SwitchButton_onDrawable, R.styleable.SwitchButton_onColor, Configuration.Default.DEFAULT_ON_COLOR));
-		mConf.setThumbDrawable(fetchDrawable(ta, R.styleable.SwitchButton_thumbDrawable, R.styleable.SwitchButton_thumbColor, Configuration.Default.DEFAULT_THUMB_COLOR));
+		mConf.setOffDrawable(fetchDrawable(ta, R.styleable.SwitchButton_offDrawable, R.styleable.SwitchButton_offColor, SBConfiguration.Default.DEFAULT_OFF_COLOR));
+		mConf.setOnDrawable(fetchDrawable(ta, R.styleable.SwitchButton_onDrawable, R.styleable.SwitchButton_onColor, SBConfiguration.Default.DEFAULT_ON_COLOR));
+		mConf.setThumbDrawable(fetchDrawable(ta, R.styleable.SwitchButton_thumbDrawable, R.styleable.SwitchButton_thumbColor, SBConfiguration.Default.DEFAULT_THUMB_COLOR));
 	}
 
 	private Drawable fetchDrawable(TypedArray ta, int attrId, int alterColorId, int defaultColor) {
@@ -136,9 +136,9 @@ public class SwitchButton extends CompoundButton {
 		return tempDrawable;
 	}
 
-	public void setConfiguration(Configuration conf) {
+	public void setConfiguration(SBConfiguration conf) {
 		if (mConf == null) {
-			mConf = Configuration.getDefault(conf.getDensity());
+			mConf = SBConfiguration.getDefault(conf.getDensity());
 		}
 		mConf.setOffDrawable(conf.getOffDrawableWithFix());
 		mConf.setOnDrawable(conf.getOnDrawableWithFix());
@@ -158,7 +158,7 @@ public class SwitchButton extends CompoundButton {
 	 * 
 	 * @return
 	 */
-	public Configuration getConfiguration() {
+	public SBConfiguration getConfiguration() {
 		return mConf;
 	}
 
