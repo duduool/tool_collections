@@ -6,8 +6,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="4dp" >
+        android:layout_height="match_parent" >
 
         <LinearLayout
             android:id="@+id/setting_diveder"
@@ -24,7 +23,7 @@
             android:layout_below="@id/setting_diveder"
             android:background="#ffffff"
             android:divider="@color/gray"
-            android:dividerHeight="6dp"
+            android:dividerHeight="1dp"
             android:listSelector="@drawable/setting_selector" />
     </RelativeLayout>
 

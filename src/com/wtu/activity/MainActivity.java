@@ -7,25 +7,31 @@ import com.wtu.fragment.SettingFragment;
 import com.wtu.fragment.HomeFragment;
 import com.wtu.fragment.MapExFragment;
 import com.wtu.fragment.StarFragment;
-import com.wtu.view.MyViewPager;
+import com.wtu.slidingactivity.SlidingFragmentActivity;
+import com.wtu.slidingmenu.SlidingMenu;
+import com.wtu.slidingmenu.SlidingMenu.CanvasTransformer;
+import com.wtu.viewpager.JazzyViewPager;
+import com.wtu.viewpager.JazzyViewPager.TransitionEffect;
 import android.os.Bundle;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.Interpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends SlidingFragmentActivity {
 	private HomeFragment homeFragment;
 	private MapExFragment mapExFragment;
 	private StarFragment starFragment;
@@ -44,41 +50,69 @@ public class MainActivity extends FragmentActivity {
 	private TextView settingText;
 	private TextView headText;
 	private TextView hintText;
-	private MyViewPager viewPager;
+	private JazzyViewPager jazzyViewPager;
 	private List<Fragment> fragments;
 	private FragmentManager fragmentManager;
+	private CanvasTransformer transformer;
+	private SlidingMenu slidingMenu;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.main_activity);
-
-		// 初始化布局元素
+		
+		// 初始化主界面及菜单
+		this.initAnimation();
+		this.initSlidingMenu();
+		
+		// 初始化界面上的View
 		this.initViews();
-		this.InitViewPager();
+		this.InitFragments();
+		this.setupJazziness(TransitionEffect.Standard);
+	} 
+
+	/**
+	 * 初始化滑动菜单
+	 */
+	private void initSlidingMenu(){
+		// 设置主界面视图
+		setContentView(R.layout.main_activity);
+				
+		// 设置滑动菜单视图
+		setBehindContentView(R.layout.menu_layout);
+
+		// 设置滑动菜单的属性值
+		slidingMenu = getSlidingMenu();		
+		slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+		slidingMenu.setShadowWidthRes(R.dimen.shadow_width);
+		slidingMenu.setShadowDrawable(R.drawable.sliding_shadow);
+		slidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+		slidingMenu.setFadeDegree(0.35f);
+		slidingMenu.setBehindScrollScale(0.0f);
+		slidingMenu.setBehindCanvasTransformer(transformer);
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuItem mi = menu.add(Menu.NONE, 1, Menu.NONE,
-				R.string.action_settings);
-		mi.setIcon(R.drawable.ic_launcher);
-
-		return super.onCreateOptionsMenu(menu);
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		super.onOptionsItemSelected(item);
-		switch (item.getItemId()) // 得到被点击的item的itemId
-		{
-		case Menu.FIRST + 0: 	  // 对应的ID就是在add方法中所设定的Id
-			this.finish();
-			System.exit(0);
-			break;
-		}
-		return true;
+	private static Interpolator interp = new Interpolator() {
+		@Override
+		public float getInterpolation(float t) {
+			t -= 1.0f;
+			return t * t * t + 1.0f;
+		}		
+	};
+	
+	/**
+	 * 初始化动画效果
+	 */
+	private void initAnimation(){
+		transformer = new CanvasTransformer(){
+			@Override
+			public void transformCanvas(Canvas canvas, float percentOpen) {
+				float scale = (float) (percentOpen*0.25 + 0.75);
+				//canvas.scale(scale, scale, canvas.getWidth()/2, canvas.getHeight()/2);	
+				//canvas.scale(percentOpen, 1, 0, 0);		
+				canvas.translate(0, canvas.getHeight() * (1 - interp.getInterpolation(percentOpen)));
+			}
+		};
 	}
 
 	/**
@@ -111,19 +145,24 @@ public class MainActivity extends FragmentActivity {
 		hintText.startAnimation(ani);
 	}
 
-	private void InitViewPager() {
-		viewPager = (MyViewPager) findViewById(R.id.viewPager);
-		viewPager.setOffscreenPageLimit(1);
+	private void InitFragments() {
 		fragments = new ArrayList<Fragment>();
 		fragments.add(new HomeFragment());
 		fragments.add(new MapExFragment());
 		fragments.add(new StarFragment());
 		fragments.add(new SettingFragment());
-		viewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager(), fragments));
-		viewPager.setOnPageChangeListener(new MyOnPageChangeListener());
+	}
+	
+	private void setupJazziness(TransitionEffect effect) {
+		jazzyViewPager = (JazzyViewPager) findViewById(R.id.jazzy_pager);
+		jazzyViewPager.setOffscreenPageLimit(1);
+		jazzyViewPager.setTransitionEffect(effect);
+		jazzyViewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager(), fragments));
+		jazzyViewPager.setOnPageChangeListener(new MyOnPageChangeListener());
+		jazzyViewPager.setPageMargin(30);
 		
 		this.setTabSelection(0);
-		viewPager.setCurrentItem(0);
+		jazzyViewPager.setCurrentItem(0);
 	}
 	
 	private void setTabSelection(int index) {
@@ -172,7 +211,7 @@ public class MainActivity extends FragmentActivity {
 	protected void onSaveInstanceState(Bundle outState) {
 	}
 	
-	// 自定义的一些类
+	// 点击底部图片切换fragment
 	private class MyOnClickListener implements OnClickListener {
 		private int index = 0;
 
@@ -197,10 +236,11 @@ public class MainActivity extends FragmentActivity {
 			default:
 				break;
 			}
-			viewPager.setCurrentItem(index);
+			jazzyViewPager.setCurrentItem(index);
 		}
 	}
-
+	
+	// 当fragment滑动时，底部的图片也要跟着滑动
 	private class MyOnPageChangeListener implements OnPageChangeListener {
 		public void onPageScrollStateChanged(int index) {
 		}
@@ -212,23 +252,29 @@ public class MainActivity extends FragmentActivity {
 			switch (index) {
 			case 0:
 				setTabSelection(0);
+				slidingMenu.setMode(SlidingMenu.LEFT);                                                                                                                                                                                            
+				slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
 				break;
 			case 1:
 				setTabSelection(1);
+				slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
 				break;
 			case 2:
 				setTabSelection(2);
+				slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
 				break;
 			case 3:
 				setTabSelection(3);
+				slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
 				break;
 			default:
 				break;
 			}
-			viewPager.setCurrentItem(index);
+			jazzyViewPager.setCurrentItem(index);
 		}
 	}
 	
+	// 每个fragment显示时，所需调用的类
 	private class MyPagerAdapter extends FragmentPagerAdapter {
 		private List<Fragment> fragmentList;
 
@@ -237,6 +283,13 @@ public class MainActivity extends FragmentActivity {
 			this.fragmentList = fragmentList;
 		}
 
+		@Override
+		public Object instantiateItem(ViewGroup container, final int position) {
+		    Object obj = super.instantiateItem(container, position);
+		    jazzyViewPager.setObjectForPosition(obj, position);
+		    return obj;
+		}
+		
 		@Override
 		public Fragment getItem(int index) {
 			return (fragmentList == null || fragmentList.size() == 0) ? null
@@ -252,5 +305,27 @@ public class MainActivity extends FragmentActivity {
 		public int getCount() {
 			return fragmentList == null ? 0 : fragmentList.size();
 		}
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuItem mi = menu.add(Menu.NONE, 1, Menu.NONE,
+				R.string.action_settings);
+		mi.setIcon(R.drawable.ic_launcher);
+
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		super.onOptionsItemSelected(item);
+		switch (item.getItemId()) // 得到被点击的item的itemId
+		{
+		case Menu.FIRST + 0: 	  // 对应的ID就是在add方法中所设定的Id
+			this.finish();
+			System.exit(0);
+			break;
+		}
+		return true;
 	}
 }

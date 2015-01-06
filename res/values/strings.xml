@@ -4,10 +4,26 @@
     <string name="app_name">WiFiLocation</string>
     <string name="action_settings">Quit</string>
     <string name="basic_map">basic map</string>
+    <string name="menu">Menu</string>
     <string name="home">Home</string>
     <string name="map">Map</string>
     <string name="star">Star</string>
     <string name="setting">Setting</string>
     <string name="notify">上滑可以进入首页</string>
+
+    <string-array name="jazzy_effects">
+        <item>Standard</item>
+        <item>Tablet</item>
+        <item>CubeIn</item>
+        <item>CubeOut</item>
+        <item>FlipVertical</item>
+        <item>FlipHorizontal</item>
+        <item>Stack</item>
+        <item>ZoomIn</item>
+        <item>ZoomOut</item>
+        <item>RotateUp</item>
+        <item>RotateDown</item>
+        <item>Accordion</item>
+    </string-array>
 
 </resources>

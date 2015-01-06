@@ -26,7 +26,6 @@ public class SettingFragment extends ListFragment {
 		List listItem = new ArrayList<HashMap<String, Object>>();
 		for (int i = 0; i < 5; i++) {
 			HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put("image", R.drawable.car);
 			map.put("title", "Level" + i);
 			listItem.add(map);
 		}
@@ -46,8 +45,7 @@ public class SettingFragment extends ListFragment {
 
 					@Override
 					public void onGlobalLayout() {
-						//new com.wtu.utils.SwitchAnimationUtil().startAnimation(
-							//	converView, AnimationType.SCALE);
+//						new SwitchAnimationUtil().startAnimation(converView, AnimationType.SCALE);
 					}
 				});
 		return converView;
@@ -57,5 +55,9 @@ public class SettingFragment extends ListFragment {
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		System.out.println("Click On List Item!!!");
 		super.onListItemClick(l, v, position, id);
+	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
 	}
 }

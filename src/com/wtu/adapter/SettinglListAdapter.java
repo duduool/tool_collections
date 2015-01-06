@@ -13,11 +13,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 class ViewHolder {    
-    public ImageView 	animal;  
     public TextView 	titleText;  
     public SwitchButton switchButton;
 }    
@@ -56,7 +54,6 @@ public class SettinglListAdapter extends BaseAdapter {
         	convertView = LayoutInflater.from(context).inflate(R.layout.setting_item, null) ;
         	
         	viewHolder = new ViewHolder();    
-        	viewHolder.animal = (ImageView) convertView.findViewById(R.id.animal);    
         	viewHolder.titleText = (TextView) convertView.findViewById(R.id.titleText);    
         	viewHolder.switchButton = (SwitchButton) convertView.findViewById(R.id.switchButton); 
         	
@@ -65,7 +62,6 @@ public class SettinglListAdapter extends BaseAdapter {
         	viewHolder = (ViewHolder) convertView.getTag();    
         }  
   
-        viewHolder.animal.setImageResource((Integer)((HashMap)list.get(position)).get("image"));  
         viewHolder.titleText.setText((String)(((HashMap)list.get(position)).get("title")));  
   
         viewHolder.switchButton.setOnCheckedChangeListener(new OnCheckedChangeListener() {

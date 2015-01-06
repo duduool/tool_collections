@@ -25,15 +25,13 @@
                 android:textSize="22sp" />
         </LinearLayout>
 
-        <com.wtu.view.MyViewPager
-            android:id="@+id/viewPager"
-            android:layout_width="wrap_content"
+        <com.wtu.viewpager.JazzyViewPager
+            android:id="@+id/jazzy_pager"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_gravity="center"
             android:layout_weight="1.0"
-            android:background="@color/gray"
-            android:flipInterval="30"
-            android:persistentDrawingCache="animation" />
+            android:background="@color/gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
