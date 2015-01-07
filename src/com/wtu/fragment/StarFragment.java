@@ -12,7 +12,7 @@ public class StarFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View starLayout = inflater.inflate(R.layout.star_layout,
+		View starLayout = inflater.inflate(R.layout.layout_star,
 				container, false);
 		return starLayout;
 	}

@@ -15,7 +15,7 @@ public class BasicMapActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.basicmap_activity);
+		setContentView(R.layout.activity_basicmap);
 		mapView = (MapView) findViewById(R.id.map);
 		mapView.onCreate(savedInstanceState);
 		

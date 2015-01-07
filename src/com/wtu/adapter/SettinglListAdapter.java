@@ -51,7 +51,7 @@ public class SettinglListAdapter extends BaseAdapter {
   
         ViewHolder viewHolder = null;    
         if (convertView == null) {    
-        	convertView = LayoutInflater.from(context).inflate(R.layout.setting_item, null) ;
+        	convertView = LayoutInflater.from(context).inflate(R.layout.item_setting, null) ;
         	
         	viewHolder = new ViewHolder();    
         	viewHolder.titleText = (TextView) convertView.findViewById(R.id.titleText);    

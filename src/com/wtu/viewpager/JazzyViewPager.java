@@ -79,7 +79,8 @@ public class JazzyViewPager extends ViewPager {
 		}
 		ta.recycle();
 	}
-
+	
+	// 返回true时viewpager可缓解与mapview的滑动冲突
 	@Override
 	protected boolean canScroll(View v, boolean checkV, int dx, int x, int y) {
 		return true;
@@ -149,10 +150,17 @@ public class JazzyViewPager extends ViewPager {
 	public void addView(View child, int index, LayoutParams params) {
 		super.addView(wrapChild(child), index, params);
 	}
-
+	
+	// 重写以下两个方法可禁止viewpager滑动
+	@Override
+	public boolean onTouchEvent(MotionEvent arg0) {
+		return false;
+	}
+	
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent arg0) {
-		return mEnabled ? super.onInterceptTouchEvent(arg0) : false;
+		//return mEnabled ? super.onInterceptTouchEvent(arg0) : false;
+		return false;
 	}
 
 	private State mState;

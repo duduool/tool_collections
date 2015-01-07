@@ -1,4 +1,4 @@
-package com.wtu.utils;
+package com.wtu.switchanim;
 
 import android.app.Activity;
 import android.content.Context;

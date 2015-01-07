@@ -14,7 +14,9 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-
+	
+	<uses-permission android:name="android.permission.VIBRATE"/>
+    
     <uses-sdk
         android:minSdkVersion="11"
         android:targetSdkVersion="14" />
@@ -30,22 +32,17 @@
 
         <activity
             android:name="com.wtu.activity.AppStartGradual"
-            android:theme="@android:style/Theme.NoTitleBar"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.wtu.activity.BasicMapActivity"
-            android:label="@string/basic_map" >
-        </activity>
-        <activity
-            android:name="com.wtu.activity.MainActivity"
-            android:label="@string/basic_map" >
-        </activity>
+        <activity android:name="com.wtu.activity.BasicMapActivity" />
+        <activity android:name="com.wtu.activity.MainActivity" />
+        <activity android:name="com.wtu.activity.DemoActivity" />
     </application>
 
 </manifest>

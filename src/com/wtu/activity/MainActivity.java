@@ -10,9 +10,14 @@ import com.wtu.fragment.StarFragment;
 import com.wtu.slidingactivity.SlidingFragmentActivity;
 import com.wtu.slidingmenu.SlidingMenu;
 import com.wtu.slidingmenu.SlidingMenu.CanvasTransformer;
+import com.wtu.swipeback.PreferenceUtils;
+import com.wtu.swipeback.SwipeBackLayout;
 import com.wtu.viewpager.JazzyViewPager;
 import com.wtu.viewpager.JazzyViewPager.TransitionEffect;
+import com.wtu.viewpager.ParallaxPagerTransformer;
 import android.os.Bundle;
+import android.os.Vibrator;
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
@@ -32,6 +37,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainActivity extends SlidingFragmentActivity {
+	private static final int VIBRATE_DURATION = 20;
 	private HomeFragment homeFragment;
 	private MapExFragment mapExFragment;
 	private StarFragment starFragment;
@@ -55,31 +61,32 @@ public class MainActivity extends SlidingFragmentActivity {
 	private FragmentManager fragmentManager;
 	private CanvasTransformer transformer;
 	private SlidingMenu slidingMenu;
+	private SwipeBackLayout mSwipeBackLayout;
+	private String mKeyTrackingMode;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		
-		// 初始化主界面及菜单
+		// 初始化主界面及菜单、滑动返回
+		this.initSwipeback();
 		this.initAnimation();
 		this.initSlidingMenu();
 		
 		// 初始化界面上的View
 		this.initViews();
 		this.InitFragments();
-		this.setupJazziness(TransitionEffect.Standard);
+		this.setupJazziness(TransitionEffect.Tablet);
 	} 
 
-	/**
-	 * 初始化滑动菜单
-	 */
+	// 初始化滑动菜单
 	private void initSlidingMenu(){
 		// 设置主界面视图
-		setContentView(R.layout.main_activity);
+		setContentView(R.layout.activity_main);
 				
 		// 设置滑动菜单视图
-		setBehindContentView(R.layout.menu_layout);
+		setBehindContentView(R.layout.layout_menu);
 
 		// 设置滑动菜单的属性值
 		slidingMenu = getSlidingMenu();		
@@ -100,9 +107,7 @@ public class MainActivity extends SlidingFragmentActivity {
 		}		
 	};
 	
-	/**
-	 * 初始化动画效果
-	 */
+	// 初始化菜单动画效果
 	private void initAnimation(){
 		transformer = new CanvasTransformer(){
 			@Override
@@ -115,9 +120,32 @@ public class MainActivity extends SlidingFragmentActivity {
 		};
 	}
 
-	/**
-	 * 获取控件的实例，并设置点击事件。
-	 */
+	// 初始化滑动返回
+	private void initSwipeback() {
+		/*
+		mKeyTrackingMode = getString(R.string.key_tracking_mode);
+		mSwipeBackLayout = getSwipeBackLayout();
+		mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_BOTTOM);
+		saveTrackingMode(SwipeBackLayout.EDGE_BOTTOM);
+		mSwipeBackLayout.addSwipeListener(new SwipeBackLayout.SwipeListener() {
+			@Override
+			public void onScrollStateChange(int state, float scrollPercent) {
+			}
+
+			@Override
+			public void onEdgeTouch(int edgeFlag) {
+				vibrate(VIBRATE_DURATION);
+			}
+
+			@Override
+			public void onScrollOverThreshold() {
+				vibrate(VIBRATE_DURATION);
+			}
+		});
+		*/
+	}
+	
+	// 获取控件的实例，并设置点击事件
 	private void initViews() {
 		homeLayout 		= findViewById(R.id.home_layout);
 		mapLayout 		= findViewById(R.id.map_layout);
@@ -138,6 +166,7 @@ public class MainActivity extends SlidingFragmentActivity {
 		starLayout.setOnClickListener(new MyOnClickListener(2));
 		settingLayout.setOnClickListener(new MyOnClickListener(3));
 		
+		// 字体动画效果
 		Animation ani = new AlphaAnimation(0f,1f);
 		ani.setDuration(1500);
 		ani.setRepeatMode(Animation.REVERSE);
@@ -153,10 +182,12 @@ public class MainActivity extends SlidingFragmentActivity {
 		fragments.add(new SettingFragment());
 	}
 	
+	// 设置jazzyviewpager的属性
 	private void setupJazziness(TransitionEffect effect) {
 		jazzyViewPager = (JazzyViewPager) findViewById(R.id.jazzy_pager);
-		jazzyViewPager.setOffscreenPageLimit(1);
+		jazzyViewPager.setOffscreenPageLimit(2);
 		jazzyViewPager.setTransitionEffect(effect);
+		jazzyViewPager.setPageTransformer(false, new ParallaxPagerTransformer(R.id.parallaxContent));
 		jazzyViewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager(), fragments));
 		jazzyViewPager.setOnPageChangeListener(new MyOnPageChangeListener());
 		jazzyViewPager.setPageMargin(30);
@@ -165,6 +196,7 @@ public class MainActivity extends SlidingFragmentActivity {
 		jazzyViewPager.setCurrentItem(0);
 	}
 	
+	// 点击底部图标时的动作
 	private void setTabSelection(int index) {
 		clearSelection();
 		switch (index) {
@@ -192,9 +224,7 @@ public class MainActivity extends SlidingFragmentActivity {
 		}
 	}
 
-	/**
-	 * 清除掉所有的选中状态。
-	 */
+	// 清除掉所有的选中状态
 	private void clearSelection() {
 		homeImage.setImageResource(R.drawable.tab_home_normal);
 		homeText.setTextColor(Color.parseColor("#82858b"));
@@ -204,11 +234,6 @@ public class MainActivity extends SlidingFragmentActivity {
 		starText.setTextColor(Color.parseColor("#82858b"));
 		settingImage.setImageResource(R.drawable.tab_settings_normal);
 		settingText.setTextColor(Color.parseColor("#82858b"));
-	}
-
-	// 有待改进
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
 	}
 	
 	// 点击底部图片切换fragment
@@ -252,20 +277,21 @@ public class MainActivity extends SlidingFragmentActivity {
 			switch (index) {
 			case 0:
 				setTabSelection(0);
-				slidingMenu.setMode(SlidingMenu.LEFT);                                                                                                                                                                                            
-				slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+				// 防止viewpager 和 slidingmenu 滑动冲突
+				//slidingMenu.setMode(SlidingMenu.LEFT);                                                                                                                                                                                            
+				//slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
 				break;
 			case 1:
 				setTabSelection(1);
-				slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
+				//slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
 				break;
 			case 2:
 				setTabSelection(2);
-				slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
+				//slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
 				break;
 			case 3:
 				setTabSelection(3);
-				slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
+				//slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
 				break;
 			default:
 				break;
@@ -307,6 +333,34 @@ public class MainActivity extends SlidingFragmentActivity {
 		}
 	}
 	
+	// swipeback
+	private void saveTrackingMode(int flag) {
+		PreferenceUtils.setPrefInt(getApplicationContext(), mKeyTrackingMode, flag);
+	}
+
+	private void restoreTrackingMode() {
+		int flag = PreferenceUtils.getPrefInt(getApplicationContext(),
+				mKeyTrackingMode, SwipeBackLayout.EDGE_LEFT);
+		mSwipeBackLayout.setEdgeTrackingEnabled(flag);
+	}
+	
+	private void vibrate(long duration) {
+		Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+		long[] pattern = { 0, duration };
+		vibrator.vibrate(pattern, -1);
+	}
+	
+	// 有待改进
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		//restoreTrackingMode();
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuItem mi = menu.add(Menu.NONE, 1, Menu.NONE,

@@ -42,7 +42,7 @@ public class SettingFragment extends ListFragment {
 			Bundle savedInstanceState) {
 
 		converView = LayoutInflater.from(getActivity()).inflate(
-				R.layout.setting_layout, null);
+				R.layout.layout_setting, null);
 		jazzylist = (JazzyListView) converView.findViewById(android.R.id.list);
 		if (savedInstanceState != null) {
 			mCurrentTransitionEffect = savedInstanceState.getInt(

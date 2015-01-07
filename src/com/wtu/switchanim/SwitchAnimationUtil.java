@@ -1,4 +1,4 @@
-package com.wtu.utils;
+package com.wtu.switchanim;
 
 import com.nineoldandroids.animation.AnimatorSet;
 import com.nineoldandroids.animation.ObjectAnimator;

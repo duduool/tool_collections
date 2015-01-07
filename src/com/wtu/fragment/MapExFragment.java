@@ -34,7 +34,7 @@ public class MapExFragment extends SupportMapFragment {
 			Bundle savedInstanceState) {
 
 		if (mapLayout == null) {
-			mapLayout = inflater.inflate(R.layout.map_layout, null);
+			mapLayout = inflater.inflate(R.layout.layout_map, null);
 			mapView = (MapView) mapLayout.findViewById(R.id.mapView);
 			mapView.onCreate(savedInstanceState);
 			if (aMap == null) {
