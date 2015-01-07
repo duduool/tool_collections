@@ -21,7 +21,7 @@
             android:textColor="@android:color/black"
             android:textSize="18sp" />
 
-        <com.wtu.view.SwitchButton
+        <com.wtu.customview.SwitchButton
             android:id="@+id/switchButton"
             style="@style/SwitchButtonStyle"
             android:layout_alignParentRight="true"

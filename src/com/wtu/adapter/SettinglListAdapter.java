@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.wtu.activity.R;
-import com.wtu.view.SwitchButton;
+import com.wtu.customview.SwitchButton;
 
 import android.content.Context;
 import android.view.LayoutInflater;

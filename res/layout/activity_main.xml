@@ -25,7 +25,7 @@
                 android:textSize="22sp" />
         </LinearLayout>
 
-        <com.wtu.viewpager.JazzyViewPager
+        <com.wtu.jazzyviewpager.JazzyViewPager
             android:id="@+id/jazzy_pager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -160,7 +160,7 @@
         </LinearLayout>
     </LinearLayout>
 
-    <com.wtu.view.PullDoorView
+    <com.wtu.customview.PullDoorView
         android:id="@+id/myImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -176,6 +176,6 @@
             android:text="@string/notify"
             android:textColor="#ffffffff"
             android:textSize="18sp" />
-    </com.wtu.view.PullDoorView>
+    </com.wtu.customview.PullDoorView>
 
 </FrameLayout>

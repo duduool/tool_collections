@@ -2,7 +2,8 @@
     android:id="@+id/LinearLayout1"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@drawable/backlolipop" >
 	<Button
 	    android:id="@+id/jump"
 	    android:layout_width="wrap_content"

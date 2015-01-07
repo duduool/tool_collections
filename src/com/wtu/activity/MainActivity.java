@@ -7,17 +7,17 @@ import com.wtu.fragment.SettingFragment;
 import com.wtu.fragment.HomeFragment;
 import com.wtu.fragment.MapExFragment;
 import com.wtu.fragment.StarFragment;
+import com.wtu.jazzyviewpager.JazzyViewPager;
+import com.wtu.jazzyviewpager.ParallaxPagerTransformer;
+import com.wtu.jazzyviewpager.JazzyViewPager.TransitionEffect;
 import com.wtu.slidingactivity.SlidingFragmentActivity;
 import com.wtu.slidingmenu.SlidingMenu;
 import com.wtu.slidingmenu.SlidingMenu.CanvasTransformer;
-import com.wtu.swipeback.PreferenceUtils;
+import com.wtu.swipeactivity.SwipeBackActivityBase;
+import com.wtu.swipeactivity.SwipeBackActivityHelper;
 import com.wtu.swipeback.SwipeBackLayout;
-import com.wtu.viewpager.JazzyViewPager;
-import com.wtu.viewpager.JazzyViewPager.TransitionEffect;
-import com.wtu.viewpager.ParallaxPagerTransformer;
+import com.wtu.swipeback.Utils;
 import android.os.Bundle;
-import android.os.Vibrator;
-import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
@@ -36,7 +36,8 @@ import android.view.animation.Interpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MainActivity extends SlidingFragmentActivity {
+public class MainActivity extends SlidingFragmentActivity implements
+		SwipeBackActivityBase {
 	private static final int VIBRATE_DURATION = 20;
 	private HomeFragment homeFragment;
 	private MapExFragment mapExFragment;
@@ -61,36 +62,36 @@ public class MainActivity extends SlidingFragmentActivity {
 	private FragmentManager fragmentManager;
 	private CanvasTransformer transformer;
 	private SlidingMenu slidingMenu;
-	private SwipeBackLayout mSwipeBackLayout;
-	private String mKeyTrackingMode;
-	
+	private SwipeBackActivityHelper mHelper;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		
-		// 初始化主界面及菜单、滑动返回
-		this.initSwipeback();
+		mHelper = new SwipeBackActivityHelper(this);
+		mHelper.onActivityCreate();
+
+		// 初始化主界面及菜单
 		this.initAnimation();
 		this.initSlidingMenu();
-		
+
 		// 初始化界面上的View
 		this.initViews();
 		this.InitFragments();
 		this.setupJazziness(TransitionEffect.Tablet);
-	} 
+	}
 
 	// 初始化滑动菜单
-	private void initSlidingMenu(){
+	private void initSlidingMenu() {
 		// 设置主界面视图
 		setContentView(R.layout.activity_main);
-				
+
 		// 设置滑动菜单视图
 		setBehindContentView(R.layout.layout_menu);
 
 		// 设置滑动菜单的属性值
-		slidingMenu = getSlidingMenu();		
-		slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+		slidingMenu = getSlidingMenu();
+		slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 		slidingMenu.setShadowWidthRes(R.dimen.shadow_width);
 		slidingMenu.setShadowDrawable(R.drawable.sliding_shadow);
 		slidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
@@ -104,70 +105,49 @@ public class MainActivity extends SlidingFragmentActivity {
 		public float getInterpolation(float t) {
 			t -= 1.0f;
 			return t * t * t + 1.0f;
-		}		
+		}
 	};
-	
+
 	// 初始化菜单动画效果
-	private void initAnimation(){
-		transformer = new CanvasTransformer(){
+	private void initAnimation() {
+		transformer = new CanvasTransformer() {
 			@Override
 			public void transformCanvas(Canvas canvas, float percentOpen) {
-				float scale = (float) (percentOpen*0.25 + 0.75);
-				//canvas.scale(scale, scale, canvas.getWidth()/2, canvas.getHeight()/2);	
-				//canvas.scale(percentOpen, 1, 0, 0);		
-				canvas.translate(0, canvas.getHeight() * (1 - interp.getInterpolation(percentOpen)));
+				float scale = (float) (percentOpen * 0.25 + 0.75);
+				// canvas.scale(scale, scale, canvas.getWidth()/2,
+				// canvas.getHeight()/2);
+				// canvas.scale(percentOpen, 1, 0, 0);
+				canvas.translate(
+						0,
+						canvas.getHeight()
+								* (1 - interp.getInterpolation(percentOpen)));
 			}
 		};
 	}
 
-	// 初始化滑动返回
-	private void initSwipeback() {
-		/*
-		mKeyTrackingMode = getString(R.string.key_tracking_mode);
-		mSwipeBackLayout = getSwipeBackLayout();
-		mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_BOTTOM);
-		saveTrackingMode(SwipeBackLayout.EDGE_BOTTOM);
-		mSwipeBackLayout.addSwipeListener(new SwipeBackLayout.SwipeListener() {
-			@Override
-			public void onScrollStateChange(int state, float scrollPercent) {
-			}
-
-			@Override
-			public void onEdgeTouch(int edgeFlag) {
-				vibrate(VIBRATE_DURATION);
-			}
-
-			@Override
-			public void onScrollOverThreshold() {
-				vibrate(VIBRATE_DURATION);
-			}
-		});
-		*/
-	}
-	
 	// 获取控件的实例，并设置点击事件
 	private void initViews() {
-		homeLayout 		= findViewById(R.id.home_layout);
-		mapLayout 		= findViewById(R.id.map_layout);
-		starLayout 		= findViewById(R.id.star_layout);
-		settingLayout 	= findViewById(R.id.setting_layout);
-		homeImage 		= (ImageView) findViewById(R.id.home_image);
-		mapImage 		= (ImageView) findViewById(R.id.map_image);
-		starImage 		= (ImageView) findViewById(R.id.star_image);
-		settingImage 	= (ImageView) findViewById(R.id.setting_image);
-		homeText 		= (TextView) findViewById(R.id.home_text);
-		mapText 		= (TextView) findViewById(R.id.map_text);
-		starText 		= (TextView) findViewById(R.id.star_text);
-		settingText 	= (TextView) findViewById(R.id.setting_text);
-		headText 		= (TextView) findViewById(R.id.head_text);
-		hintText		= (TextView) findViewById(R.id.hint_text);
+		homeLayout = findViewById(R.id.home_layout);
+		mapLayout = findViewById(R.id.map_layout);
+		starLayout = findViewById(R.id.star_layout);
+		settingLayout = findViewById(R.id.setting_layout);
+		homeImage = (ImageView) findViewById(R.id.home_image);
+		mapImage = (ImageView) findViewById(R.id.map_image);
+		starImage = (ImageView) findViewById(R.id.star_image);
+		settingImage = (ImageView) findViewById(R.id.setting_image);
+		homeText = (TextView) findViewById(R.id.home_text);
+		mapText = (TextView) findViewById(R.id.map_text);
+		starText = (TextView) findViewById(R.id.star_text);
+		settingText = (TextView) findViewById(R.id.setting_text);
+		headText = (TextView) findViewById(R.id.head_text);
+		hintText = (TextView) findViewById(R.id.hint_text);
 		homeLayout.setOnClickListener(new MyOnClickListener(0));
 		mapLayout.setOnClickListener(new MyOnClickListener(1));
 		starLayout.setOnClickListener(new MyOnClickListener(2));
 		settingLayout.setOnClickListener(new MyOnClickListener(3));
-		
+
 		// 字体动画效果
-		Animation ani = new AlphaAnimation(0f,1f);
+		Animation ani = new AlphaAnimation(0f, 1f);
 		ani.setDuration(1500);
 		ani.setRepeatMode(Animation.REVERSE);
 		ani.setRepeatCount(Animation.INFINITE);
@@ -181,21 +161,23 @@ public class MainActivity extends SlidingFragmentActivity {
 		fragments.add(new StarFragment());
 		fragments.add(new SettingFragment());
 	}
-	
+
 	// 设置jazzyviewpager的属性
 	private void setupJazziness(TransitionEffect effect) {
 		jazzyViewPager = (JazzyViewPager) findViewById(R.id.jazzy_pager);
 		jazzyViewPager.setOffscreenPageLimit(2);
 		jazzyViewPager.setTransitionEffect(effect);
-		jazzyViewPager.setPageTransformer(false, new ParallaxPagerTransformer(R.id.parallaxContent));
-		jazzyViewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager(), fragments));
+		jazzyViewPager.setPageTransformer(false, new ParallaxPagerTransformer(
+				R.id.parallaxContent));
+		jazzyViewPager.setAdapter(new MyPagerAdapter(
+				getSupportFragmentManager(), fragments));
 		jazzyViewPager.setOnPageChangeListener(new MyOnPageChangeListener());
 		jazzyViewPager.setPageMargin(30);
-		
+
 		this.setTabSelection(0);
 		jazzyViewPager.setCurrentItem(0);
 	}
-	
+
 	// 点击底部图标时的动作
 	private void setTabSelection(int index) {
 		clearSelection();
@@ -235,7 +217,7 @@ public class MainActivity extends SlidingFragmentActivity {
 		settingImage.setImageResource(R.drawable.tab_settings_normal);
 		settingText.setTextColor(Color.parseColor("#82858b"));
 	}
-	
+
 	// 点击底部图片切换fragment
 	private class MyOnClickListener implements OnClickListener {
 		private int index = 0;
@@ -264,8 +246,8 @@ public class MainActivity extends SlidingFragmentActivity {
 			jazzyViewPager.setCurrentItem(index);
 		}
 	}
-	
-	// 当fragment滑动时，底部的图片也要跟着滑动
+
+	// 当fragment滑动时，底部的图片要跟着变化
 	private class MyOnPageChangeListener implements OnPageChangeListener {
 		public void onPageScrollStateChanged(int index) {
 		}
@@ -278,20 +260,20 @@ public class MainActivity extends SlidingFragmentActivity {
 			case 0:
 				setTabSelection(0);
 				// 防止viewpager 和 slidingmenu 滑动冲突
-				//slidingMenu.setMode(SlidingMenu.LEFT);                                                                                                                                                                                            
-				//slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+				// slidingMenu.setMode(SlidingMenu.LEFT);
+				slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 				break;
 			case 1:
 				setTabSelection(1);
-				//slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
+				slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
 				break;
 			case 2:
 				setTabSelection(2);
-				//slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
+				slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 				break;
 			case 3:
 				setTabSelection(3);
-				//slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
+				slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 				break;
 			default:
 				break;
@@ -299,7 +281,7 @@ public class MainActivity extends SlidingFragmentActivity {
 			jazzyViewPager.setCurrentItem(index);
 		}
 	}
-	
+
 	// 每个fragment显示时，所需调用的类
 	private class MyPagerAdapter extends FragmentPagerAdapter {
 		private List<Fragment> fragmentList;
@@ -309,13 +291,14 @@ public class MainActivity extends SlidingFragmentActivity {
 			this.fragmentList = fragmentList;
 		}
 
+		// 产生动画效果的关键
 		@Override
 		public Object instantiateItem(ViewGroup container, final int position) {
-		    Object obj = super.instantiateItem(container, position);
-		    jazzyViewPager.setObjectForPosition(obj, position);
-		    return obj;
+			Object obj = super.instantiateItem(container, position);
+			jazzyViewPager.setObjectForPosition(obj, position);
+			return obj;
 		}
-		
+
 		@Override
 		public Fragment getItem(int index) {
 			return (fragmentList == null || fragmentList.size() == 0) ? null
@@ -332,40 +315,16 @@ public class MainActivity extends SlidingFragmentActivity {
 			return fragmentList == null ? 0 : fragmentList.size();
 		}
 	}
-	
-	// swipeback
-	private void saveTrackingMode(int flag) {
-		PreferenceUtils.setPrefInt(getApplicationContext(), mKeyTrackingMode, flag);
-	}
 
-	private void restoreTrackingMode() {
-		int flag = PreferenceUtils.getPrefInt(getApplicationContext(),
-				mKeyTrackingMode, SwipeBackLayout.EDGE_LEFT);
-		mSwipeBackLayout.setEdgeTrackingEnabled(flag);
-	}
-	
-	private void vibrate(long duration) {
-		Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-		long[] pattern = { 0, duration };
-		vibrator.vibrate(pattern, -1);
-	}
-	
 	// 有待改进
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
-	}
-	
-	@Override
-	protected void onResume() {
-		super.onResume();
-		//restoreTrackingMode();
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuItem mi = menu.add(Menu.NONE, 1, Menu.NONE,
 				R.string.action_settings);
-		mi.setIcon(R.drawable.ic_launcher);
 
 		return super.onCreateOptionsMenu(menu);
 	}
@@ -375,11 +334,41 @@ public class MainActivity extends SlidingFragmentActivity {
 		super.onOptionsItemSelected(item);
 		switch (item.getItemId()) // 得到被点击的item的itemId
 		{
-		case Menu.FIRST + 0: 	  // 对应的ID就是在add方法中所设定的Id
+		case Menu.FIRST + 0: // 对应的ID就是在add方法中所设定的Id
 			this.finish();
 			System.exit(0);
 			break;
 		}
 		return true;
+	}
+
+	@Override
+	public void onPostCreate(Bundle savedInstanceState) {
+		super.onPostCreate(savedInstanceState);
+		mHelper.onPostCreate();
+	}
+
+	@Override
+	public View findViewById(int id) {
+		View v = super.findViewById(id);
+		if (v == null && mHelper != null)
+			return mHelper.findViewById(id);
+		return v;
+	}
+
+	@Override
+	public SwipeBackLayout getSwipeBackLayout() {
+		return mHelper.getSwipeBackLayout();
+	}
+
+	@Override
+	public void setSwipeBackEnable(boolean enable) {
+		getSwipeBackLayout().setEnableGesture(enable);
+	}
+
+	@Override
+	public void scrollToFinishActivity() {
+		Utils.convertActivityToTranslucent(this);
+		getSwipeBackLayout().scrollToFinishActivity();
 	}
 }

@@ -8,7 +8,6 @@ import android.view.ViewGroup.LayoutParams;
 import com.wtu.slidingmenu.SlidingMenu;
 
 public class SlidingFragmentActivity extends FragmentActivity implements SlidingActivityBase {
-
 	private SlidingActivityHelper mHelper;
 
 	/* (non-Javadoc)
@@ -147,5 +146,4 @@ public class SlidingFragmentActivity extends FragmentActivity implements Sliding
 		if (b) return b;
 		return super.onKeyUp(keyCode, event);
 	}
-
 }

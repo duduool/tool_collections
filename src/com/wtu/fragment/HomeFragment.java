@@ -27,7 +27,6 @@ public class HomeFragment extends Fragment {
 			public void onClick(View view) {
 				Intent intent = new Intent(getActivity(), DemoActivity.class);
 				getActivity().startActivity(intent);
-				getActivity().finish();
 			}
 		});
 		

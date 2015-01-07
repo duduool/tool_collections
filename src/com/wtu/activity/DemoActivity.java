@@ -1,8 +1,9 @@
 package com.wtu.activity;
 
-import com.wtu.swipeback.PreferenceUtils;
-import com.wtu.swipeback.SwipeBackActivity;
+import com.wtu.swipeactivity.PreferenceUtils;
+import com.wtu.swipeactivity.SwipeBackActivity;
 import com.wtu.swipeback.SwipeBackLayout;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,7 +23,7 @@ public class DemoActivity extends SwipeBackActivity implements
 	private SwipeBackLayout mSwipeBackLayout;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_demo);
 
