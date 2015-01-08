@@ -10,6 +10,8 @@ import com.wtu.fragment.StarFragment;
 import com.wtu.jazzyviewpager.JazzyViewPager;
 import com.wtu.jazzyviewpager.ParallaxPagerTransformer;
 import com.wtu.jazzyviewpager.JazzyViewPager.TransitionEffect;
+import com.wtu.residemenu.ResideMenu;
+import com.wtu.residemenu.ResideMenuItem;
 import com.wtu.slidingactivity.SlidingFragmentActivity;
 import com.wtu.slidingmenu.SlidingMenu;
 import com.wtu.slidingmenu.SlidingMenu.CanvasTransformer;
@@ -18,6 +20,7 @@ import com.wtu.swipeactivity.SwipeBackActivityHelper;
 import com.wtu.swipeback.SwipeBackLayout;
 import com.wtu.swipeback.Utils;
 import android.os.Bundle;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
@@ -63,41 +66,33 @@ public class MainActivity extends SlidingFragmentActivity implements
 	private CanvasTransformer transformer;
 	private SlidingMenu slidingMenu;
 	private SwipeBackActivityHelper mHelper;
-
+	private ResideMenu resideMenu;
+	private ResideMenuItem itemHome;
+    private ResideMenuItem itemProfile;
+    private ResideMenuItem itemCalendar;
+    private ResideMenuItem itemSettings;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.activity_main);
+		
 		mHelper = new SwipeBackActivityHelper(this);
 		mHelper.onActivityCreate();
-
-		// 初始化主界面及菜单
-		this.initAnimation();
-		this.initSlidingMenu();
-
-		// 初始化界面上的View
+		
+		// 初始化界面上的View主界面及菜单
 		this.initViews();
-		this.InitFragments();
+		this.initAnimation();
+		
+		this.setupResideMenu();
+		this.setupSlidingMenu();
 		this.setupJazziness(TransitionEffect.Tablet);
-	}
-
-	// 初始化滑动菜单
-	private void initSlidingMenu() {
-		// 设置主界面视图
-		setContentView(R.layout.activity_main);
-
-		// 设置滑动菜单视图
-		setBehindContentView(R.layout.layout_menu);
-
-		// 设置滑动菜单的属性值
-		slidingMenu = getSlidingMenu();
-		slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-		slidingMenu.setShadowWidthRes(R.dimen.shadow_width);
-		slidingMenu.setShadowDrawable(R.drawable.sliding_shadow);
-		slidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
-		slidingMenu.setFadeDegree(0.35f);
-		slidingMenu.setBehindScrollScale(0.0f);
-		slidingMenu.setBehindCanvasTransformer(transformer);
+		
+		if(savedInstanceState == null) {
+			this.setTabSelection(0);
+			jazzyViewPager.setCurrentItem(0);
+		}
 	}
 
 	private static Interpolator interp = new Interpolator() {
@@ -110,6 +105,13 @@ public class MainActivity extends SlidingFragmentActivity implements
 
 	// 初始化菜单动画效果
 	private void initAnimation() {
+		// 上滑字体动画效果
+		Animation ani = new AlphaAnimation(0f, 1f);
+		ani.setDuration(1500);
+		ani.setRepeatMode(Animation.REVERSE);
+		ani.setRepeatCount(Animation.INFINITE);
+		hintText.startAnimation(ani);
+		
 		transformer = new CanvasTransformer() {
 			@Override
 			public void transformCanvas(Canvas canvas, float percentOpen) {
@@ -127,44 +129,52 @@ public class MainActivity extends SlidingFragmentActivity implements
 
 	// 获取控件的实例，并设置点击事件
 	private void initViews() {
-		homeLayout = findViewById(R.id.home_layout);
-		mapLayout = findViewById(R.id.map_layout);
-		starLayout = findViewById(R.id.star_layout);
+		homeLayout 	= findViewById(R.id.home_layout);
+		mapLayout 	= findViewById(R.id.map_layout);
+		starLayout 	= findViewById(R.id.star_layout);
 		settingLayout = findViewById(R.id.setting_layout);
-		homeImage = (ImageView) findViewById(R.id.home_image);
-		mapImage = (ImageView) findViewById(R.id.map_image);
-		starImage = (ImageView) findViewById(R.id.star_image);
+		homeImage 	= (ImageView) findViewById(R.id.home_image);
+		mapImage 	= (ImageView) findViewById(R.id.map_image);
+		starImage 	= (ImageView) findViewById(R.id.star_image);
 		settingImage = (ImageView) findViewById(R.id.setting_image);
-		homeText = (TextView) findViewById(R.id.home_text);
-		mapText = (TextView) findViewById(R.id.map_text);
-		starText = (TextView) findViewById(R.id.star_text);
+		homeText 	= (TextView) findViewById(R.id.home_text);
+		mapText 	= (TextView) findViewById(R.id.map_text);
+		starText 	= (TextView) findViewById(R.id.star_text);
 		settingText = (TextView) findViewById(R.id.setting_text);
-		headText = (TextView) findViewById(R.id.head_text);
-		hintText = (TextView) findViewById(R.id.hint_text);
+		headText 	= (TextView) findViewById(R.id.head_text);
+		hintText 	= (TextView) findViewById(R.id.hint_text);
 		
 		homeLayout.setOnClickListener(new MyOnClickListener(0));
 		mapLayout.setOnClickListener(new MyOnClickListener(1));
 		starLayout.setOnClickListener(new MyOnClickListener(2));
 		settingLayout.setOnClickListener(new MyOnClickListener(3));
-
-		// 字体动画效果
-		Animation ani = new AlphaAnimation(0f, 1f);
-		ani.setDuration(1500);
-		ani.setRepeatMode(Animation.REVERSE);
-		ani.setRepeatCount(Animation.INFINITE);
-		hintText.startAnimation(ani);
 	}
 
-	private void InitFragments() {
+	// 初始化滑动菜单
+	private void setupSlidingMenu() {
+		// 设置主界面视图 ...
+		// 设置滑动菜单视图
+		setBehindContentView(R.layout.layout_menu);
+
+		// 设置滑动菜单的属性值
+		slidingMenu = getSlidingMenu();
+		slidingMenu.setMode(SlidingMenu.LEFT);
+		slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		slidingMenu.setShadowWidthRes(R.dimen.shadow_width);
+		slidingMenu.setShadowDrawable(R.drawable.sliding_shadow);
+		slidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+		slidingMenu.setFadeDegree(0.35f);
+		slidingMenu.setBehindScrollScale(0.0f);
+		slidingMenu.setBehindCanvasTransformer(transformer);
+	}
+
+	// 设置jazzyviewpager的属性
+	private void setupJazziness(TransitionEffect effect) {
 		fragments = new ArrayList<Fragment>();
 		fragments.add(new HomeFragment());
 		fragments.add(new MapExFragment());
 		fragments.add(new StarFragment());
 		fragments.add(new SettingFragment());
-	}
-
-	// 设置jazzyviewpager的属性
-	private void setupJazziness(TransitionEffect effect) {
 		jazzyViewPager = (JazzyViewPager) findViewById(R.id.jazzy_pager);
 		jazzyViewPager.setOffscreenPageLimit(1);
 		jazzyViewPager.setTransitionEffect(effect);	// 设置页面之间的切换效果
@@ -179,6 +189,50 @@ public class MainActivity extends SlidingFragmentActivity implements
 		jazzyViewPager.setCurrentItem(0);
 	}
 
+	// 设置 residemenu
+	private void setupResideMenu() {
+        // attach to current activity;
+        resideMenu = new ResideMenu(this);
+        resideMenu.setBackground(R.drawable.menu_background);
+        resideMenu.attachToActivity(this);
+        resideMenu.setMenuListener(menuListener);
+        //valid scale factor is between 0.0f and 1.0f. leftmenu'width is 150dip. 
+        resideMenu.setScaleValue(0.7f);
+
+        // create menu items;
+        itemHome     = new ResideMenuItem(this, R.drawable.icon_home,     "Home");
+        itemProfile  = new ResideMenuItem(this, R.drawable.icon_profile,  "Profile");
+        itemCalendar = new ResideMenuItem(this, R.drawable.icon_calendar, "Calendar");
+        itemSettings = new ResideMenuItem(this, R.drawable.icon_settings, "Settings");
+
+        itemHome.setOnClickListener    (new ResideMenuOnClickListener());
+        itemProfile.setOnClickListener (new ResideMenuOnClickListener());
+        itemCalendar.setOnClickListener(new ResideMenuOnClickListener());
+        itemSettings.setOnClickListener(new ResideMenuOnClickListener());
+
+        resideMenu.addMenuItem(itemHome, 	 ResideMenu.DIRECTION_RIGHT);
+        resideMenu.addMenuItem(itemProfile,  ResideMenu.DIRECTION_RIGHT);
+        resideMenu.addMenuItem(itemCalendar, ResideMenu.DIRECTION_RIGHT);
+        resideMenu.addMenuItem(itemSettings, ResideMenu.DIRECTION_RIGHT);
+
+        // You can disable a direction by setting ->
+        resideMenu.setSwipeDirectionDisable(ResideMenu.DIRECTION_LEFT);
+        //resideMenu.addIgnoredView((LinearLayout) findViewById(R.id.ignored_view));
+        
+        findViewById(R.id.title_bar_left_menu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            	slidingMenu.showMenu();
+            }
+        });
+        findViewById(R.id.title_bar_right_menu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resideMenu.openMenu(ResideMenu.DIRECTION_RIGHT);
+            }
+        });
+    }
+	
 	// 点击底部图标时的动作
 	private void setTabSelection(int index) {
 		clearSelection();
@@ -218,20 +272,36 @@ public class MainActivity extends SlidingFragmentActivity implements
 		settingImage.setImageResource(R.drawable.tab_settings_normal);
 		settingText.setTextColor(Color.parseColor("#82858b"));
 	}
+	
+	// ResideMenuListener
+	private ResideMenu.OnMenuListener menuListener = new ResideMenu.OnMenuListener() {
+        @Override
+        public void openMenu() {
+            // Toast.makeText(MainActivity.this, "Menu is opened!", Toast.LENGTH_SHORT).show();
+        }
 
-	// 顶部按钮点击事件
-	public void onTitleBarClick(View v) {
-		switch (v.getId()) {
-		case R.id.title_bar_left_menu:
-			slidingMenu.toggle();
-			break;
-		case R.id.title_bar_right_menu:
-			break;
-		default:
-			break;
+        @Override
+        public void closeMenu() {
+            // Toast.makeText(MainActivity.this, "Menu is closed!", Toast.LENGTH_SHORT).show();
+        }
+    };
+	
+    private class ResideMenuOnClickListener implements OnClickListener {
+		
+		@Override
+		public void onClick(View view) {
+			if (view == itemHome){
+				Intent intent = new Intent(MainActivity.this, DemoActivity.class);
+				startActivity(intent);
+	        }else if (view == itemProfile){
+	        }else if (view == itemCalendar){
+	        }else if (view == itemSettings){
+	        }
+
+	        resideMenu.closeMenu();
 		}
 	}
-	
+    
 	// 点击底部图片切换fragment
 	private class MyOnClickListener implements OnClickListener {
 		private int index = 0;
@@ -241,7 +311,7 @@ public class MainActivity extends SlidingFragmentActivity implements
 		}
 
 		@Override
-		public void onClick(View v) {
+		public void onClick(View view) {
 			switch (index) {
 			case 0:
 				setTabSelection(0);
@@ -278,7 +348,6 @@ public class MainActivity extends SlidingFragmentActivity implements
 			case 0:
 				setTabSelection(0);
 				// 防止viewpager 和 slidingmenu 滑动冲突
-				// slidingMenu.setMode(SlidingMenu.LEFT);
 				slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 				break;
 			case 1:
@@ -337,8 +406,9 @@ public class MainActivity extends SlidingFragmentActivity implements
 	// 有待改进
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
+		//super.onSaveInstanceState(outState);
 	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuItem mi = menu.add(Menu.NONE, 1, Menu.NONE,
@@ -360,6 +430,7 @@ public class MainActivity extends SlidingFragmentActivity implements
 		return true;
 	}
 	
+	// 滑动返回事件重写的方法
 	@Override
 	public void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
@@ -389,4 +460,9 @@ public class MainActivity extends SlidingFragmentActivity implements
 		Utils.convertActivityToTranslucent(this);
 		getSwipeBackLayout().scrollToFinishActivity();
 	}
+	
+	// What good method is to access resideMenu？
+    public ResideMenu getResideMenu(){
+        return resideMenu;
+    }
 }

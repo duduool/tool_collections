@@ -6,6 +6,7 @@
     tools:ignore="UseCompoundDrawables" >
 
     <LinearLayout
+        android:id="@+id/ignored_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" >
@@ -31,8 +32,7 @@
                     android:layout_height="28dp"
                     android:layout_gravity="left|center_vertical"
                     android:layout_marginLeft="10dp"
-                    android:background="@drawable/titlebar_menu_selector"
-                    android:onClick="onTitleBarClick" />
+                    android:background="@drawable/titlebar_menu_selector" />
 
                 <TextView
                     android:id="@+id/head_text"
@@ -50,8 +50,7 @@
                     android:layout_height="28dp"
                     android:layout_gravity="right|center_vertical"
                     android:layout_marginRight="10dp"
-                    android:background="@drawable/titlebar_menu_selector"
-                    android:onClick="onTitleBarClick" />
+                    android:background="@drawable/titlebar_menu_selector" />
             </FrameLayout>
 
             <ImageView

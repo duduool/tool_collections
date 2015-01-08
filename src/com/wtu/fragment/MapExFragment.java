@@ -4,6 +4,8 @@ import com.amap.api.maps2d.AMap;
 import com.amap.api.maps2d.MapView;
 import com.amap.api.maps2d.SupportMapFragment;
 import com.wtu.activity.R;
+import com.wtu.residemenu.ResideMenu;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,7 +19,8 @@ public class MapExFragment extends SupportMapFragment {
 	private MapView mapView;
 	private AMap aMap;
 	private View mapLayout;
-
+	private ResideMenu resideMenu;
+	
 	public static SupportMapFragment newInstance() {
 		if (fragment == null) {
 			synchronized (MapExFragment.class) {
@@ -32,7 +35,7 @@ public class MapExFragment extends SupportMapFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-
+		
 		if (mapLayout == null) {
 			mapLayout = inflater.inflate(R.layout.layout_map, null);
 			mapView = (MapView) mapLayout.findViewById(R.id.mapView);
@@ -45,7 +48,7 @@ public class MapExFragment extends SupportMapFragment {
 				((ViewGroup) mapLayout.getParent()).removeView(mapLayout);
 			}
 		}
-
+		
 		return mapLayout;
 	}
 
