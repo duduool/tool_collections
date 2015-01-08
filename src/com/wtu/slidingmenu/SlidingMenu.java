@@ -2,7 +2,6 @@ package com.wtu.slidingmenu;
 
 import java.lang.reflect.Method;
 
-import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
@@ -870,7 +869,6 @@ public class SlidingMenu extends RelativeLayout {
 	/* (non-Javadoc)
 	 * @see android.view.ViewGroup#fitSystemWindows(android.graphics.Rect)
 	 */
-	@SuppressLint("NewApi")
 	@Override
 	protected boolean fitSystemWindows(Rect insets) {
 		int leftPadding = insets.left;

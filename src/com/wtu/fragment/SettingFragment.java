@@ -8,11 +8,14 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.ListView;
 import com.wtu.activity.R;
 import com.wtu.adapter.SettinglListAdapter;
 import com.wtu.jazzylistview.JazzyHelper;
 import com.wtu.jazzylistview.JazzyListView;
+import com.wtu.switchanim.SwitchAnimationUtil;
+import com.wtu.switchanim.SwitchAnimationUtil.AnimationType;
 
 public class SettingFragment extends ListFragment {
 	private static final String KEY_TRANSITION_EFFECT = "transition_effect";
@@ -49,7 +52,15 @@ public class SettingFragment extends ListFragment {
 					KEY_TRANSITION_EFFECT, JazzyHelper.CARDS);
 			setupJazziness(mCurrentTransitionEffect);
 		}
-		
+		converView.getViewTreeObserver().addOnGlobalLayoutListener(
+				new OnGlobalLayoutListener() {
+
+					@Override
+					public void onGlobalLayout() {
+						new SwitchAnimationUtil().startAnimation(converView,
+								AnimationType.ALPHA);
+					}
+				});
 		return converView;
 	}
 

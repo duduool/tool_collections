@@ -116,11 +116,11 @@ public class MainActivity extends SlidingFragmentActivity implements
 				float scale = (float) (percentOpen * 0.25 + 0.75);
 				// canvas.scale(scale, scale, canvas.getWidth()/2,
 				// canvas.getHeight()/2);
-				// canvas.scale(percentOpen, 1, 0, 0);
-				canvas.translate(
-						0,
-						canvas.getHeight()
-								* (1 - interp.getInterpolation(percentOpen)));
+				canvas.scale(percentOpen, 1, 0, 0);
+				// canvas.translate(
+				//		0,
+				//		canvas.getHeight()
+				//				* (1 - interp.getInterpolation(percentOpen)));
 			}
 		};
 	}
@@ -141,6 +141,7 @@ public class MainActivity extends SlidingFragmentActivity implements
 		settingText = (TextView) findViewById(R.id.setting_text);
 		headText = (TextView) findViewById(R.id.head_text);
 		hintText = (TextView) findViewById(R.id.hint_text);
+		
 		homeLayout.setOnClickListener(new MyOnClickListener(0));
 		mapLayout.setOnClickListener(new MyOnClickListener(1));
 		starLayout.setOnClickListener(new MyOnClickListener(2));
@@ -165,10 +166,10 @@ public class MainActivity extends SlidingFragmentActivity implements
 	// 设置jazzyviewpager的属性
 	private void setupJazziness(TransitionEffect effect) {
 		jazzyViewPager = (JazzyViewPager) findViewById(R.id.jazzy_pager);
-		jazzyViewPager.setOffscreenPageLimit(2);
-		jazzyViewPager.setTransitionEffect(effect);
+		jazzyViewPager.setOffscreenPageLimit(1);
+		jazzyViewPager.setTransitionEffect(effect);	// 设置页面之间的切换效果
 		jazzyViewPager.setPageTransformer(false, new ParallaxPagerTransformer(
-				R.id.parallaxContent));
+				R.id.parallaxContent));	// 设置页面上的切换效果
 		jazzyViewPager.setAdapter(new MyPagerAdapter(
 				getSupportFragmentManager(), fragments));
 		jazzyViewPager.setOnPageChangeListener(new MyOnPageChangeListener());
@@ -218,14 +219,28 @@ public class MainActivity extends SlidingFragmentActivity implements
 		settingText.setTextColor(Color.parseColor("#82858b"));
 	}
 
+	// 顶部按钮点击事件
+	public void onTitleBarClick(View v) {
+		switch (v.getId()) {
+		case R.id.title_bar_left_menu:
+			slidingMenu.toggle();
+			break;
+		case R.id.title_bar_right_menu:
+			break;
+		default:
+			break;
+		}
+	}
+	
 	// 点击底部图片切换fragment
 	private class MyOnClickListener implements OnClickListener {
 		private int index = 0;
-
+		
 		public MyOnClickListener(int i) {
 			index = i;
 		}
 
+		@Override
 		public void onClick(View v) {
 			switch (index) {
 			case 0:
@@ -249,12 +264,15 @@ public class MainActivity extends SlidingFragmentActivity implements
 
 	// 当fragment滑动时，底部的图片要跟着变化
 	private class MyOnPageChangeListener implements OnPageChangeListener {
+		@Override
 		public void onPageScrollStateChanged(int index) {
 		}
 
+		@Override
 		public void onPageScrolled(int arg0, float arg1, int arg2) {
 		}
 
+		@Override
 		public void onPageSelected(int index) {
 			switch (index) {
 			case 0:
@@ -341,7 +359,7 @@ public class MainActivity extends SlidingFragmentActivity implements
 		}
 		return true;
 	}
-
+	
 	@Override
 	public void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
