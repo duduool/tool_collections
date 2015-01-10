@@ -88,11 +88,6 @@ public class MainActivity extends SlidingFragmentActivity implements
 		this.setupResideMenu();
 		this.setupSlidingMenu();
 		this.setupJazziness(TransitionEffect.Tablet);
-		
-		if(savedInstanceState == null) {
-			this.setTabSelection(0);
-			jazzyViewPager.setCurrentItem(0);
-		}
 	}
 
 	private static Interpolator interp = new Interpolator() {
@@ -116,9 +111,9 @@ public class MainActivity extends SlidingFragmentActivity implements
 			@Override
 			public void transformCanvas(Canvas canvas, float percentOpen) {
 				float scale = (float) (percentOpen * 0.25 + 0.75);
-				// canvas.scale(scale, scale, canvas.getWidth()/2,
-				// canvas.getHeight()/2);
-				canvas.scale(percentOpen, 1, 0, 0);
+				canvas.scale(scale, scale, canvas.getWidth()/2,
+						canvas.getHeight()/2);
+				// canvas.scale(percentOpen, 1, 0, 0);
 				// canvas.translate(
 				//		0,
 				//		canvas.getHeight()
@@ -150,13 +145,12 @@ public class MainActivity extends SlidingFragmentActivity implements
 		settingLayout.setOnClickListener(new MyOnClickListener(3));
 	}
 
-	// 初始化滑动菜单
+	// 设置滑动菜单的属性值
 	private void setupSlidingMenu() {
 		// 设置主界面视图 ...
 		// 设置滑动菜单视图
 		setBehindContentView(R.layout.layout_menu);
-
-		// 设置滑动菜单的属性值
+		
 		slidingMenu = getSlidingMenu();
 		slidingMenu.setMode(SlidingMenu.LEFT);
 		slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
@@ -369,7 +363,7 @@ public class MainActivity extends SlidingFragmentActivity implements
 		}
 	}
 
-	// 每个fragment显示时，所需调用的类
+	// 每个fragment显示时，所需调用的适配器
 	private class MyPagerAdapter extends FragmentPagerAdapter {
 		private List<Fragment> fragmentList;
 

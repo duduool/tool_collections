@@ -20,7 +20,7 @@ public class AppStartGradual extends Activity {
 
 		// 渐变展示启动屏,这里通过动画来设置了开启应用程序的界面
 		AlphaAnimation aa = new AlphaAnimation(1.5f, 1.5f);
-		aa.setDuration(800);
+		aa.setDuration(500);
 		view.startAnimation(aa);
 		//给动画添加监听方法
 		aa.setAnimationListener(new AnimationListener() {
