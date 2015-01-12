@@ -15,7 +15,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 
-class ViewHolder {    
+class SettingViewHolder {    
     public TextView 	titleText;  
     public SwitchButton switchButton;
 }    
@@ -49,17 +49,17 @@ public class SettinglListAdapter extends BaseAdapter {
     @Override  
     public View getView(final int position, View convertView, ViewGroup parent) {  
   
-        ViewHolder viewHolder = null;    
+        SettingViewHolder viewHolder = null;    
         if (convertView == null) {    
         	convertView = LayoutInflater.from(context).inflate(R.layout.item_setting, null) ;
         	
-        	viewHolder = new ViewHolder();    
+        	viewHolder = new SettingViewHolder();    
         	viewHolder.titleText = (TextView) convertView.findViewById(R.id.titleText);    
         	viewHolder.switchButton = (SwitchButton) convertView.findViewById(R.id.switchButton); 
         	
             convertView.setTag(viewHolder);    
         } else {    
-        	viewHolder = (ViewHolder) convertView.getTag();    
+        	viewHolder = (SettingViewHolder) convertView.getTag();    
         }  
   
         viewHolder.titleText.setText((String)(((HashMap)list.get(position)).get("title")));  

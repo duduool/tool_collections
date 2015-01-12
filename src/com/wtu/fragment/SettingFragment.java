@@ -8,14 +8,11 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.ListView;
 import com.wtu.activity.R;
 import com.wtu.adapter.SettinglListAdapter;
 import com.wtu.jazzylistview.JazzyHelper;
 import com.wtu.jazzylistview.JazzyListView;
-import com.wtu.switchanim.SwitchAnimationUtil;
-import com.wtu.switchanim.SwitchAnimationUtil.AnimationType;
 
 public class SettingFragment extends ListFragment {
 	private static final String KEY_TRANSITION_EFFECT = "transition_effect";
@@ -46,21 +43,23 @@ public class SettingFragment extends ListFragment {
 
 		converView = LayoutInflater.from(getActivity()).inflate(
 				R.layout.layout_setting, null);
+		
+		// 设置listview滑动的特效
 		jazzylist = (JazzyListView) converView.findViewById(android.R.id.list);
 		if (savedInstanceState != null) {
 			mCurrentTransitionEffect = savedInstanceState.getInt(
 					KEY_TRANSITION_EFFECT, JazzyHelper.CARDS);
 			setupJazziness(mCurrentTransitionEffect);
 		}
-		converView.getViewTreeObserver().addOnGlobalLayoutListener(
-				new OnGlobalLayoutListener() {
-
-					@Override
-					public void onGlobalLayout() {
-						new SwitchAnimationUtil().startAnimation(converView,
-								AnimationType.ALPHA);
-					}
-				});
+		// converView.getViewTreeObserver().addOnGlobalLayoutListener(
+		// new OnGlobalLayoutListener() {
+		//
+		// @Override
+		// public void onGlobalLayout() {
+		// new SwitchAnimationUtil().startAnimation(converView,
+		// AnimationType.ALPHA);
+		// }
+		// });
 		return converView;
 	}
 

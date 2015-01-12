@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -60,7 +59,8 @@ public class PullDoorView extends RelativeLayout {
 		mImgView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
 				LayoutParams.MATCH_PARENT));
 		mImgView.setScaleType(ImageView.ScaleType.FIT_XY);// 填充整个屏幕
-		mImgView.setImageResource(R.drawable.background); // 默认背景
+		//mImgView.setImageResource(R.drawable.background); // 默认背景
+		mImgView.setBackgroundResource(R.drawable.background);
 		addView(mImgView);
 	}
 
@@ -104,7 +104,7 @@ public class PullDoorView extends RelativeLayout {
 			mDelY = mCurryY - mLastDownY;
 			if (mDelY < 0) {
 
-				if (Math.abs(mDelY) > mScreenHeigh / 2) {
+				if (Math.abs(mDelY) > mScreenHeigh / 3) {
 
 					// 向上滑动超过半个屏幕高的时候 开启向上消失动画
 					startBounceAnim(this.getScrollY(), mScreenHeigh, 450);
@@ -127,9 +127,9 @@ public class PullDoorView extends RelativeLayout {
 
 		if (mScroller.computeScrollOffset()) {
 			scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
-			Log.i("scroller", "getCurrX()= " + mScroller.getCurrX()
-					+ "     getCurrY()=" + mScroller.getCurrY()
-					+ "  getFinalY() =  " + mScroller.getFinalY());
+//			Log.i("scroller", "getCurrX()= " + mScroller.getCurrX()
+//					+ "     getCurrY()=" + mScroller.getCurrY()
+//					+ "  getFinalY() =  " + mScroller.getFinalY());
 			// 不要忘记更新界面
 			postInvalidate();
 		} else {

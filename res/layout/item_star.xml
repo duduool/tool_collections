@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#fff" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp" >
+
+       <com.wtu.customview.CircleImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/car" />
+
+        <TextView
+            android:id="@+id/star_text"
+            android:paddingLeft="60dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:textColor="#666e75"
+            android:text="@string/app_name"
+            android:layout_centerVertical="true"
+            android:textSize="25sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

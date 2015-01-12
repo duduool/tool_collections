@@ -6,7 +6,6 @@
     tools:ignore="UseCompoundDrawables" >
 
     <LinearLayout
-        android:id="@+id/ignored_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" >
@@ -55,7 +54,7 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="5dp"
+                android:layout_height="2dp"
                 android:background="#ebebeb"
                 android:contentDescription="@string/app_name" />
         </LinearLayout>
