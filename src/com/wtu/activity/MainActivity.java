@@ -36,6 +36,7 @@ import android.view.Window;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.Interpolator;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -87,7 +88,8 @@ public class MainActivity extends SlidingFragmentActivity implements
 		
 		this.setupResideMenu();
 		this.setupSlidingMenu();
-		this.setupJazziness(TransitionEffect.Tablet);
+		// 设置viewpager的滑动效果
+		this.setupJazziness(TransitionEffect.Accordion);
 	}
 
 	private static Interpolator interp = new Interpolator() {
@@ -153,7 +155,7 @@ public class MainActivity extends SlidingFragmentActivity implements
 		
 		slidingMenu = getSlidingMenu();
 		slidingMenu.setMode(SlidingMenu.LEFT);
-		slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
 		slidingMenu.setShadowWidthRes(R.dimen.shadow_width);
 		slidingMenu.setShadowDrawable(R.drawable.sliding_shadow);
 		slidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
@@ -211,7 +213,8 @@ public class MainActivity extends SlidingFragmentActivity implements
 
         // You can disable a direction by setting ->
         resideMenu.setSwipeDirectionDisable(ResideMenu.DIRECTION_LEFT);
-        //resideMenu.addIgnoredView((LinearLayout) findViewById(R.id.ignored_view));
+        // 屏蔽滑动
+        resideMenu.addIgnoredView((FrameLayout) findViewById(R.id.ignored_view));
         
         findViewById(R.id.title_bar_left_menu).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -342,7 +345,7 @@ public class MainActivity extends SlidingFragmentActivity implements
 			case 0:
 				setTabSelection(0);
 				// 防止viewpager 和 slidingmenu 滑动冲突
-				slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+				slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
 				break;
 			case 1:
 				setTabSelection(1);
